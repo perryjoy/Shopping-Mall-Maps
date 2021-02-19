@@ -6,12 +6,11 @@ Rules:
 
 Commit & dashboard rules: 
 1) Use only english and past time.
-2)  2) Use Upper chars in the beginning.
+2) Use Upper chars in the beginning.
 
 Code rules: //Discussion -> Code -> Test -> Review 
-1) Don't do serious commits in 2 days before deadline. 
-2) 2) In 2 days before deadline must be test and review. 
-3) 3)
+1) Don't do serious commits in 3 days before deadline. 
+2) In 3 days before deadline must be test and review. 
 
 Code style: 
 1) Every figure "{" must be on new string. 
