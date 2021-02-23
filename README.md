@@ -12,6 +12,7 @@ Rules:
   Commit & dashboard rules: 
     1) Use only english and past time.
     2) Use Upper chars in the beginning.
+    3) Single reason for commit.
 
   Code rules: 
     //Discussion -> Code -> Test -> Review 
