@@ -1,13 +1,13 @@
 # Shopping-Mall-Maps
 
-## Contributors:
-  Kirillova Arina
-  Karaev Yakov
-  Ignatiev Daniil
-  Kelarev Michal
-  Chepikov Ilya
-  Mozhaev Alexandr
-
+## Contributors:   
+  Kirillova Arina   
+  Karaev Yakov   
+  Ignatiev Daniil   
+  Kelarev Michal   
+  Chepikov Ilya   
+  Mozhaev Alexandr   
+  
 ## Rules:
   ### Commit & dashboard rules: 
     1) Use only english and past time.
