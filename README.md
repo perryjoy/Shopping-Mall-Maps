@@ -1,12 +1,4 @@
-# Shopping-Mall-Maps
-
-## Contributors:   
-  Kirillova Arina   
-  Karaev Yakov   
-  Ignatiev Daniil   
-  Kelarev Michal   
-  Chepikov Ilya   
-  Mozhaev Alexandr   
+# Shopping-Mall-Maps 
   
 ## Rules:
   ### Commit & dashboard rules:   
@@ -24,3 +16,11 @@
   2) Single if-else must be with " { ... }".     
   3) camelCase.     
   4) If function fits the screen, variables declares in the beginning, else in the place of use.    
+
+## Contributors:   
+  Kirillova Arina   
+  Karaev Yakov   
+  Ignatiev Daniil   
+  Kelarev Michal   
+  Chepikov Ilya   
+  Mozhaev Alexandr  
