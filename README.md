@@ -5,18 +5,16 @@
   1) Use only english and past tense.
   2) Use Upper chars in the beginning.
   3) Single reason for commit.
-  4) Write in the end strinng"AB#* ticket number *"
+  4) Write in the end of commit name strinng"AB#* ticket number *"
   
   Commit example: 
   ```
-  Created commit rules  
-  AB#30
+  Created commit rules AB#30
   ```
   or   
   
   ```
-  Ball disappearing bug fixed   
-  AB#12
+  Ball disappearing bug fixed AB#12
   ```   
 
   ### Code rules: 
