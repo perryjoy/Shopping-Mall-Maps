@@ -1,0 +1,28 @@
+Git workflow
+
+-Master Branch
+
+Master is always an up-to-date copy of the existing code in production. No one, including the technical manager, should make changes directly to this branch, as this will directly affect the working product.
+All the code is actually written in other branches.
+
+-Release branch
+
+When starting a project, the first step is to create a release branch for it based on master. All the code related to this project should be located here. A release branch is a regular Git branch with the release/  prefix.
+
+-Feature Branch
+
+For each new component or functionality, a separate feature branch is created, which differs from the usual one only by the feature/  prefix. This ensures independent development.
+When you finish working on the component, you need to send its code from the feature/ branch to the release/ branch. You need to make a pull request.
+
+-Pull request
+
+A developer cannot directly submit their changes to the release branch. First, they should be checked by the technical manager. This is what pool queries are designed for. After verification, the technical manager must merge the developer branch with the release branch
+
+-The code conflicts
+
+Let's say that the release branch already contains new code written by the first developer, and if the second developer sends a pool request from its feature/ branch to the release branch, conflicts arise. They should be solved by the reviewer of the request or an experienced developer.
+Thus, code conflicts can be resolved by the reviewer of the pool request or by the developer himself in the feature branch.
+
+-Master again
+
+When the project is completed, the code from the release branch is merged with master and deployed to production. Thus, the working product and the master code are the same thing.
