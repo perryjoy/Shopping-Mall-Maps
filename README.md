@@ -5,17 +5,17 @@
   1) Use only english and past tense.
   2) Use Upper chars in the beginning.
   3) Single reason for commit.
-  4) Write in the end of commit name strinng"AB#* ticket number *"
+  4) Write in the end of commit name strinng"AB#* ticket number *".
   
   Commit example: 
   ```
   Created commit rules AB#30
   ```
-  or   
-  
+  or      
   ```
   Ball disappearing bug fixed AB#12
   ```   
+  That creates link to your commit in azure boards.
 
   ### Code rules: 
   *Discussion -> Code -> Test -> Review -> Done*   
