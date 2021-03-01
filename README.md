@@ -35,6 +35,7 @@
 2. Under heavy load will lag.
 3. Few people know.
 4. Inconvenient scaling.
+
 *Plus:*
 1. Separately allocated toilets, ATMs, discounts, taxi area.
 2. Nicely built route.
@@ -46,6 +47,7 @@
 2. Queues.
 3. Lag.
 4. If you have to visit many shops, it is inconvenient.
+
 *Plus:*
 1. Located in every shopping center.
 
@@ -57,6 +59,7 @@
 3. It doesn't work offline.
 4. Not supported at the moment(28.02.2021).
 5. Only in Moscow
+
 *Plus:*
 1. Road map around.
 2. Good route between floors.
