@@ -18,9 +18,8 @@
   That creates link to your commit in azure boards.
 
   ### Code rules: 
-  *Discussion -> Code -> Test -> Review -> Done*   
-  1) Don't do serious commits in 3 days before deadline.     
-  2) In 3 days before deadline must be test and review.     
+  *Discussion -> Code -> Test -> Review -> Done*     
+  1) In 3 days before deadline must be test and review.     
 
   ### Code style:    
   1) Every figure "{" must be on new string.     
