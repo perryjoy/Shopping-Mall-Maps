@@ -6,4 +6,4 @@ initial release
 
 **Added:**
 - We can draw a dot on the screen
-Thanks for attention
+
