@@ -22,7 +22,7 @@
   *Discussion -> Code -> Test -> Review -> Done*     
   1) In 3 days before deadline must be test and review.     
   2) No "magic" numbers and constants in code. Everything must be in enums, defines or special variables.   
-  3) Use global variables only after discussion.    
+  3) Use global variables only after team discussion.    
 
   ### Code style:    
   1) Every figure "{" must be on new string. 
