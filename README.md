@@ -131,34 +131,34 @@
 
 ### Main Branch
 
-__Main__ is always an up-to-date copy of the existing code in production. No one, including the technical manager, should make changes directly to this branch, as this will directly affect the working product.
+`Main` is always an up-to-date copy of the existing code in production. No one, including the technical manager, should make changes directly to this branch, as this will directly affect the working product.
 All the code is actually written in other branches.
 
 ### Develop branch
 
-When starting a project, the first step is to create a __develop__ branch for it based on __main__. All the code related to this project should be located here. A __develop__ branch is a regular Git branch with the __develop__  prefix.
+When starting a project, the first step is to create a `develop` branch for it based on `main`. All the code related to this project should be located here. A `develop` branch is a regular Git branch with the `develop`  prefix.
 
 ### Feature Branch
 
-For each new component or functionality, a separate __feature__ branch is created, which differs from the usual one only by the __feature__  prefix. This ensures independent development.
-When you finish working on the component, you need to send its code from the __feature__ branch to the __develop__ branch. You need to make a pull request.
+For each new component or functionality, a separate `feature` branch is created, which differs from the usual one only by the `feature`  prefix. This ensures independent development.
+When you finish working on the component, you need to send its code from the `feature` branch to the `develop` branch. You need to make a pull request.
 
 ### Pull request
 
-A developer cannot directly submit their changes to the __develop__ branch. First, they should be checked by the technical manager. This is what pool queries are designed for. After verification, the technical manager must merge this branch with the __develop__ branch
+A developer cannot directly submit their changes to the `develop` branch. First, they should be checked by the technical manager. This is what pool queries are designed for. After verification, the technical manager must merge this branch with the `develop` branch
 
 ### The code conflicts
 
-Let's say that the __develop__ branch already contains new code written by the first developer, and if the second developer sends a pool request from its __feature__ branch to the __develop__ branch, conflicts arise. They should be solved by the reviewer of the request or an experienced developer.
-Thus, code conflicts can be resolved by the reviewer of the pool request or by the developer himself in the __feature__ branch.
+Let's say that the `develop` branch already contains new code written by the first developer, and if the second developer sends a pool request from its `feature` branch to the `develop` branch, conflicts arise. They should be solved by the reviewer of the request or an experienced developer.
+Thus, code conflicts can be resolved by the reviewer of the pool request or by the developer himself in the `feature` branch.
 
 ### Bugs
 
-To fix bugs, create a new __feature__ branch.
+To fix bugs, create a new `feature` branch.
 
 ### Main again
 
-When the project is completed, the code from the __develop__ branch is merged with __main__ and deployed to production. Thus, the working product and the __main__ code are the same thing.
+When the project is completed, the code from the `develop` branch is merged with `main` and deployed to production. Thus, the working product and the `main` code are the same thing.
 
 ## Contributors:   
   Kirillova Arina   
