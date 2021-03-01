@@ -9,13 +9,9 @@
   5) Write at the end of the commit message string "AB#* ticket number *".
   
   Commit example: 
-  ```C
-  Created commit rules AB#30
-  ```   
+  < Created commit rules AB#30 >   
   or      
-  ```C
-  Ball disappearing bug was fixed AB#12 
-  ```
+  < Ball disappearing bug was fixed AB#12 >      
   That creates link to your commit in azure boards.
 
   ### Code rules: 
@@ -32,7 +28,7 @@
 
 ## Compare with analogs:
 
-### Galeria Saint-Petersburg(https://www.galeria.spb.ru/schema/)
+### Galeria Saint-Petersburg(https://www.galeria.spb.ru/schema/):
 
 *Minuses:*
 1. Maps are located on the site. Inconvenient to use.
@@ -44,7 +40,7 @@
 1. Separately allocated toilets, ATMs, discounts, taxi area.
 2. Nicely built route.
 
-### Scoreboard in the shopping center
+### Scoreboard in the shopping center:
 
 *Minuses:*
 1. Hard to find.
@@ -55,7 +51,7 @@
 *Pluses:*
 1. Located in every shopping center.
 
-### Application "Shopping Guide"
+### Application "Shopping Guide":
 
 *Minuses:*
 1. No parking map.
