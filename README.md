@@ -9,9 +9,13 @@
   5) Write at the end of the commit message string "AB#* ticket number *".
   
   Commit example: 
-  < Created commit rules AB#30 >   
+  ```C
+  Created commit rules AB#30
+  ```
   or      
-  < Ball disappearing bug was fixed AB#12 >      
+  ```C
+  Ball disappearing bug was fixed AB#12 
+  ```
   That creates link to your commit in azure boards.
 
   ### Code rules: 
