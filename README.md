@@ -32,5 +32,4 @@
   Chepikov Ilya   
   Mozhaev Alexandr  
 
-## Release note:
-**verstion1 0.0** - [Change log](CHANGELOG.md)
+
