@@ -26,9 +26,9 @@
   3) camelCase.     
   4) If function fits the screen, variables declares in the beginning, else in the place of use.    
 
-## Compare with analogs
+## Compare with analogs:
 
-*Galeria Saint-Petersburg(https://www.galeria.spb.ru/schema/)
+### Galeria Saint-Petersburg(https://www.galeria.spb.ru/schema/)
 
 Minuses:
 1. Maps are located on the site. Inconvenient to use.
@@ -40,8 +40,7 @@ Plus:
 1. Separately allocated toilets, ATMs, discounts, taxi area.
 2. Nicely built route.
 
-
-*Scoreboard in the shopping center
+### Scoreboard in the shopping center
 
 Minuses:
 1. Hard to find.
@@ -52,8 +51,7 @@ Minuses:
 Plus:
 1. Located in every shopping center.
 
-
-*Application "Shopping Guide"
+### Application "Shopping Guide"
 
 Minuses:
 1. No parking map.
