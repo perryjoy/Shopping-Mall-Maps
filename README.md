@@ -58,13 +58,13 @@
 2. Large icons if you do not zoom in.
 3. It doesn't work offline.
 4. Not supported at the moment(28.02.2021).
-5. Only in Moscow
+5. Only in Moscow.
 
 *Pluses:*
 1. Road map around.
 2. Good route between floors.
-3. Shows stocks
-4. Search for stores by requirements
+3. Shows stocks.
+4. Search for stores by requirements.
 
 ## Contributors:   
   Kirillova Arina   
