@@ -70,7 +70,7 @@
       int y = 7;
       double z = 4.25;
  ```
- 7) When the line does not fit into the skrin, divide it into two, making a newline after the operator, and continue writing.
+ 7) When the line gets longer than 100 characters, divide it into two, making a newline after the operator, and continue writing.
  ```C
    int result = reallyLongFunctionOne() + reallyLongFunctionTwo() + 
         reallyLongFunctionThree() + reallyLongFunctionFour();
