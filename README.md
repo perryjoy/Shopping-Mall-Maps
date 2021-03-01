@@ -6,7 +6,7 @@
   2) Use Upper chars in the beginning.
   3) Single reason for commit.
   4) Use active voice
-  5) Write at the end of the commit message string "AB#* ticket number *".
+  5) Write at the end of the commit message string `AB#* ticket number *`.
   
   Commit example: 
   ```C
