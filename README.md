@@ -36,7 +36,7 @@
 3. Few people know.
 4. Inconvenient scaling.
 
-*Plus:*
+*Pluses:*
 1. Separately allocated toilets, ATMs, discounts, taxi area.
 2. Nicely built route.
 
@@ -48,7 +48,7 @@
 3. Lag.
 4. If you have to visit many shops, it is inconvenient.
 
-*Plus:*
+*Pluses:*
 1. Located in every shopping center.
 
 ### Application "Shopping Guide"
@@ -60,7 +60,7 @@
 4. Not supported at the moment(28.02.2021).
 5. Only in Moscow
 
-*Plus:*
+*Pluses:*
 1. Road map around.
 2. Good route between floors.
 3. Shows stocks
