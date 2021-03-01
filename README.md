@@ -30,37 +30,43 @@
 
 ### Galeria Saint-Petersburg(https://www.galeria.spb.ru/schema/)
 
-Minuses:
+*Minuses:
+
 1. Maps are located on the site. Inconvenient to use.
 2. Under heavy load will lag.
 3. Few people know.
 4. Inconvenient scaling.
 
-Plus:
+*Plus:
+
 1. Separately allocated toilets, ATMs, discounts, taxi area.
 2. Nicely built route.
 
 ### Scoreboard in the shopping center
 
-Minuses:
+*Minuses:
+
 1. Hard to find.
 2. Queues.
 3. Lag.
 4. If you have to visit many shops, it is inconvenient.
 
-Plus:
+*Plus:
+
 1. Located in every shopping center.
 
 ### Application "Shopping Guide"
 
-Minuses:
+*Minuses:
+
 1. No parking map.
 2. Large icons if you do not zoom in.
 3. It doesn't work offline.
 4. Not supported at the moment(28.02.2021).
 5. Only in Moscow
 
-Plus:
+*Plus: 
+
 1. Road map around.
 2. Good route between floors.
 3. Shows stocks
