@@ -25,11 +25,68 @@
   3) Use global variables only after discussion.    
 
   ### Code style:    
-  1) Every figure "{" must be on new string.     
+  1) Every figure "{" must be on new string. 
+ ```C
+      void foo(int a)
+      {
+	      ...
+      }
+ ```
   2) Single if-else must be with " { ... }".     
+ ```C
+      void foo(int a)
+      {
+	      if(n>0)
+        {
+         ...
+        }
+        else
+        {
+        ...
+        }
+      }
+ ```
   3) camelCase.     
+ ```C
+      void foo(int a)
+      {
+	      int maxNumber;
+          double ballForceThrow;
+      }
+      
+      void openFile()
+      {
+      ...
+      }
+ ```
   4) If function fits the screen, variables declares in the beginning, else in the place of use.    
-
+  5) Insert spaces between operators and operands.
+ ```C
+      int x = (a + b) * c / d + foo();
+ ```
+ 6) Each variable declaration on a new line.
+  ```C
+      int x = 3;
+      int y = 7;
+      double z = 4.25;
+ ```
+ 7) When the line does not fit into the skrin, divide it into two, making a newline after the operator, and continue writing.
+ ```C
+   int result = reallyLongFunctionOne() + reallyLongFunctionTwo() + 
+        reallyLongFunctionThree() + reallyLongFunctionFour();
+ ```
+ 8) Leave blank lines between functions and between expression groups.
+  ```C
+   void foo() 
+   {
+    ...
+   }
+                          // Empty line
+   void bar() 
+   {
+    ...
+   }
+ ```
 ## Compare with analogs:
 
 ### Galeria Saint-Petersburg(https://www.galeria.spb.ru/schema/):
