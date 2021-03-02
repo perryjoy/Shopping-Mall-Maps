@@ -33,9 +33,9 @@
 >  - the plan of the mall, each object on which is marked with a unique tag (SVG / PDF format)
 
   ##### Functionality:
-    _NB: at this stage, the functionality is provided outside the application interface_
+   _NB: at this stage, the functionality is provided outside the application interface_
 >  - updating titles/descriptions of objects
->  - intuitive interface: changes are made to the table with the columns '''\<object tag> \<object title> \<object description> ...'''
+>  - intuitive interface: changes are made to the table with the columns \<object tag> \<object title> \<object description> ...
 
   ##### Requirements:
 >  - provision of an up-to-date plan of the mall premises
