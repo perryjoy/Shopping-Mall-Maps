@@ -12,10 +12,10 @@
   --------------------------------------------------------------------------------
   USER SIDE
 
->  Artifacts provided:
+  Artifacts provided:
 >  - AllMall mobile app for Android platform
 
->  User-side functionality:
+  User-side functionality:
 >  - selecting a mall from the list
 >    - interactive floor plan of the selected mall
 >    - on-tap selection of the object
@@ -31,7 +31,7 @@
   ---------------------------------------------------------------------------------
   MALL REPRESENTATIVES SIDE
 
->  Artifacts provided:
+  Artifacts provided:
 >  - the plan of the mall, each object on which is marked with a unique tag (SVG / PDF format)
 
   _NB: at this stage, the functionality is provided outside the application interface_
