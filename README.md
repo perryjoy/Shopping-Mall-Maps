@@ -1,5 +1,50 @@
 # Shopping-Mall-Maps 
-  
+
+## Product description (RU/EN)
+  ### EN
+  ```C
+  AllMall Mobile App
+
+  The application allows you to navigate through malls, providing the user with an interactive map of the building, the
+  ability to search for a mall object by name, the ability to plot a route between two selected points.
+  AllMall allows you to aggregate the maps of many malls with a single app.
+
+  --------------------------------------------------------------------------------
+  USER SIDE
+
+  Artifacts provided:
+  - AllMall mobile app for Android platform
+
+  User-side functionality:
+  - selecting a mall from the list
+    - interactive floor plan of the selected mall
+    - on-tap selection of the object
+    - information about the selected object over the map
+  - searching for an object inside the mall by its title
+    - found object is highlighted
+  - route between two objects
+    - setting the selected object as the start/end point of the route
+
+  Technical requirements:
+  - access to the Internet at the moment when the user is choosing a mall
+
+  ---------------------------------------------------------------------------------
+  MALL REPRESENTATIVES SIDE
+
+  Artifacts provided:
+  - the plan of the mall, each object on which is marked with a unique tag (SVG / PDF format)
+
+  *NB: at this stage, the functionality is provided outside the application interface*
+  Functionality:
+  - updating titles/descriptions of objects
+  - "intuitive" interface: changes are made to the table with the columns <object tag> <object name> <object description> ...
+
+  Requirements:
+  - provision of an up-to-date plan of the mall premises
+  - maintaining up-to-date information about shopping center facilities
+  ```C
+	
+
 ## Rules:
   ### Commit & dashboard rules:   
   1) Use only english and past simple tense.
