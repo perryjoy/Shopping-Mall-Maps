@@ -3,19 +3,18 @@
 ## Product description (RU/EN):
   ### EN
 
-  AllMall Mobile App
+  #### AllMall Mobile App
 
 >  The application allows you to navigate through malls, providing the user with an interactive map of the building, the
 >  ability to search for a mall object by name, the ability to plot a route between two selected points.
 >  AllMall allows you to aggregate the maps of many malls with a single app.
 
-  --------------------------------------------------------------------------------
-  USER SIDE
+  #### USER SIDE
 
-  Artifacts provided:
+  ##### Artifacts provided:
 >  - AllMall mobile app for Android platform
 
-  Functionality:
+  ##### Functionality:
 >  - selecting a mall from the list
 >    - interactive floor plan of the selected mall
 >    - on-tap selection of the object
@@ -25,40 +24,38 @@
 >  - route between two objects
 >    - setting the selected object as the start/end point of the route
 
-  Technical requirements:
+  ##### Technical requirements:
 >  - access to the Internet at the moment when the user is choosing a mall
 
-  ---------------------------------------------------------------------------------
-  MALL REPRESENTATIVES SIDE
+  #### MALL REPRESENTATIVES SIDE
 
-  Artifacts provided:
+  ##### Artifacts provided:
 >  - the plan of the mall, each object on which is marked with a unique tag (SVG / PDF format)
 
-  _NB: at this stage, the functionality is provided outside the application interface_
-  
-  Functionality:
+  ##### Functionality:
+    _NB: at this stage, the functionality is provided outside the application interface_
 >  - updating titles/descriptions of objects
 >  - intuitive interface: changes are made to the table with the columns '''\<object tag> \<object title> \<object description> ...'''
 
-  Requirements:
+  ##### Requirements:
 >  - provision of an up-to-date plan of the mall premises
 >  - maintaining up-to-date information about shopping center facilities
 _________________________________________________________________________________
  ### RU
 
-  Мобильное приложение AllMall
+  #### Мобильное приложение AllMall
 
 >  Приложение позволяет ориентироваться в торговых центрах, предоставляя пользователю интерактивную карту здания,
 >  возможность поиска объекта ТЦ по названию, возможность проложить маршрут между двумя выбранными точками.
 >  Приложение позволяет агрегировать карты многих ТЦ в одной сущности.
 
-  --------------------------------------------------------------------------------
-  НА СТОРОНЕ ПОЛЬЗОВАТЕЛЯ
 
-  Предоставляемые артефакты:
+  #### НА СТОРОНЕ ПОЛЬЗОВАТЕЛЯ
+
+  ##### Предоставляемые артефакты:
 >  - мобильное приложение AllMall для платформы Android
 
-  Функциональность:
+  ##### Функциональность:
 >  - выбор ТЦ из списка
 >  - интерактивный поэтажный план выбранного ТЦ
 >    - выделение объекта тапом
@@ -68,22 +65,20 @@ ________________________________________________________________________________
 >  - маршрут между двумя объектами
 >    - возможность выбрать выделенный объект как начальную/конечную точку маршрута
 
-  Требования:
+  ##### Требования:
 >  - доступ к сети интернет на момент выбора ТЦ
 
-  ---------------------------------------------------------------------------------
-  НА СТОРОНЕ ПРЕДСТАВИТЕЛЕЙ ТЦ
+  #### НА СТОРОНЕ ПРЕДСТАВИТЕЛЕЙ ТЦ
 
-  Предоставляемые артефакты:
+  ##### Предоставляемые артефакты:
 >  - план ТЦ, каждый объект на котором, отмечен уникальным тегом (формат SVG / PDF)
-
-  _NB: на данном этапе функциональность предоставляется вне интерфейса приложения_
   
-  Функциональность:
+  ##### Функциональность:
+  _NB: на данном этапе функциональность предоставляется вне интерфейса приложения_
 >  - обновление названий/описаний объектов
 >  - "интуитивный" интерфейс: изменения вносятся в таблицу со столбцами <тег объекта> <название объекта> <описание объекта> ...
 
-  Требования:
+  ##### Требования:
 >  - предоставление актуального плана помещений ТЦ
 >  - поддержание актуальной информации об объектах ТЦ
 
