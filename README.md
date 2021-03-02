@@ -1,6 +1,6 @@
 # Shopping-Mall-Maps 
 
-## Product description (RU/EN)
+## Product description (RU/EN):
   ### EN
 
   AllMall Mobile App
@@ -38,7 +38,7 @@
   
   Functionality:
 >  - updating titles/descriptions of objects
->  - "intuitive" interface: changes are made to the table with the columns <object tag> <object name> <object description> ...
+>  - intuitive interface: changes are made to the table with the columns '''\<object tag> \<object title> \<object description> ...'''
 
   Requirements:
 >  - provision of an up-to-date plan of the mall premises
