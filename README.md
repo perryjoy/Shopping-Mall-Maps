@@ -15,7 +15,7 @@
   Artifacts provided:
 >  - AllMall mobile app for Android platform
 
-  User-side functionality:
+  Functionality:
 >  - selecting a mall from the list
 >    - interactive floor plan of the selected mall
 >    - on-tap selection of the object
@@ -78,6 +78,7 @@
 >  - план ТЦ, каждый объект на котором, отмечен уникальным тегом (формат SVG / PDF)
 
   _NB: на данном этапе функциональность предоставляется вне интерфейса приложения_
+  
   Функциональность:
 >  - обновление названий/описаний объектов
 >  - "интуитивный" интерфейс: изменения вносятся в таблицу со столбцами <тег объекта> <название объекта> <описание объекта> ...
