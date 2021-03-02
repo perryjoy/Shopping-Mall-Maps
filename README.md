@@ -43,7 +43,7 @@
   Requirements:
 >  - provision of an up-to-date plan of the mall premises
 >  - maintaining up-to-date information about shopping center facilities
-
+_________________________________________________________________________________
  ### RU
 
   Мобильное приложение AllMall
