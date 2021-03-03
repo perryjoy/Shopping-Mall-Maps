@@ -129,36 +129,76 @@ ________________________________________________________________________________
         }
       }
  ```
-  3) camelCase.     
+  3) Naming.
+  *	camelCase for: local variables, class members
+  *	PascalCase for: functions
+  *	snake_case for: data types (except types declared in the libraries used)
+  *	UPPER_CASE for: global constants, enumerations elements, macro constants
  ```C
-      void foo(int a)
+      const float PI_CONSTANT = 3.1415926;
+      
+      class my_class
       {
-	      int maxNumber;
+          int memberData;
+	 	 void ProcessData();
+      };
+      
+      void Foo(int a)
+      {
+		 int maxNumber;
           double ballForceThrow;
       }
       
-      void openFile()
+      void OpenFile()
       {
       ...
       }
  ```
-  4) If function fits the screen, variables declares in the beginning, else in the place of use.    
-  5) Insert spaces between operators and operands.
+  4) Indentation
+  *	Use only spaces, 4 spaces
+  *	Any inner block must be indented, '{' must has same indentation as outer block
+  *	Data access specifiers ("public", "protected", "private") has same indentation as class
+  *	"case" markers has same indentation as "switch" block
+  ```C
+  class my_class
+  {
+  public:
+      void ProcessData()
+      {
+          switch (memberData)
+          {
+          case 0:
+              memberData++;
+              break;
+          case 1:
+              memberData--;
+              break;
+          case 2:
+              printf("Error");
+              break;
+          }
+      }
+  private:
+      int memberData;
+  };
+  ```
+  5) If function fits the screen, variables declares in the beginning, else in the place of use. 
+  6) Insert spaces between operators and operands.
  ```C
       int x = (a + b) * c / d + foo();
  ```
- 6) Each variable declaration on a new line.
+ 7) Each variable declaration on a new line.
   ```C
       int x = 3;
       int y = 7;
       double z = 4.25;
  ```
- 7) When the line gets longer than 100 characters, divide it into two, making a newline after the operator, and continue writing.
+ 8) When the line gets longer than 100 characters, divide it into two, making a newline after the operator, and continue writing.
  ```C
    int result = reallyLongFunctionOne() + reallyLongFunctionTwo() + 
         reallyLongFunctionThree() + reallyLongFunctionFour();
  ```
- 8) Leave blank lines between functions and between expression groups.
+ 9) Leave blank lines between functions and between expression groups.
   ```C
    void foo() 
    {
