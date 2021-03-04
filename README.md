@@ -210,6 +210,9 @@ ________________________________________________________________________________
     ...
    }
  ```
+ 
+## [Setup instructoin for collaborators](https://github.com/HellInsider/Shopping-Mall-Maps/blob/develop/docs/setup_guide.md)
+
 ## Compare with analogs:
 
 ### Galeria Saint-Petersburg(https://www.galeria.spb.ru/schema/):
