@@ -1,73 +1,60 @@
+#include <QtWidgets>
+#include <QSvgRenderer>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QtGui>
+#include "svgview.h"
 
-main_window::main_window(QWindow *parent)
-    : QWindow(parent),
-      backingStore(new QBackingStore(this))
+main_window::main_window() :
+    view(new svg_view)
 {
     resize(500, 500);
     timerId = startTimer(100);
+    //setCentralWidget(m_view);
 }
 
 bool main_window::event(QEvent *event)
 {
     if (event->type() == QEvent::UpdateRequest)
     {
-        RenderNow();
         return true;
     }
-    return QWindow::event(event);
-}
-
-void main_window::resizeEvent(QResizeEvent *resizeEvent)
-{
-    backingStore->resize(resizeEvent->size());
+    return QWidget::event(event);
 }
 
 void main_window::timerEvent(QTimerEvent *event)
 {
     if (event->timerId() == timerId)
     {
-        requestUpdate();
+        //QPaintEvent *e;
+        ;
     }
 }
 
-void main_window::exposeEvent(QExposeEvent *)
+bool main_window::LoadFile(const QString &fileName)
 {
-    if (isExposed())
+    if (QFileInfo::exists(fileName))
     {
-        RenderNow();
+        if (view->OpenFile(fileName))
+        {
+            return true;
+        }
     }
+
+    return false;
 }
 
-void main_window::RenderNow()
+void main_window::Show()
 {
-    if (!isExposed())
-    {
-        return;
-    }
-    QRect rect(0, 0, width(), height());
-    backingStore->beginPaint(rect);
-
-    QPaintDevice *device = backingStore->paintDevice();
-    QPainter painter(device);
-    painter.fillRect(0, 0, width(), height(), QColor::fromRgb(255, 255, 255));
-    Render(&painter);
-    painter.end();
-
-    backingStore->endPaint();
-    backingStore->flush(rect);
+    view->show();
 }
 
 main_window::~main_window()
 {
-
 }
 
 void main_window::Render(QPainter *p)
 {
-    p->setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap));
-    p->drawPoint(100, 100);
+//    p->setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap));
+//    p->drawPoint(100, 100);
 }
 

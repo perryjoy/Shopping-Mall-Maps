@@ -1,12 +1,12 @@
-#include "device\mainwindow.h"
-
 #include <QApplication>
-#include <QtGui>
+
+#include "device\mainwindow.h"
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication a(argc, argv);
+    QApplication a(argc, argv);
     main_window w;
-    w.show();
+    w.LoadFile("a.svg");
+    w.Show();
     return a.exec();
 }

@@ -1,27 +1,29 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QWindow>
+#include <QWidget>
 
-class main_window : public QWindow
+class svg_view;
+
+class main_window : public QWidget
 {
     Q_OBJECT
 
 public:
-    main_window(QWindow *parent = nullptr);
+    main_window();
     ~main_window();
     virtual void Render(QPainter *painter);
+    bool LoadFile(const QString &fileName);
 
 public slots:
-    void RenderNow();
+    void Show();
 
 protected:
     bool event(QEvent *event) override;
     void timerEvent(QTimerEvent *) override;
-    void resizeEvent(QResizeEvent *event) override;
-    void exposeEvent(QExposeEvent *event) override;
+
 private:
-    QBackingStore *backingStore;
     int timerId;
+    svg_view *view;
 };
 #endif // MAINWINDOW_H

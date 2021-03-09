@@ -1,0 +1,92 @@
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="a.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="313.61833"
+     inkscape:cy="267.60581"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1710"
+     inkscape:window-height="1030"
+     inkscape:window-x="160"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#008000;stroke-width:0.264583"
+       id="shop1_1"
+       width="70.826424"
+       height="82.319016"
+       x="1.6036172"
+       y="4.543582"
+       inkscape:label="" />
+    <rect
+       style="fill:#ffcc00;stroke-width:0.264583"
+       id="rect14"
+       width="69.490074"
+       height="90.337105"
+       x="1.6036172"
+       y="86.862595" />
+    <rect
+       style="fill:#800080;stroke-width:0.190895"
+       id="rect16"
+       width="73.23185"
+       height="50.781208"
+       x="135.77292"
+       y="50.781208" />
+    <rect
+       style="fill:#ff6600;stroke-width:0.264583"
+       id="rect18"
+       width="70.291885"
+       height="82.319023"
+       x="135.77292"
+       y="101.56241" />
+    <rect
+       style="fill:#0000ff;stroke-width:0.264583"
+       id="rect20"
+       width="69.757347"
+       height="109.5805"
+       x="1.6036172"
+       y="177.19971" />
+    <rect
+       style="fill:#005800;stroke-width:0.264583"
+       id="rect22"
+       width="69.490082"
+       height="103.70058"
+       x="135.77292"
+       y="183.88144" />
+    <rect
+       style="fill:#ff0000;stroke-width:0.182681"
+       id="rect16-9"
+       width="73.23185"
+       height="46.504894"
+       x="135.77292"
+       y="4.2763138" />
+  </g>
+</svg>
