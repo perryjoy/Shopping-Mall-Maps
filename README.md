@@ -127,7 +127,7 @@ ________________________________________________________________________________
 [Code rules and style](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Code-Style-and-Rules.md)   
 [Git workflow](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Git-Workflow)   
 [Commit rules](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Coomit-and-Dashboard-Rules.md)   
-
+ 
 
 
 ## Contributors:   
