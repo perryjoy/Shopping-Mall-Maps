@@ -3,13 +3,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "svgview.h"
+#include "map.h"
 
 main_window::main_window() :
-    view(new svg_view)
+    mapInfo(new map)
 {
     resize(500, 500);
     timerId = startTimer(100);
-    //setCentralWidget(m_view);
+    connect(mapInfo, &map::MapPictureChanged, this, &main_window::setNewView);
 }
 
 bool main_window::event(QEvent *event)
@@ -30,14 +31,16 @@ void main_window::timerEvent(QTimerEvent *event)
     }
 }
 
+void main_window::setNewView(svg_view * toSet)
+{
+    view = toSet;
+}
+
 bool main_window::LoadFile(const QString &fileName)
 {
-    if (QFileInfo::exists(fileName))
+    if (QFileInfo::exists(fileName)) // maybe move checks to view module? - KYG
     {
-        if (view->OpenFile(fileName))
-        {
-            return true;
-        }
+        mapInfo->SetAnotherMap(fileName, __LEAVE_MAP_AS_IT_IS);
     }
 
     return false;
@@ -45,7 +48,10 @@ bool main_window::LoadFile(const QString &fileName)
 
 void main_window::Show()
 {
-    view->show();
+    if (view != nullptr)
+    {
+        view->show();
+    }
 }
 
 main_window::~main_window()

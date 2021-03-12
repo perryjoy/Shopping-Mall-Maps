@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class svg_view;
+class map;
 
 class main_window : public QWidget
 {
@@ -17,6 +18,7 @@ public:
 
 public slots:
     void Show();
+    void setNewView(svg_view * toSet);
 
 protected:
     bool event(QEvent *event) override;
@@ -25,5 +27,6 @@ protected:
 private:
     int timerId;
     svg_view *view;
+    map *mapInfo;
 };
 #endif // MAINWINDOW_H

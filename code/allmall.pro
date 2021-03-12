@@ -12,10 +12,12 @@ CONFIG += c++11
 
 SOURCES += \
     core\main.cpp \
+    device/map.cpp \
     device/svgview.cpp \
     device\mainwindow.cpp
 
 HEADERS += \
+    device/map.h \
     device/svgview.h \
     device\mainwindow.h
 
