@@ -14,7 +14,7 @@ public:
     main_window();
     ~main_window();
     virtual void Render(QPainter *painter);
-    bool LoadFile(const QString &fileName);
+    bool LoadFile(const QString &svgFileName, const QString &xmlFileName);
 
 public slots:
     void Show();

@@ -3,8 +3,11 @@
 
 	<xs:element name="Info">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="InfoLine" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:sequence maxOccurs="1">
+				<xs:element name="size" type ="xs:unsignedInt" />
+				<xs:sequence>
+					<xs:element ref="InfoLine" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

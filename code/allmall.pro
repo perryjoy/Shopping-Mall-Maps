@@ -14,12 +14,14 @@ SOURCES += \
     core\main.cpp \
     device/map.cpp \
     device/svgview.cpp \
-    device\mainwindow.cpp
+    device\mainwindow.cpp \
+    shops_data.cpp
 
 HEADERS += \
     device/map.h \
     device/svgview.h \
-    device\mainwindow.h
+    device\mainwindow.h \
+    shops_data.h
 
 FORMS += \
     mainwindow.ui

@@ -1,5 +1,6 @@
 #include "map.h"
 #include "svgview.h"
+#include "shops_data.h"
 
 #define __MAP_PIC_CHANGED ((quint8)1)
 #define __MAP_GRAPH_CHANGED ((quint8)2)
@@ -8,15 +9,18 @@
 
 
 
-class shop_data //TODO: make an actual class and move to its personal file
-{
-    // DUMMY
-};
+
 
 class graph //TODO: link it properly when Misha is done
 {
     // DUMMY
 };
+
+
+shops_data* map::GetInfo (void)
+{
+    return info;
+}
 
 graph* CreateGraphFromSvg (svg_view* v)
 {
@@ -27,13 +31,9 @@ graph* CreateGraphFromSvg (svg_view* v)
     return nullptr; // TDOD: write an actual creation when Misha is done
 }
 
- void CreateInfoFromFile(QString const & file, QMap<QLatin1String, shop_data*>& info)
- {
-     return; // TODO: write an actual function and move it to shop_data file
- }
 
 map::map(QObject *parent) :
-    pic(new svg_view), QObject(parent), svgMapFileName(""), mapInfoFileName(""), objects()
+    QObject(parent), svgMapFileName(""), pic(new svg_view), mapInfoFileName(""), object_indexes()
 {
     //pic = nullptr;
     paths = nullptr;
@@ -46,10 +46,11 @@ map::~map()
 }
 
 
-shop_data const* map::ProvideData(QLatin1String id)
+quint32 map::GetIndex(QLatin1String name)
 {
-    return objects[id];
+    return object_indexes[name];
 }
+
 
 
 void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
@@ -81,7 +82,7 @@ void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
     if ((flags & __MAP_INFO_CHANGED) != 0)
     {
         ClearObjects();
-        CreateInfoFromFile (extrasToSet, objects);
+        info = InitInfoFromFile (extrasToSet, object_indexes);
     }
 
     OnChange(flags);
@@ -93,12 +94,8 @@ void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
 
 void map::ClearObjects() // doesnt inform anyone. emit signals yourself!
 {
-    for (auto& obj : objects)
-    {
-        delete obj;
-        obj = nullptr;
-    }
-    objects.clear();
+    object_indexes.clear();
+
 }
 void map::ClearPic()  // doesnt inform anyone. emit signals yourself!
 {
@@ -121,16 +118,16 @@ void map::ClearAll()  // doesnt inform anyone. emit signals yourself!
 
 void map::OnChange(quint8 singal_flags)
 {
-    if (singal_flags & __MAP_PIC_CHANGED != 0)
+    if ((singal_flags & __MAP_PIC_CHANGED) != 0)
     {
         emit MapPictureChanged(pic);
     }
-    if (singal_flags & __MAP_GRAPH_CHANGED != 0)
+    if ((singal_flags & __MAP_GRAPH_CHANGED) != 0)
     {
         emit PathGraphChanged(paths);
     }
-    if (singal_flags & __MAP_INFO_CHANGED != 0)
+    if ((singal_flags & __MAP_INFO_CHANGED) != 0)
     {
-        emit MapInfoChanged(objects);
+        emit MapInfoChanged(info, object_indexes);
     }
 }
