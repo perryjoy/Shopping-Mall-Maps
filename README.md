@@ -131,6 +131,9 @@ ________________________________________________________________________________
 The current released version is **0.1.0**
 
 ### [Launch instructions](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/launch_instructions.md)
+#### Target platform:    
+Android 5.0+   
+IOS 14.4 + (comming soon)   
 
 ## Links for collaborators:   
 
