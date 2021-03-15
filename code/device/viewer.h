@@ -2,42 +2,32 @@
 #define VIEWER_H
 #include "map.h"
 
-class Coord; //Misha's
-class Graph; //Misha's
+class coord; //Misha's
+class graph; //Misha's
 
 enum viewer_error_code
 {
-    _VEC_SUCCESFULL,
-    _VEC_FAILED_TO_OPEN_FILE,
-    _VEC_ENTITY_CREATION_ERROR
+    VEC_SUCCESFULL,
+    VEC_FAILED_TO_OPEN_FILE,
+    VEC_ENTITY_CREATION_ERROR
 };
 
 
 class viewer
 {
-    svg_view* mapPic;
-    Graph *path;
+ public:
     void InitMap(svg_view* newMapPic);          // Saving new map imame
     void ClearMap();                            // deleting img ptr
 
     void ViewMap();                             // Draws map
     void ViewObject();                          // Drows something (preparing for future) f.e. selected shop
     void ViewGraph();                           // Shows graph on map (for debug )
-    void ViewPath(Coord *from, Coord *to);      // Shows path from firt point to second point (calls Graph)
-
-
+    void ViewPath(coord *from, coord *to);      // Shows path from firt point to second point (calls Graph)
+    
+ private:
+    svg_view* mapPic;
+    graph *path;
 
 };
-
-
-
-
-
-
-
-
-
-
-
 
 #endif // VIEWER_H
