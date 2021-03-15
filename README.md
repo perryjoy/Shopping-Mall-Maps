@@ -130,6 +130,8 @@ ________________________________________________________________________________
 
 The current released version is **0.1.0**
 
+### [Launch instructions](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/launch_instructions.md)
+
 ## Links for collaborators:   
 
 [Code rules and style](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Code-Style-and-Rules.md)   
