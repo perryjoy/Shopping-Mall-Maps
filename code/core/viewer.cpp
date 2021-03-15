@@ -9,12 +9,15 @@ void viewer::InitMap(svg_view* newMap)
 
 void viewer::ClearMap()
 {
-    mapPic = NULL;
+    mapPic = nullptr;
 }
 
 void viewer::ViewMap()
 {
-    mapPic->show();
+    if(mapPic!=nullptr)
+    {
+        mapPic->show();
+    }
 }
 
 void viewer::ViewObject()
