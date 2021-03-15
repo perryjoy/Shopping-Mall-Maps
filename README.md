@@ -41,9 +41,11 @@
 >  - provision of an up-to-date plan of the mall premises
 >  - maintaining up-to-date information about shopping center facilities
 _________________________________________________________________________________
- ### RU
 
-  #### Мобильное приложение AllMall
+ ### RU      
+ <details>     
+  
+ #### Мобильное приложение AllMall
 
 >  Приложение позволяет ориентироваться в торговых центрах, предоставляя пользователю интерактивную карту здания,
 >  возможность поиска объекта ТЦ по названию, возможность проложить маршрут между двумя выбранными точками.
@@ -80,7 +82,9 @@ ________________________________________________________________________________
 
   ##### Требования:
 >  - предоставление актуального плана помещений ТЦ
->  - поддержание актуальной информации об объектах ТЦ
+>  - поддержание актуальной информации об объектах ТЦ   
+
+  </details>    
   
 ## Compare with analogs:
 
@@ -121,6 +125,12 @@ ________________________________________________________________________________
 2. Good route between floors.
 3. Shows stocks.
 4. Search for stores by requirements.
+
+### Current stage
+
+The current released version is **0.1.0**
+
+### [Launch instructions](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/launch_instructions.md)
 
 ## Links for collaborators:   
 
