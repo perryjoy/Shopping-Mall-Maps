@@ -126,6 +126,10 @@ ________________________________________________________________________________
 3. Shows stocks.
 4. Search for stores by requirements.
 
+### Current stage
+
+The current released version is **0.1.0**
+
 ## Links for collaborators:   
 
 [Code rules and style](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Code-Style-and-Rules.md)   
