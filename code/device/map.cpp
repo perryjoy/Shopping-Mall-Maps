@@ -88,9 +88,6 @@ void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
 }
 
 
-
-
-
 void map::ClearObjects() // doesnt inform anyone. emit signals yourself!
 {
     for (auto& obj : objects)
