@@ -6,9 +6,8 @@
 #include <math.h>
 #include <algorithm>
 
-class vertex_graph
+struct vertex_graph
 {
-public:
     std::pair<float, float> vertexCoordinates;     // x and y coordinates
     int vertexFloor;                               //
     std::vector<std::pair<int, float>> edgeWeight; // int - index of adjacent vertex, float - edge Weight
