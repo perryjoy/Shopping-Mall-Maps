@@ -13,19 +13,17 @@ CONFIG += c++11
 SOURCES += \
     core/graph.cpp \
     core/viewer.cpp \
-    core/main.cpp \
+    core\main.cpp \
     device/map.cpp \
     device/svgview.cpp \
-    device/mainwindow.cpp \
-    shops_data.cpp
+    device\mainwindow.cpp
 
 HEADERS += \
     device/graph.h \
     device/map.h \
     device/svgview.h \
     device/viewer.h \
-    device/mainwindow.h
-    shops_data.h
+    device\mainwindow.h
 
 FORMS += \
     mainwindow.ui
