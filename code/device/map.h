@@ -6,7 +6,7 @@
 
 class svg_view;
 class graph;
-class shop_data;
+class shops_data;
 
 
 #define __LEAVE_MAP_AS_IT_IS (QString(""))
@@ -29,8 +29,8 @@ private:
     graph* paths; // paths graph, based on svg pic
 
     QLatin1String mapInfoFileName; // *xml file, containing extra information for map objects
-    QMap<QLatin1String, shop_data*> objects; // loaded and parsed extras data from file above
-
+    shops_data* info; // loaded and parsed extras data from file above
+    QMap<QLatin1String, quint32> object_indexes; // their indexes
 
 
     // inner functions. im too lazy to incapsulate
@@ -46,21 +46,22 @@ public:
     explicit map(QObject *parent = nullptr);
     ~map();
 
-    shop_data const* ProvideData(QLatin1String id);
-    bool Exists (QLatin1String id);
+    quint32 GetIndex(QLatin1String id);  //returns an ordinal number which is used to access info
+    bool Exists (QLatin1String id); // checks if the object exists
+    shops_data* GetInfo (void); // allows to acces extra info. DO NOT MODIFY THIS INFO. IT WILL HURT.
 
 signals:
     // v = new svg pic ptr
     //NOTE: might be nullptr, check it!
-    void MapPictureChanged(svg_view * v);
+    void MapPictureChanged(svg_view * view);
 
     // g = new graph ptr
     //NOTE: might be nullptr, check it!
-    void PathGraphChanged(graph * g);
+    void PathGraphChanged(graph * graph);
 
     // i = new info
     // NOTE: might be empty
-    void MapInfoChanged(QMap<QLatin1String, shop_data*> const & i);
+    void MapInfoChanged(shops_data const * const & info, QMap<QLatin1String, quint32> indexes);
 
     public slots:
     // called on changing the mall to show
