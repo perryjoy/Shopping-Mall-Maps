@@ -11,15 +11,19 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    core\main.cpp \
+    core/graph.cpp \
+    core/viewer.cpp \
+    core/main.cpp \
     device/map.cpp \
     device/svgview.cpp \
-    device\mainwindow.cpp \
+    device/mainwindow.cpp \
     shops_data.cpp
 
 HEADERS += \
+    device/graph.h \
     device/map.h \
     device/svgview.h \
+    device/viewer.h \
     device\mainwindow.h \
     shops_data.h
 

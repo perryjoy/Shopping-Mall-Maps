@@ -1,5 +1,6 @@
 #include "map.h"
 #include "svgview.h"
+#include "graph.h"
 #include "shops_data.h"
 
 #define __MAP_PIC_CHANGED ((quint8)1)
@@ -7,14 +8,6 @@
 #define __MAP_INFO_CHANGED ((quint8)4)
 #define __MAP_ALL_CHANGED ((__MAP_PIC_CHANGED)|(__MAP_GRAPH_CHANGED)|(__MAP_INFO_CHANGED))
 
-
-
-
-
-class graph //TODO: link it properly when Misha is done
-{
-    // DUMMY
-};
 
 
 shops_data* map::GetInfo (void)
@@ -128,6 +121,6 @@ void map::OnChange(quint8 singal_flags)
     }
     if ((singal_flags & __MAP_INFO_CHANGED) != 0)
     {
-        emit MapInfoChanged(info, object_indexes);
+        //emit MapInfoChanged(info, object_indexes);
     }
 }
