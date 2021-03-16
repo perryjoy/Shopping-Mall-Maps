@@ -36,11 +36,11 @@ void main_window::setNewView(svg_view * toSet)
     view = toSet;
 }
 
-bool main_window::LoadFile(const QString &fileName)
+bool main_window::LoadFile(const QString &svgFileName, const QString &xmlFileName)
 {
-    if (QFileInfo::exists(fileName)) // maybe move checks to view module? - KYG
+    if (QFileInfo::exists(svgFileName) && QFileInfo::exists(xmlFileName)) // maybe move checks to view module? - KYG
     {
-        mapInfo->SetAnotherMap(fileName, __LEAVE_MAP_AS_IT_IS);
+        mapInfo->SetAnotherMap(svgFileName, xmlFileName);
     }
 
     return false;
