@@ -1,6 +1,8 @@
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets svg
+qtHaveModule(opengl): QT += opengl
+
 
 CONFIG += c++11
 
@@ -10,10 +12,16 @@ CONFIG += c++11
 
 SOURCES += \
     core\main.cpp \
-    device\mainwindow.cpp
+    device/map.cpp \
+    device/svgview.cpp \
+    device\mainwindow.cpp \
+    shops_data.cpp
 
 HEADERS += \
-    device\mainwindow.h
+    device/map.h \
+    device/svgview.h \
+    device\mainwindow.h \
+    shops_data.h
 
 FORMS += \
     mainwindow.ui

@@ -1,73 +1,66 @@
+#include <QtWidgets>
+#include <QSvgRenderer>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QtGui>
+#include "svgview.h"
+#include "map.h"
 
-main_window::main_window(QWindow *parent)
-    : QWindow(parent),
-      backingStore(new QBackingStore(this))
+main_window::main_window() :
+    mapInfo(new map)
 {
     resize(500, 500);
     timerId = startTimer(100);
+    connect(mapInfo, &map::MapPictureChanged, this, &main_window::setNewView);
 }
 
 bool main_window::event(QEvent *event)
 {
     if (event->type() == QEvent::UpdateRequest)
     {
-        RenderNow();
         return true;
     }
-    return QWindow::event(event);
-}
-
-void main_window::resizeEvent(QResizeEvent *resizeEvent)
-{
-    backingStore->resize(resizeEvent->size());
+    return QWidget::event(event);
 }
 
 void main_window::timerEvent(QTimerEvent *event)
 {
     if (event->timerId() == timerId)
     {
-        requestUpdate();
+        //QPaintEvent *e;
+        ;
     }
 }
 
-void main_window::exposeEvent(QExposeEvent *)
+void main_window::setNewView(svg_view * toSet)
 {
-    if (isExposed())
-    {
-        RenderNow();
-    }
+    view = toSet;
 }
 
-void main_window::RenderNow()
+bool main_window::LoadFile(const QString &svgFileName, const QString &xmlFileName)
 {
-    if (!isExposed())
+    if (QFileInfo::exists(svgFileName) && QFileInfo::exists(xmlFileName)) // maybe move checks to view module? - KYG
     {
-        return;
+        mapInfo->SetAnotherMap(svgFileName, xmlFileName);
     }
-    QRect rect(0, 0, width(), height());
-    backingStore->beginPaint(rect);
 
-    QPaintDevice *device = backingStore->paintDevice();
-    QPainter painter(device);
-    painter.fillRect(0, 0, width(), height(), QColor::fromRgb(255, 255, 255));
-    Render(&painter);
-    painter.end();
+    return false;
+}
 
-    backingStore->endPaint();
-    backingStore->flush(rect);
+void main_window::Show()
+{
+    if (view != nullptr)
+    {
+        view->show();
+    }
 }
 
 main_window::~main_window()
 {
-
 }
 
 void main_window::Render(QPainter *p)
 {
-    p->setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap));
-    p->drawPoint(100, 100);
+//    p->setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap));
+//    p->drawPoint(100, 100);
 }
 
