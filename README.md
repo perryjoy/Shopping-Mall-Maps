@@ -135,6 +135,10 @@ The current released version is **0.1.0**
 Android 5.0+   
 IOS 14.4 + (comming soon)   
 
+#### System Requirements and Limitations (for v0.2.0):    
+Android 5.0+ 
+200 MB free space on drive.    
+
 ## Links for collaborators:   
 
 [Code rules and style](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Code-Style-and-Rules.md)   
