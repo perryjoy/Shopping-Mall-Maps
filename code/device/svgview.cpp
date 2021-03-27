@@ -50,7 +50,7 @@ bool svg_view::OpenFile(const QString &fileName)
     QGraphicsSvgItem *black = new QGraphicsSvgItem();
 
     black->setSharedRenderer(svgRenderer);
-    black->setElementId(QLatin1String("shop1_1"));
+    //black->setElementId(QLatin1String("shop1_1"));
 
 
     //QScopedPointer<QGraphicsSvgItem> svgItem(new QGraphicsSvgItem(fileName));
@@ -150,4 +150,23 @@ void svg_view::paintEvent(QPaintEvent *event)
     {
         QGraphicsView::paintEvent(event);
     }
+}
+
+qreal svg_view::zoomFactor()
+{
+    return transform().m11();
+}
+
+void svg_view::wheelEvent(QWheelEvent *event)
+{
+    zoomBy(qPow(1.2, event->angleDelta().y() / 240.0));
+}
+
+void svg_view::zoomBy(qreal factor)
+{
+    const qreal currentZoom = zoomFactor();
+    if ((factor < 1 && currentZoom < 0.1) || (factor > 1 && currentZoom > 10))
+        return;
+    scale(factor, factor);
+    //emit zoomChanged();
 }

@@ -43,7 +43,8 @@ public:
 
     // on deafault sets toSet pointer to the needed value (NOT  SAFE, DO NOT TRY TO MODIFY DATA YOU RECIEVE THIS WAY).
     // With index provided copies data of what_needed sort of the one object to the *toSet var - in that case you may do with the data anything you want
-    template<typename T> void Access(T*& toSet, data_accessable what_needed, quint32 index = QUINT_MAX)
+    template<typename T>
+    void Access(T*& toSet, data_accessable what_needed, quint32 index = QUINT_MAX)
     {
         switch(what_needed)
         {

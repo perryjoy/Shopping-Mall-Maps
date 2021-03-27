@@ -25,19 +25,23 @@ public:
 
     QSize SvgSize() const;
     QSvgRenderer *Renderer() const;
-
+    qreal zoomFactor();
 
 public slots:
     void SetAntialiasing(bool antialiasing);
     void SetViewBackground(bool enable);
     void SetViewOutline(bool enable);
 
+
 signals:
+    //void zoomChanged();
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
 private:
+    void zoomBy(qreal factor);
 
     renderer_type rendererType;
 
