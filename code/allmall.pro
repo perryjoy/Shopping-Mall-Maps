@@ -20,6 +20,7 @@ SOURCES += \
     shops_data.cpp
 
 HEADERS += \
+    core/manager.h \
     device/graph.h \
     device/map.h \
     device/svgview.h \
