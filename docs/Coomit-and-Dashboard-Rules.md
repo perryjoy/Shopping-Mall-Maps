@@ -11,6 +11,6 @@
   ```
   or      
   ```C
-  Ball disappearing bug was fixed AB#12 
+  Fixed ball disappearing bug  AB#12 
   ```
   That creates link to your commit in azure boards.
