@@ -74,7 +74,7 @@ shops_data* ReadInfo(QXmlStreamReader& reader, QMap<QLatin1String, quint32>& ind
                            goto for_break;
                            break;
                        case DA_IS_UNIQUE:
-                           res->isUnique[i] = (reader.readElementText() == "true");
+                           res->isUnique[curr_index] = (reader.readElementText() == "true");
                            goto for_break;
                            break;
                        case DA_SHORT_INFO:
@@ -82,11 +82,11 @@ shops_data* ReadInfo(QXmlStreamReader& reader, QMap<QLatin1String, quint32>& ind
                            goto for_break;
                            break;
                        case DA_OPENS_AT:
-                           res->opensAt[i] = QTime::fromString(reader.readElementText(), "hh:mm:ss:zzz");
+                           res->opensAt[curr_index] = QTime::fromString(reader.readElementText(), "hh:mm:ss:zzz");
                            goto for_break;
                            break;
                        case DA_CLOSES_AT:
-                           res->closesAt[i] = QTime::fromString(reader.readElementText(), "hh:mm:ss:zzz");
+                           res->closesAt[curr_index] = QTime::fromString(reader.readElementText(), "hh:mm:ss:zzz");
                            goto for_break;
                            break;
                        case DA_FULL_INFO:
