@@ -18,35 +18,6 @@ bool map::OpenFile(const QString &fileName)
 {
     pic = new QGraphicsSvgItem(fileName);
 
-/*
-    s->clear();
-    resetTransform();
-
-    svgItem = black;//svgItem.take();
-    svgItem->setFlags(QGraphicsItem::ItemClipsToShape);
-    svgItem->setCacheMode(QGraphicsItem::NoCache);
-    svgItem->setZValue(0);
-
-    backgroundItem = new QGraphicsRectItem(svgItem->boundingRect());
-    backgroundItem->setBrush(Qt::white);
-    backgroundItem->setPen(Qt::NoPen);
-    backgroundItem->setVisible(drawBackground);
-    backgroundItem->setZValue(-1);
-
-    outlineItem = new QGraphicsRectItem(svgItem->boundingRect());
-    QPen outline(Qt::black, 2, Qt::DashLine);
-    outline.setCosmetic(true);
-    outlineItem->setPen(outline);
-    outlineItem->setBrush(Qt::NoBrush);
-    outlineItem->setVisible(drawOutline);
-    outlineItem->setZValue(1);
-
-    s->addItem(backgroundItem);
-    s->addItem(svgItem);
-    s->addItem(outlineItem);
-
-    s->setSceneRect(outlineItem->boundingRect().adjusted(-10, -10, 10, 10));
-    */
     return true;
 }
 
@@ -67,10 +38,8 @@ graph* CreateGraphFromSvg (QGraphicsSvgItem* v)
 
 
 map::map(QObject *parent) :
-    QObject(parent), svgMapFileName("")/*, pic(new QGraphicsSvgItem)*/, mapInfoFileName(""), object_indexes()
+    QObject(parent), svgMapFileName(""), mapInfoFileName(""), object_indexes(), paths(nullptr)
 {
-    //pic = nullptr;
-    paths = nullptr;
 }
 
 map::~map()
@@ -104,8 +73,6 @@ void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
 
     if ((flags & __MAP_PIC_CHANGED) != 0)
     {
-        //ClearPic();
-        //pic->OpenFile(mapToSet);
         OpenFile(mapToSet);
     }
 

@@ -30,16 +30,17 @@ class viewer: public QGraphicsView
 
  public:
     explicit viewer(QWidget *parent = nullptr);
-    bool InitMap(const QString &fileName);          // Saving new map imame
+    bool InitMap(const QString &fileName);       // Saving new map imame
     void ClearMap();                            // deleting img ptr
 
     void ViewMap();                             // Draws map
     void ViewObject();                          // Drows something (preparing for future) f.e. selected shop
     void ViewGraph();                           // Shows graph on map (for debug )
     void ViewPath(coord *from, coord *to);      // Shows path from firt point to second point (calls Graph)
-    qreal zoomFactor();
-    qreal GetMapPicScale();
-    virtual ~viewer() {};
+    float zoomFactor();
+    float GetMapPicScale();
+    void Clear();
+    ~viewer();
 
 signals:
     void zoomChanged();
@@ -51,7 +52,7 @@ protected:
     void drawBackground(QPainter *p, const QRectF &) override;
 
 private:
-    void zoomBy(qreal factor);
+    void zoomBy(float factor);
     void SetRenderer(renderer_type type = RENDERER_NATIVE);
     void SetAntialiasing(bool antialiasing);
 
@@ -65,10 +66,7 @@ private:
     QSvgRenderer *mapRenderer;
     QGraphicsScene *mapScene;
 
-    
- private:
     QGraphicsSvgItem* mapPic;
-//    QImage** buttonsPics; //array of buttons pictures
     graph *path;
     QImage image;
 

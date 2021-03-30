@@ -24,16 +24,12 @@ public:
     MainWindow();
     ~MainWindow();
 
-    bool loadFile(const QString &path);
     bool LoadFile(const QString &svgFileName, const QString &xmlFileName);
     virtual void Render(QPainter *painter);
 
 public slots:
-     //void openFile();
-   // void exportImage();
     bool event(QEvent *event) override;
     void timerEvent(QTimerEvent *) override;
-    //void setRenderer(int renderMode);
     void Show();
     void setNewView(QGraphicsSvgItem * toSet);
 

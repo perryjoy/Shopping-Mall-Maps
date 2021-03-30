@@ -7,10 +7,12 @@
 
 viewer::viewer(QWidget *parent) :
     QGraphicsView(parent),
+    svgRenderer(nullptr),
     rendererType(RENDERER_IMAGE),
     svgItem(nullptr),
     backgroundItem(nullptr),
-    outlineItem(nullptr)
+    outlineItem(nullptr),
+    mapPic(nullptr)
 {
     mapScene = new QGraphicsScene();
     setScene(mapScene);
@@ -73,25 +75,11 @@ void viewer::SetRenderer(renderer_type type)
 
 bool viewer::InitMap(const QString &fileName)
 {
-
-    //mapPic = newMap;
-    //if (!mapPic->renderer()->isValid())
-        //return false;
-
+    Clear();
 
     svgRenderer = new QSvgRenderer(fileName);
-    QGraphicsSvgItem *black = new QGraphicsSvgItem();
-
-    const bool drawBackground = (backgroundItem ? backgroundItem->isVisible() : false);
-    const bool drawOutline = (outlineItem ? outlineItem->isVisible() : true);
-
-
-     black->setSharedRenderer(svgRenderer);
-     mapPic = black;
-    //mapPic->setElementId(QLatin1String("shop1_1"));
-
-
-    //QScopedPointer<QGraphicsSvgItem> svgItem(new QGraphicsSvgItem(fileName));
+    mapPic = new QGraphicsSvgItem();
+    mapPic->setSharedRenderer(svgRenderer);
 
     mapScene->clear();
     resetTransform();
@@ -103,7 +91,7 @@ bool viewer::InitMap(const QString &fileName)
     backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
     backgroundItem->setBrush(Qt::blue);
     backgroundItem->setPen(Qt::NoPen);
-    backgroundItem->setVisible(drawBackground);
+    backgroundItem->setVisible(backgroundItem ? backgroundItem->isVisible() : false);
     backgroundItem->setZValue(-1);
 
     outlineItem = new QGraphicsRectItem(mapPic->boundingRect());
@@ -111,7 +99,7 @@ bool viewer::InitMap(const QString &fileName)
     outline.setCosmetic(true);
     outlineItem->setPen(outline);
     outlineItem->setBrush(Qt::NoBrush);
-    outlineItem->setVisible(drawOutline);
+    outlineItem->setVisible(outlineItem ? outlineItem->isVisible() : true);
     outlineItem->setZValue(1);
 
     mapScene->addItem(backgroundItem);
@@ -119,17 +107,39 @@ bool viewer::InitMap(const QString &fileName)
     mapScene->addItem(outlineItem);
 
     mapScene->setSceneRect(outlineItem->boundingRect().adjusted(-10, -10, 10, 10));
+
     return true;
+}
+
+void viewer::Clear()
+{
+    if (svgRenderer)
+        delete svgRenderer;
+    if (backgroundItem)
+        delete backgroundItem;
+    if (outlineItem)
+        delete outlineItem;
+    if (mapPic)
+        delete mapPic;
+}
+
+viewer::~viewer()
+{
+    Clear();
+    delete mapScene;
 }
 
 void viewer::ClearMap()
 {
+    if (mapPic)
+        delete mapPic;
+
     mapPic = nullptr;
 }
 
 void viewer::ViewMap()
 {
-    if(mapPic!=nullptr)
+    if(mapPic != nullptr)
     {
         mapPic->show();
     }
@@ -150,12 +160,12 @@ void viewer::ViewPath(coord *from, coord *to)
 
 }
 
-qreal viewer::GetMapPicScale()
+float viewer::GetMapPicScale()
 {
     return mapPic->scale();
 }
 
-qreal viewer::zoomFactor()
+float viewer::zoomFactor()
 {
     return transform().m11();
 }
@@ -165,10 +175,10 @@ void viewer::wheelEvent(QWheelEvent *event)
     zoomBy(qPow(1.2, event->angleDelta().y() / 240.0));
 }
 
-void viewer::zoomBy(qreal factor)
+void viewer::zoomBy(float factor)
 {
     //const qreal currentZoom = zoomFactor();
-    const qreal currentZoom = mapPic->scale();
+    const float currentZoom = mapPic->scale();
     if ((factor < 1 && currentZoom < 0.1) || (factor > 1 && currentZoom > 10))
         return;
     //scale(factor, factor);

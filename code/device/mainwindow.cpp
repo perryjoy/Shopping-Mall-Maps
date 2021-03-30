@@ -27,14 +27,12 @@ void MainWindow::timerEvent(QTimerEvent *event)
 {
     if (event->timerId() == timerId)
     {
-        //QPaintEvent *e;
         ;
     }
 }
 
 void MainWindow::setNewView(QGraphicsSvgItem *toSet)
 {
-    //mapViewer->InitMap(toSet);
 }
 
 bool MainWindow::LoadFile(const QString &svgFileName, const QString &xmlFileName)
@@ -62,12 +60,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::Render(QPainter *p)
 {
-//    p->setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap));
-//    p->drawPoint(100, 100);
 }
 
 void MainWindow::updateZoomLabel()
 {
-    const int percent = qRound(mapViewer->GetMapPicScale() * qreal(100));
+    const int percent = qRound(mapViewer->GetMapPicScale() * float(100));
     m_zoomLabel->setText(QString::number(percent) + QLatin1Char('%'));
 }
