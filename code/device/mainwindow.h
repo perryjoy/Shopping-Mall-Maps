@@ -1,32 +1,57 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QWidget>
+#include <QMainWindow>
+#include <QString>
+#include "map.h"
+#include "viewer.h"
 
-class svg_view;
-class map;
 
-class main_window : public QWidget
+
+QT_BEGIN_NAMESPACE
+class QAction;
+class QGraphicsView;
+class QGraphicsScene;
+class QGraphicsRectItem;
+class QLabel;
+QT_END_NAMESPACE
+
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    main_window();
-    ~main_window();
-    virtual void Render(QPainter *painter);
+    MainWindow();
+    ~MainWindow();
+
     bool LoadFile(const QString &svgFileName, const QString &xmlFileName);
+    virtual void Render(QPainter *painter);
 
 public slots:
-    void Show();
-    void setNewView(svg_view * toSet);
-
-protected:
     bool event(QEvent *event) override;
     void timerEvent(QTimerEvent *) override;
+    void Show();
+    void setNewView(QGraphicsSvgItem * toSet);
+
+private slots:
+    void updateZoomLabel();
+
+private:
+    QAction *m_nativeAction;
+    QAction *m_glAction;
+    QAction *m_imageAction;
+    QAction *m_antialiasingAction;
+    QAction *m_backgroundAction;
+    QAction *m_outlineAction;
+
+    QLabel *m_zoomLabel;
 
 private:
     int timerId;
-    svg_view *view;
+    viewer *mapViewer;
     map *mapInfo;
+
+    QString m_currentPath;
 };
-#endif // MAINWINDOW_H
+
+#endif

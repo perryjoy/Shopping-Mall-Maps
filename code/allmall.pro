@@ -15,14 +15,12 @@ SOURCES += \
     core/viewer.cpp \
     core/main.cpp \
     device/map.cpp \
-    device/svgview.cpp \
     device/mainwindow.cpp \
     shops_data.cpp
 
 HEADERS += \
     device/graph.h \
     device/map.h \
-    device/svgview.h \
     device/viewer.h \
     device\mainwindow.h \
     shops_data.h
@@ -34,3 +32,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    ../resources/map1.qrc
