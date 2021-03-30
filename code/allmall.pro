@@ -14,14 +14,18 @@ SOURCES += \
     core/graph.cpp \
     core/viewer.cpp \
     core/main.cpp \
+    device/graph_alternative.cpp \
     device/map.cpp \
+    device/map2graph.cpp \
     device/svgview.cpp \
     device/mainwindow.cpp \
     shops_data.cpp
 
 HEADERS += \
     core/manager.h \
+    device/Vector2.hpp \
     device/graph.h \
+    device/graph_alternative.h \
     device/map.h \
     device/svgview.h \
     device/viewer.h \

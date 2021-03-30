@@ -15,15 +15,6 @@ shops_data* map::GetInfo (void)
     return info;
 }
 
-graph* CreateGraphFromSvg (svg_view* v)
-{
-    if (v == nullptr)
-    {
-        return nullptr;
-    }
-    return nullptr; // TDOD: write an actual creation when Misha is done
-}
-
 
 map::map(QObject *parent) :
     QObject(parent), svgMapFileName(""), pic(new svg_view), mapInfoFileName(""), object_indexes()
