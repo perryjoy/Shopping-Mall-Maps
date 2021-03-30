@@ -41,9 +41,11 @@
 >  - provision of an up-to-date plan of the mall premises
 >  - maintaining up-to-date information about shopping center facilities
 _________________________________________________________________________________
- ### RU
 
-  #### Мобильное приложение AllMall
+ ### RU      
+ <details>     
+  
+ #### Мобильное приложение AllMall
 
 >  Приложение позволяет ориентироваться в торговых центрах, предоставляя пользователю интерактивную карту здания,
 >  возможность поиска объекта ТЦ по названию, возможность проложить маршрут между двумя выбранными точками.
@@ -80,139 +82,10 @@ ________________________________________________________________________________
 
   ##### Требования:
 >  - предоставление актуального плана помещений ТЦ
->  - поддержание актуальной информации об объектах ТЦ
+>  - поддержание актуальной информации об объектах ТЦ   
 
-
-## Rules:
-  ### Commit & dashboard rules:   
-  1) Use only english and past simple tense.
-  2) Use Upper chars in the beginning.
-  3) Single reason for commit.
-  4) Use active voice
-  5) Write at the end of the commit message string `AB#* ticket number *`.
+  </details>    
   
-  Commit example: 
-  ```C
-  Created commit rules AB#30
-  ```
-  or      
-  ```C
-  Ball disappearing bug was fixed AB#12 
-  ```
-  That creates link to your commit in azure boards.
-
-  ### Code rules: 
-  *Discussion -> Code -> Test -> Review -> Done*     
-  1) In 3 days before deadline must be test and review.     
-  2) No "magic" numbers and constants in code. Everything must be in enums, defines or special variables.   
-  3) Use global variables only after team discussion.    
-
-  ### Code style:    
-  1) Every figure "{" must be on new string. 
- ```C
-      void foo(int a)
-      {
-	      ...
-      }
- ```
-  2) Single if-else must be with " { ... }".     
- ```C
-      void foo(int a)
-      {
-	    if(n>0)
-        {
-         ...
-        }
-        else
-        {
-        ...
-        }
-      }
- ```
-  3) Naming.
-  *	camelCase for: local variables, class members
-  *	PascalCase for: functions
-  *	snake_case for: data types (except types declared in the libraries used)
-  *	UPPER_CASE for: global constants, enumerations elements, macro constants
- ```C
-      const float PI_CONSTANT = 3.1415926;
-      
-      class my_class
-      {
-          int memberData;
-	 	 void ProcessData();
-      };
-      
-      void Foo(int a)
-      {
-		 int maxNumber;
-          double ballForceThrow;
-      }
-      
-      void OpenFile()
-      {
-      ...
-      }
- ```
-  4) Indentation
-  *	Use only spaces, 4 spaces
-  *	Any inner block must be indented, '{' must has same indentation as outer block
-  *	Data access specifiers ("public", "protected", "private") has same indentation as class
-  *	"case" markers has same indentation as "switch" block
-  ```C
-  class my_class
-  {
-  public:
-      void ProcessData()
-      {
-          switch (memberData)
-          {
-          case 0:
-              memberData++;
-              break;
-          case 1:
-              memberData--;
-              break;
-          case 2:
-              printf("Error");
-              break;
-          }
-      }
-  private:
-      int memberData;
-  };
-  ```
-  5) If function fits the screen, variables declares in the beginning, else in the place of use. 
-  6) Insert spaces between operators and operands.
- ```C
-      int x = (a + b) * c / d + foo();
- ```
- 7) Each variable declaration on a new line.
-  ```C
-      int x = 3;
-      int y = 7;
-      double z = 4.25;
- ```
- 8) When the line gets longer than 100 characters, divide it into two, making a newline after the operator, and continue writing.
- ```C
-   int result = reallyLongFunctionOne() + reallyLongFunctionTwo() + 
-        reallyLongFunctionThree() + reallyLongFunctionFour();
- ```
- 9) Leave blank lines between functions and between expression groups.
-  ```C
-   void foo() 
-   {
-    ...
-   }
-                          // Empty line
-   void bar() 
-   {
-    ...
-   }
- ```
- 
-## [Setup instructoin for collaborators](https://github.com/HellInsider/Shopping-Mall-Maps/blob/develop/docs/setup_guide.md)
-
 ## Compare with analogs:
 
 ### Galeria Saint-Petersburg(https://www.galeria.spb.ru/schema/):
@@ -253,38 +126,27 @@ ________________________________________________________________________________
 3. Shows stocks.
 4. Search for stores by requirements.
 
-## Git workflow
+### Current stage
 
-### Main Branch
+The current released version is **0.2.0**
 
-`Main` is always an up-to-date copy of the existing code in production. No one, including the technical manager, should make changes directly to this branch, as this will directly affect the working product.
-All the code is actually written in other branches.
+### [Launch instructions](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/launch_instructions.md)
 
-### Develop branch
+#### Target platform:    
+Android 5.0+   
+IOS 14.4 + (comming soon)   
 
-When starting a project, the first step is to create a `develop` branch for it based on `main`. All the code related to this project should be located here. A `develop` branch is a regular Git branch with the `develop`  prefix.
+#### System Requirements and Limitations (for v0.2.0):    
+Android 5.0+ 
+200 MB free space on drive.    
 
-### Feature Branch
+## Links for collaborators:   
 
-For each new component or functionality, a separate `feature` branch is created, which differs from the usual one only by the `feature`  prefix. This ensures independent development.
-When you finish working on the component, you need to send its code from the `feature` branch to the `develop` branch. You need to make a pull request.
+[Code rules and style](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Coomit-and-Dashboard-Rules.md)   
+[Git workflow](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Git-Workflow)   
+[Commit rules](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Coomit-and-Dashboard-Rules.md)   
+[Setup instructoin for collaborators](https://github.com/HellInsider/Shopping-Mall-Maps/blob/develop/docs/setup_guide.md) 
 
-### Pull request
-
-A developer cannot directly submit their changes to the `develop` branch. First, they should be checked by the technical manager. This is what pool queries are designed for. After verification, the technical manager must merge this branch with the `develop` branch
-
-### The code conflicts
-
-Let's say that the `develop` branch already contains new code written by the first developer, and if the second developer sends a pool request from its `feature` branch to the `develop` branch, conflicts arise. They should be solved by the reviewer of the request or an experienced developer.
-Thus, code conflicts can be resolved by the reviewer of the pool request or by the developer himself in the `feature` branch.
-
-### Bugs
-
-To fix bugs, create a new `feature` branch.
-
-### Main again
-
-When the project is completed, the code from the `develop` branch is merged with `main` and deployed to production. Thus, the working product and the `main` code are the same thing.
 
 ## Contributors:   
   Kirillova Arina   
