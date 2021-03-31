@@ -128,9 +128,10 @@ ________________________________________________________________________________
 
 ### Current stage
 
-The current released version is **0.1.0**
+The current released version is **0.2.0**
 
 ### [Launch instructions](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/launch_instructions.md)
+
 #### Target platform:    
 Android 5.0+   
 IOS 14.4 + (comming soon)   
@@ -144,7 +145,7 @@ Android 5.0+
 [Code rules and style](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Coomit-and-Dashboard-Rules.md)   
 [Git workflow](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Git-Workflow)   
 [Commit rules](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Coomit-and-Dashboard-Rules.md)   
- 
+[Setup instructoin for collaborators](https://github.com/HellInsider/Shopping-Mall-Maps/blob/develop/docs/setup_guide.md) 
 
 
 ## Contributors:   
