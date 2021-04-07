@@ -109,6 +109,7 @@ void graph::AddTemporaryVertex(vec2 coordinates)
         index++;
     }
 
+    std::cout<<newVertex.vertexCoordinates.x<<" "<<newVertex.vertexCoordinates.y<<std::endl;
     AddVertex(newVertex);
     AddVertex({{coordinates}, newVertex.vertexFloor, {{(long int)adjacencyList.size() - 1,CalculateWeight(coordinates, newVertex.vertexCoordinates)}}});
 }
