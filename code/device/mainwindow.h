@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPushButton>
 #include <QString>
 #include "map.h"
 #include "viewer.h"
@@ -35,6 +36,7 @@ public slots:
 
 private slots:
     void updateZoomLabel();
+    void handleButton();
 
 private:
     QAction *m_nativeAction;
@@ -43,6 +45,8 @@ private:
     QAction *m_antialiasingAction;
     QAction *m_backgroundAction;
     QAction *m_outlineAction;
+    QPushButton *m_button;
+    QPushButton *m_button1;
 
     QLabel *m_zoomLabel;
 
