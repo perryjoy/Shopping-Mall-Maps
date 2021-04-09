@@ -11,7 +11,7 @@ MainWindow::MainWindow() : QMainWindow(),
     resize(500, 500);
     timerId = startTimer(100);
     connect(mapInfo, &map::MapPictureChanged, this, &MainWindow::setNewView);
-    connect(mapViewer, &viewer::zoomChanged, this, &MainWindow::updateZoomLabel);
+    connect(mapViewer, &viewer::ZoomChanged, this, &MainWindow::updateZoomLabel);
 }
 
 bool MainWindow::event(QEvent *event)
