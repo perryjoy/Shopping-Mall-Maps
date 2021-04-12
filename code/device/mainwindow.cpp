@@ -1,5 +1,6 @@
 #include <QtWidgets>
 #include <QSvgRenderer>
+#include <QPushButton>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -11,7 +12,23 @@ MainWindow::MainWindow() : QMainWindow(),
     resize(500, 500);
     timerId = startTimer(100);
     connect(mapInfo, &map::MapPictureChanged, this, &MainWindow::setNewView);
-    connect(mapViewer, &viewer::ZoomChanged, this, &MainWindow::updateZoomLabel);
+    connect(mapViewer, &viewer::zoomChanged, this, &MainWindow::updateZoomLabel);
+    // create a button
+    m_button_for_up = new QPushButton("Up", this);
+    m_button_for_down = new QPushButton("Down", this);
+
+    // set the size and position of the button
+    m_button_for_up->setGeometry(QRect(QPoint(1800, 100),QSize(100, 50)));
+    m_button_for_down->setGeometry(QRect(QPoint(1800, 150),QSize(100, 50)));
+
+    // connect the signal to the corresponding slot
+    connect(m_button_for_up, SIGNAL (released()), this, SLOT (handleButton()));
+    connect(m_button_for_down, SIGNAL (released()), this, SLOT (handleButton()));
+
+}
+void MainWindow::handleButton()
+{
+
 }
 
 bool MainWindow::event(QEvent *event)
@@ -45,6 +62,7 @@ bool MainWindow::LoadFile(const QString &svgFileName, const QString &xmlFileName
 
     return false;
 }
+
 
 void MainWindow::Show()
 {

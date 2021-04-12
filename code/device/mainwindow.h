@@ -35,6 +35,7 @@ public slots:
 
 private slots:
     void updateZoomLabel();
+    void handleButton();
 
 private:
     QAction *m_nativeAction;
@@ -43,6 +44,8 @@ private:
     QAction *m_antialiasingAction;
     QAction *m_backgroundAction;
     QAction *m_outlineAction;
+    QPushButton *m_button_for_up;
+    QPushButton *m_button_for_down;
 
     QLabel *m_zoomLabel;
 
