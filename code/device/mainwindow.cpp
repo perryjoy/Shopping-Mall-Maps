@@ -13,15 +13,15 @@ MainWindow::MainWindow() : QMainWindow(),
     timerId = startTimer(100);
     connect(mapInfo, &map::MapPictureChanged, this, &MainWindow::setNewView);
     connect(mapViewer, &viewer::zoomChanged, this, &MainWindow::updateZoomLabel);
-// create a button
+    // create a button
 m_button_for_up = new QPushButton("Up", this);
 m_button_for_down = new QPushButton("Down", this);
 
-// set the size and position of the button
+    // set the size and position of the button
 m_button_for_up->setGeometry(QRect(QPoint(1800, 100),QSize(100, 50)));
 m_button_for_down->setGeometry(QRect(QPoint(1800, 150),QSize(100, 50)));
 
-// connect the signal to the corresponding slot
+    // connect the signal to the corresponding slot
 connect(m_button_for_up, SIGNAL (released()), this, SLOT (handleButton()));
 connect(m_button_for_down, SIGNAL (released()), this, SLOT (handleButton()));
 
