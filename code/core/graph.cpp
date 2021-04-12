@@ -114,10 +114,10 @@ void graph::AddTemporaryVertex(vec2 coordinates)
     AddVertex({{coordinates}, newVertex.vertexFloor, {{static_cast<long int>(adjacencyList.size()) - 1,CalculateWeight(coordinates, newVertex.vertexCoordinates)}}});
 }
 
-std::vector<int> graph::SearchWay(int vertexStart, int vertexFinish)
+std::vector<vertex_graph> graph::SearchWay(int vertexStart, int vertexFinish)
 {
     const int INF = INT_MAX;
-    std::vector<int> path;
+    std::vector<vertex_graph> path;
     size_t graphSize = adjacencyList.size();
     std::vector<int> minimalWay(graphSize, INF);
     std::vector<int> temporatyValue(graphSize);
@@ -153,10 +153,10 @@ std::vector<int> graph::SearchWay(int vertexStart, int vertexFinish)
 
     for (int i = vertexFinish; i != vertexStart; i = temporatyValue[i])
     {
-        path.push_back(i);
+        path.push_back(adjacencyList[i]);
     }
 
-    path.push_back(vertexStart);
+    path.push_back(adjacencyList[vertexStart]);
     reverse(path.begin(), path.end());
 
     return path;

@@ -1,4 +1,9 @@
 #include "device/viewer.h"
+#include "device/graph.h"
+#include <QtSvg/QSvgRenderer>
+#include <QtSvg/qgraphicssvgitem.h>
+#include <QWheelEvent>
+#include <QtMath>
 
 
 #ifndef QT_NO_OPENGL
@@ -23,7 +28,8 @@ viewer::viewer(QWidget *parent) :
 
 void viewer::paintEvent(QPaintEvent *event)
 {
-    if (rendererType == RENDERER_IMAGE)
+
+   if (rendererType == RENDERER_IMAGE)
     {
         if (image.size() != viewport()->size())
         {
@@ -36,7 +42,10 @@ void viewer::paintEvent(QPaintEvent *event)
 
         QPainter p(viewport());
         p.drawImage(0, 0, image);
-
+        if(isPathNeeded)
+        {
+        ViewPath();
+        }
     }
     else
     {
@@ -155,9 +164,26 @@ void viewer::ViewGraph()
 
 }
 
-void viewer::ViewPath(coord *from, coord *to)
+void viewer::ViewPath()
 {
-
+    graph w;
+    w.adjacencyList = {
+    {{555,555},0,{{1,5},{2,6},{3,4}}},
+    {{30,485},0,{{0,5},{2,6},{5,9}}},
+    {{60,100},0,{{0,6},{1,6},{5,7}}},
+    {{200,30},0,{{0,4},{4,14}}},
+    {{120,30},0,{{3,14},{6,5}}},
+    {{120,308},0,{{1,9},{2,7},{6,5}}},
+    {{160,0},0,{{5,5},{4,5}}}
+};
+    std::vector<vertex_graph> path = w.SearchWay(0,6);
+    for(std::vector<vertex_graph>::size_type i = 0; i < path.size() - 1; ++i)
+    {
+    QPainter painter(viewport());
+    painter.setPen(QPen(Qt::red, 3, Qt::DotLine, Qt::RoundCap));
+        painter.drawLine(path[i].vertexCoordinates.x, path[i].vertexCoordinates.y,
+                         path[i + 1].vertexCoordinates.x, path[i + 1].vertexCoordinates.y);
+    }
 }
 
 float viewer::GetMapPicScale()
@@ -165,17 +191,17 @@ float viewer::GetMapPicScale()
     return mapPic->scale();
 }
 
-float viewer::zoomFactor()
+float viewer::ZoomFactor()
 {
     return transform().m11();
 }
 
 void viewer::wheelEvent(QWheelEvent *event)
 {
-    zoomBy(qPow(1.2, event->angleDelta().y() / 240.0));
+    ZoomBy(qPow(1.2, event->angleDelta().y() / 240.0));
 }
 
-void viewer::zoomBy(float factor)
+void viewer::ZoomBy(float factor)
 {
     //const qreal currentZoom = zoomFactor();
     const float currentZoom = mapPic->scale();
@@ -183,5 +209,5 @@ void viewer::zoomBy(float factor)
         return;
     //scale(factor, factor);
     mapPic->setScale(factor);
-    emit zoomChanged();
+    emit ZoomChanged();
 }
