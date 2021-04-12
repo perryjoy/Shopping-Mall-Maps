@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPushButton>
 #include <QString>
 #include "map.h"
 #include "viewer.h"
@@ -45,8 +44,8 @@ private:
     QAction *m_antialiasingAction;
     QAction *m_backgroundAction;
     QAction *m_outlineAction;
-    QPushButton *m_button;
-    QPushButton *m_button1;
+    QPushButton *m_button_for_up;
+    QPushButton *m_button_for_down;
 
     QLabel *m_zoomLabel;
 
