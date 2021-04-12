@@ -30,9 +30,9 @@ class graph
 public:
     void DeleteVertex(int index);
     void AddTemporaryVertex(vec2 coordinates);
-    std::vector<int> SearchWay(int vertexStart, int vertexFinish);
-private:
+    std::vector<vertex_graph> SearchWay(int vertexStart, int vertexFinish);
     std::vector<vertex_graph> adjacencyList;
+private:
     std::vector<edge> CopyDataweightedEdges(vec2 newVertex, edge adjVert, int h);
     void AddVertex(vertex_graph vertex);
     std::vector<float> CreateLineEquation(vertex_graph vert, int index);

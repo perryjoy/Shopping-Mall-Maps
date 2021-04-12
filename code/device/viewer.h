@@ -1,10 +1,7 @@
 #ifndef VIEWER_H
 #define VIEWER_H
 #include <QGraphicsView>
-#include <QtSvg/QSvgRenderer>
-#include <QtSvg/qgraphicssvgitem.h>
-#include <QWheelEvent>
-#include <QtMath>
+
 #include "map.h"
 
 class coord; //Misha's
@@ -36,14 +33,14 @@ class viewer: public QGraphicsView
     void ViewMap();                             // Draws map
     void ViewObject();                          // Drows something (preparing for future) f.e. selected shop
     void ViewGraph();                           // Shows graph on map (for debug )
-    void ViewPath(coord *from, coord *to);      // Shows path from firt point to second point (calls Graph)
-    float zoomFactor();
+    void ViewPath();      // Shows path from firt point to second point (calls Graph)
+    float ZoomFactor();
     float GetMapPicScale();
     void Clear();
     ~viewer();
 
 signals:
-    void zoomChanged();
+    void ZoomChanged();
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -52,7 +49,7 @@ protected:
     void drawBackground(QPainter *p, const QRectF &) override;
 
 private:
-    void zoomBy(float factor);
+    void ZoomBy(float factor);
     void SetRenderer(renderer_type type = RENDERER_NATIVE);
     void SetAntialiasing(bool antialiasing);
 
@@ -69,6 +66,8 @@ private:
     QGraphicsSvgItem* mapPic;
     graph *path;
     QImage image;
+
+    bool isPathNeeded = true;
 
 };
 
