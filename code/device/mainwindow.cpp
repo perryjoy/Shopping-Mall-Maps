@@ -29,7 +29,6 @@ MainWindow::MainWindow() : QMainWindow(),
 void MainWindow::handleButton()
 {
 
-
 }
 
 bool MainWindow::event(QEvent *event)

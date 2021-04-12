@@ -1,4 +1,8 @@
 #include "device/viewer.h"
+#include <QtSvg/QSvgRenderer>
+#include <QtSvg/qgraphicssvgitem.h>
+#include <QWheelEvent>
+#include <QtMath>
 
 
 #ifndef QT_NO_OPENGL
@@ -165,17 +169,17 @@ float viewer::GetMapPicScale()
     return mapPic->scale();
 }
 
-float viewer::zoomFactor()
+float viewer::ZoomFactor()
 {
     return transform().m11();
 }
 
 void viewer::wheelEvent(QWheelEvent *event)
 {
-    zoomBy(qPow(1.2, event->angleDelta().y() / 240.0));
+    ZoomBy(qPow(1.2, event->angleDelta().y() / 240.0));
 }
 
-void viewer::zoomBy(float factor)
+void viewer::ZoomBy(float factor)
 {
     //const qreal currentZoom = zoomFactor();
     const float currentZoom = mapPic->scale();
@@ -183,5 +187,5 @@ void viewer::zoomBy(float factor)
         return;
     //scale(factor, factor);
     mapPic->setScale(factor);
-    emit zoomChanged();
+    emit ZoomChanged();
 }
