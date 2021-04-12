@@ -33,7 +33,7 @@ class viewer: public QGraphicsView
     void ViewMap();                             // Draws map
     void ViewObject();                          // Drows something (preparing for future) f.e. selected shop
     void ViewGraph();                           // Shows graph on map (for debug )
-    void ViewPath(coord *from, coord *to);      // Shows path from firt point to second point (calls Graph)
+    void ViewPath();      // Shows path from firt point to second point (calls Graph)
     float ZoomFactor();
     float GetMapPicScale();
     void Clear();
@@ -66,6 +66,8 @@ private:
     QGraphicsSvgItem* mapPic;
     graph *path;
     QImage image;
+
+    bool isPathNeeded = true;
 
 };
 

@@ -1,4 +1,5 @@
 #include "device/viewer.h"
+#include "device/graph.h"
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/qgraphicssvgitem.h>
 #include <QWheelEvent>
@@ -27,7 +28,8 @@ viewer::viewer(QWidget *parent) :
 
 void viewer::paintEvent(QPaintEvent *event)
 {
-    if (rendererType == RENDERER_IMAGE)
+
+   if (rendererType == RENDERER_IMAGE)
     {
         if (image.size() != viewport()->size())
         {
@@ -40,7 +42,10 @@ void viewer::paintEvent(QPaintEvent *event)
 
         QPainter p(viewport());
         p.drawImage(0, 0, image);
-
+        if (isPathNeeded)
+        {
+            ViewPath();
+        }
     }
     else
     {
@@ -92,11 +97,11 @@ bool viewer::InitMap(const QString &fileName)
     mapPic->setCacheMode(QGraphicsItem::NoCache);
     mapPic->setZValue(1);
 
-    backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
+   /* backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
     backgroundItem->setBrush(Qt::blue);
     backgroundItem->setPen(Qt::NoPen);
     backgroundItem->setVisible(backgroundItem ? backgroundItem->isVisible() : false);
-    backgroundItem->setZValue(-1);
+    backgroundItem->setZValue(-1);*/
 
     outlineItem = new QGraphicsRectItem(mapPic->boundingRect());
     QPen outline(Qt::black, 2, Qt::DashLine);
@@ -159,9 +164,26 @@ void viewer::ViewGraph()
 
 }
 
-void viewer::ViewPath(coord *from, coord *to)
+void viewer::ViewPath()
 {
-
+    graph w;
+    w.adjacencyList = {
+    {{555,555},0,{{1,5},{2,6},{3,4}}},
+    {{30,485},0,{{0,5},{2,6},{5,9}}},
+    {{60,100},0,{{0,6},{1,6},{5,7}}},
+    {{200,30},0,{{0,4},{4,14}}},
+    {{120,30},0,{{3,14},{6,5}}},
+    {{120,308},0,{{1,9},{2,7},{6,5}}},
+    {{160,0},0,{{5,5},{4,5}}}
+    };
+    std::vector<vertex_graph> path = w.SearchWay(0,6);
+    for (int i = 0; i < path.size() - 1; ++i)
+    {
+        QPainter painter(viewport());
+        painter.setPen(QPen(Qt::red, 3, Qt::DotLine, Qt::RoundCap));
+        painter.drawLine(path[i].vertexCoordinates.x, path[i].vertexCoordinates.y,
+                         path[i + 1].vertexCoordinates.x, path[i + 1].vertexCoordinates.y);
+    }
 }
 
 float viewer::GetMapPicScale()
