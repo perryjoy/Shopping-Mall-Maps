@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/map1">
-        <file>floors.svg</file>
+        <file>a.svg</file>
         <file>xml_from_excel.xml</file>
     </qresource>
 </RCC>

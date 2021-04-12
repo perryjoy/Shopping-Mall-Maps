@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QPushButton>
 #include "map.h"
 #include "viewer.h"
 
@@ -26,6 +27,7 @@ public:
 
     bool LoadFile(const QString &svgFileName, const QString &xmlFileName);
     virtual void Render(QPainter *painter);
+    void ChangeLayer();
 
 public slots:
     bool event(QEvent *event) override;
@@ -35,6 +37,8 @@ public slots:
 
 private slots:
     void updateZoomLabel();
+    void handleButtonUp();
+    void handleButtonDown();
 
 private:
     QAction *m_nativeAction;
@@ -43,6 +47,8 @@ private:
     QAction *m_antialiasingAction;
     QAction *m_backgroundAction;
     QAction *m_outlineAction;
+    QPushButton *m_button_for_up;
+    QPushButton *m_button_for_down;
 
     QLabel *m_zoomLabel;
 
@@ -51,6 +57,7 @@ private:
     viewer *mapViewer;
     map *mapInfo;
 
+    int layer;
     QString m_currentPath;
 };
 
