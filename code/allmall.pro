@@ -34,4 +34,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    ../resources/map1(2).qrc \
+    ../resources/map1.qrc \
     ../resources/map1.qrc
+
