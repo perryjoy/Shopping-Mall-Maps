@@ -42,9 +42,9 @@ void viewer::paintEvent(QPaintEvent *event)
 
         QPainter p(viewport());
         p.drawImage(0, 0, image);
-        if(isPathNeeded)
+        if (isPathNeeded)
         {
-        ViewPath();
+            ViewPath();
         }
     }
     else
@@ -97,11 +97,11 @@ bool viewer::InitMap(const QString &fileName)
     mapPic->setCacheMode(QGraphicsItem::NoCache);
     mapPic->setZValue(1);
 
-    backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
+   /* backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
     backgroundItem->setBrush(Qt::blue);
     backgroundItem->setPen(Qt::NoPen);
     backgroundItem->setVisible(backgroundItem ? backgroundItem->isVisible() : false);
-    backgroundItem->setZValue(-1);
+    backgroundItem->setZValue(-1);*/
 
     outlineItem = new QGraphicsRectItem(mapPic->boundingRect());
     QPen outline(Qt::black, 2, Qt::DashLine);
@@ -175,12 +175,12 @@ void viewer::ViewPath()
     {{120,30},0,{{3,14},{6,5}}},
     {{120,308},0,{{1,9},{2,7},{6,5}}},
     {{160,0},0,{{5,5},{4,5}}}
-};
+    };
     std::vector<vertex_graph> path = w.SearchWay(0,6);
-    for(std::vector<vertex_graph>::size_type i = 0; i < path.size() - 1; ++i)
+    for (int i = 0; i < path.size() - 1; ++i)
     {
-    QPainter painter(viewport());
-    painter.setPen(QPen(Qt::red, 3, Qt::DotLine, Qt::RoundCap));
+        QPainter painter(viewport());
+        painter.setPen(QPen(Qt::red, 3, Qt::DotLine, Qt::RoundCap));
         painter.drawLine(path[i].vertexCoordinates.x, path[i].vertexCoordinates.y,
                          path[i + 1].vertexCoordinates.x, path[i + 1].vertexCoordinates.y);
     }
