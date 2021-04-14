@@ -36,5 +36,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     ../resources/map1(2).qrc \
     ../resources/map1.qrc \
-    ../resources/map1.qrc
-
+    ../resources/pics.qrc \

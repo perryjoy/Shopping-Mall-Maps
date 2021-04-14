@@ -36,16 +36,30 @@ void viewer::paintEvent(QPaintEvent *event)
             image = QImage(viewport()->size(), QImage::Format_ARGB32_Premultiplied);
         }
 
-        QPainter imagePainter(&image);
-        QGraphicsView::render(&imagePainter);
-        imagePainter.end();
+        // My way
+        QPainter p(this);
+        QGraphicsView::render(&p);
+        p.end();
+        QGraphicsView::paintEvent(event);
 
-        QPainter p(viewport());
-        p.drawImage(0, 0, image);
-        if (isPathNeeded)
-        {
-            ViewPath();
-        }
+        //QGraphicsSvgItem *black = new QGraphicsSvgItem();
+        //black->setSharedRenderer(svgRenderer);
+        //black->setElementId(QLatin1String("layer2"));
+        //svgRenderer->render(&p, QLatin1String("layer2"));
+
+        //QPainter imagePainter(&image);
+        //QGraphicsView::render(&imagePainter);
+        //imagePainter.end();
+
+        //QPainter p(viewport());
+
+        // Other way
+        //QPainter p(viewport());
+        //p.drawImage(0, 0, image);
+        //if (isPathNeeded)
+        //{
+        //    ViewPath();
+        //}
     }
     else
     {

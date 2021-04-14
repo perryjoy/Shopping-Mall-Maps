@@ -14,16 +14,34 @@ MainWindow::MainWindow() : QMainWindow(),
     connect(mapInfo, &map::MapPictureChanged, this, &MainWindow::setNewView);
     connect(mapViewer, &viewer::ZoomChanged, this, &MainWindow::updateZoomLabel);
     // create a button
-    m_button_for_up = new QPushButton("Up", this);
-    m_button_for_down = new QPushButton("Down", this);
-
+    m_button_for_up = new QPushButton("", mapViewer);
+    m_button_for_up->setStyleSheet("QPushButton\
+        {\
+            image: url(:/based/UP.png);\
+            background: transparent;\
+            padding-top: 0px;\
+            height: 200px;\
+            width: 200px;\
+        }\
+    ");
+    m_button_for_down = new QPushButton("", mapViewer);
+    m_button_for_down->setStyleSheet("QPushButton\
+        {\
+            image: url(:/based/DOWN.png);\
+            background: transparent;\
+            padding-top: 0px;\
+            height: 200px;\
+            width: 200px;\
+        }\
+    ");
     // set the size and position of the button
-    m_button_for_up->setGeometry(QRect(QPoint(1800, 100),QSize(100, 50)));
-    m_button_for_down->setGeometry(QRect(QPoint(1800, 150),QSize(100, 50)));
+
+    m_button_for_up->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(200, 200)));
+    m_button_for_down->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(200, 200)));
 
     // connect the signal to the corresponding slot
-    connect(m_button_for_up, SIGNAL (released()), this, SLOT (handleButton()));
-    connect(m_button_for_down, SIGNAL (released()), this, SLOT (handleButton()));
+    connect(m_button_for_up, SIGNAL (released()), this, SLOT (handleButtonUp()));
+    connect(m_button_for_down, SIGNAL (released()), this, SLOT (handleButtonDown()));
 
 }
 void MainWindow::ChangeLayer(void)
@@ -32,7 +50,7 @@ void MainWindow::ChangeLayer(void)
     switch (this->layer)
     {
     case 0:
-        LoadFile(":/map1/floors.svg", ":/map1/xml_from_excel.xml");
+        LoadFile(":/map1/a.svg", ":/map1/xml_from_excel.xml");
         break;
     case 1:
     default:
@@ -88,6 +106,8 @@ void MainWindow::Show()
     if (mapViewer != nullptr)
     {
         mapViewer->show();
+        m_button_for_up->show();
+        m_button_for_down->show();
     }
 }
 
