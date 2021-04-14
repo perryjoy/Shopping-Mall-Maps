@@ -8,10 +8,13 @@ constexpr quint32 NO_PATH_INT = MAX_INT;
 
 
 
-graph_alternative::graph_alternative()
+//graph_alternative::graph_alternative()
+//{
+//}
+
+graph_alternative::graph_alternative(QObject *parent) : QObject(parent)
 {
 }
-
 
 void graph_alternative::SetStart(point p, quint32 floorIndex)
 {

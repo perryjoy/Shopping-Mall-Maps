@@ -1,6 +1,8 @@
 #include "map.h"
 #include "svgview.h"
-#include "graph.h"
+//#include "graph.h"
+#include "graph_alternative1.h"
+#include "graph_parser.h"
 #include "shops_data.h"
 
 #define __MAP_PIC_CHANGED ((quint8)1)
@@ -61,7 +63,11 @@ void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
     if ((flags & __MAP_GRAPH_CHANGED) != 0)
     {
         ClearGraph();
-        paths = CreateGraphFromSvg (pic);
+        graph_parser gp(mapToSet);
+        if (gp.proceedFile())
+        {
+            paths = gp.produceOtherGraph();
+        }
     }
     if ((flags & __MAP_INFO_CHANGED) != 0)
     {

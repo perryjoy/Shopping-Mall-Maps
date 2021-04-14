@@ -312,7 +312,7 @@
          style="display:inline;fill:#d4ff2a;stroke:#668000;stroke-width:0.264583"
          id="2_lift_1"
          cx="150.8125"
-         cy="104.51041"
+         cy="104.51042"
          r="0.79374999" />
       <path
          style="fill:#668000;stroke:#668000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -324,13 +324,13 @@
          id="path2431" />
       <path
          style="fill:#668000;stroke:#668000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="M 79.374999,54.239583 H 25.135416"
+         d="M 79.374999,54.239583 H 25.135417"
          id="path2433" />
       <circle
          style="fill:#445500;stroke:#668000;stroke-width:0.264583"
          id="2_ladder_1"
-         cx="25.135416"
-         cy="54.239582"
+         cx="25.135417"
+         cy="54.239583"
          r="0.79374999" />
     </g>
   </g>
@@ -376,7 +376,7 @@
          style="display:inline;fill:#d4ff2a;stroke:#668000;stroke-width:0.264583"
          id="3_lift_1"
          cx="150.8125"
-         cy="104.51041"
+         cy="104.51042"
          r="0.79374999" />
       <path
          style="display:inline;fill:#668000;stroke:#668000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -390,13 +390,13 @@
          sodipodi:nodetypes="cc" />
       <path
          style="display:inline;fill:#668000;stroke:#668000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="M 79.374999,54.239583 H 25.135416"
+         d="M 79.374999,54.239583 H 25.135417"
          id="path2512" />
       <circle
          style="display:inline;fill:#445500;stroke:#668000;stroke-width:0.264583"
          id="3_ladder_1"
-         cx="25.135416"
-         cy="54.239582"
+         cx="25.135417"
+         cy="54.239583"
          r="0.79374999" />
       <path
          style="display:inline;fill:#668000;stroke:#668000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

@@ -7,6 +7,8 @@
 
 #define DELTA 1e-4 // maximum difference between edge endings to count them as one point
 
+class QDomNode;
+class QDomElement;
 
 using point = Vector2<double>;
 using vec = Vector2<double>;
@@ -85,11 +87,13 @@ struct mall_floor
 
 
 
-class graph_alternative
+class graph_alternative : public QObject
 {
     Q_OBJECT
 public:
-    graph_alternative();
+    //graph_alternative();
+    explicit graph_alternative(QObject *parent = nullptr);
+    //virtual ~graph_alternative() = default; // in order to fix graph_parser.cpp:300:9: warning: delete called on non-final 'graph_alternative' that has virtual functions but non-virtual destructor
 
 signals:
     void PathFound (path* res);
@@ -127,6 +131,21 @@ private:
     void ClearPath();
     void ClearGraph();
 
+
+    friend graph_alternative CreateGraphFromSvg (QString picFileName);
+    friend class graph_parser;
+
+    // those are really bad, althoug it guaratees that you cant change parser without cheking in here
+    friend void LoadGraphObjectsOfTheFloor (graph_alternative* res, QDomNode& pathGroupHolder);
+    friend void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e);
+    friend void LoadElevator (graph_alternative* g, quint32 floor, QDomElement& e);
+    friend void LoadLadder (graph_alternative* g, quint32 floor, QDomElement& l);
+
+
 };
+
+#ifndef GRAPH_H
+//typedef graph_alternative graph;
+#endif
 
 #endif // GRAPH_ALTERNATIVE_H

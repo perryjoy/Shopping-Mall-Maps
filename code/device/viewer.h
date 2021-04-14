@@ -3,7 +3,7 @@
 #include "map.h"
 
 class coord; //Misha's
-class graph; //Misha's
+// class graph; //Misha's
 
 enum viewer_error_code
 {
@@ -26,7 +26,7 @@ class viewer
     
  private:
     svg_view* mapPic;
-    graph *path;
+    graph_alternative* path;
 
 };
 
