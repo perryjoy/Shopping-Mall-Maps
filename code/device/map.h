@@ -7,6 +7,7 @@
 
 class graph;
 class shops_data;
+class manager;
 
 
 #define __LEAVE_MAP_AS_IT_IS (QString(""))

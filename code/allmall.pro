@@ -12,6 +12,7 @@ CONFIG += c++11
 
 SOURCES += \
     core/graph.cpp \
+    core/manager.cpp \
     core/viewer.cpp \
     core/main.cpp \
     device/map.cpp \
@@ -20,13 +21,13 @@ SOURCES += \
 
 HEADERS += \
     device/graph.h \
+    device/manager.h \
     device/map.h \
     device/viewer.h \
     device\mainwindow.h \
     shops_data.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
