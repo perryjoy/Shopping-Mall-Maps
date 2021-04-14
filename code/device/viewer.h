@@ -6,7 +6,6 @@
 
 class coord; //Misha's
 class graph; //Misha's
-class manager;
 
 enum viewer_error_code
 {
@@ -26,9 +25,7 @@ class viewer: public QGraphicsView
         RENDERER_IMAGE
     };
 
-
  public:
-
     explicit viewer(QWidget *parent = nullptr);
     bool InitMap(const QString &fileName);       // Saving new map imame
     void ClearMap();                            // deleting img ptr
