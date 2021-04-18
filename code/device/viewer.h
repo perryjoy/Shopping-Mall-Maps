@@ -1,6 +1,7 @@
 #ifndef VIEWER_H
 #define VIEWER_H
 #include <QGraphicsView>
+#include <QGestureEvent>
 
 #include "map.h"
 
@@ -42,9 +43,12 @@ class viewer: public QGraphicsView
 signals:
     void ZoomChanged();
 
+
 protected:
     void paintEvent(QPaintEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
+
+    bool viewportEvent(QEvent *event) override;
 
     void drawBackground(QPainter *p, const QRectF &) override;
 
@@ -52,7 +56,6 @@ private:
     void ZoomBy(float factor);
     void SetRenderer(renderer_type type = RENDERER_NATIVE);
     void SetAntialiasing(bool antialiasing);
-
 
     renderer_type rendererType;
 
@@ -68,6 +71,7 @@ private:
     QImage image;
 
     bool isPathNeeded = true;
+    qreal totalScaleFactor = 1;
 
 };
 
