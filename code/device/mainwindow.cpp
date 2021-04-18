@@ -19,8 +19,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
 
     buttonUp = new QPushButton("", this);
     buttonDown = new QPushButton("", this);
-	
-	buttonUp->setStyleSheet("QPushButton\
+    buttonUp->setStyleSheet("QPushButton\
         {\
             image: url(:/based/UP.png);\
             background: transparent;\
@@ -29,7 +28,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
             width: 200px;\
         }\
     ");
-	buttonDown->setStyleSheet("QPushButton\
+    buttonDown->setStyleSheet("QPushButton\
         {\
             image: url(:/based/DOWN.png);\
             background: transparent;\
@@ -38,7 +37,6 @@ void MainWindow::SetupUi(bool customGraphicsView)
             width: 200px;\
         }\
     ");
-
     buttonUp->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(200, 200)));
     buttonDown->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(200, 200)));
 
@@ -50,13 +48,11 @@ void MainWindow::SetupUi(bool customGraphicsView)
 
     connect(buttonMapper, &QSignalMapper::mappedInt, &manager, &manager::OnButton);
 
-
     centralWidget = new QWidget(this);
     horizontalLayout = new QHBoxLayout(centralWidget);
 
     horizontalLayout->addWidget(buttonDown);
     horizontalLayout->addWidget(buttonUp);
-
 
     if (!customGraphicsView)
     {
@@ -75,7 +71,9 @@ void MainWindow::SetupUi(bool customGraphicsView)
 void MainWindow::SetView(QGraphicsView *view)
 {
     if (graphicsView)
+    {
         delete graphicsView;
+    }
     graphicsView = view;
     horizontalLayout->addWidget(graphicsView);
     setCentralWidget(centralWidget);
