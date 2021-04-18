@@ -4,7 +4,9 @@
 #include <QtSvg/qgraphicssvgitem.h>
 #include <QWheelEvent>
 #include <QtMath>
+#include <QGestureEvent>
 
+#include <QDebug>
 
 #ifndef QT_NO_OPENGL
 #include <QtOpenGL/QGLWidget>
@@ -24,6 +26,7 @@ viewer::viewer(QWidget *parent) :
     setTransformationAnchor(AnchorUnderMouse);
     setDragMode(ScrollHandDrag);
     setViewportUpdateMode(FullViewportUpdate);
+    setAttribute(Qt::WA_AcceptTouchEvents);
 }
 
 void viewer::paintEvent(QPaintEvent *event)
@@ -98,6 +101,7 @@ void viewer::SetRenderer(renderer_type type)
 
 bool viewer::InitMap(const QString &fileName)
 {
+    qDebug() << "init";
     Clear();
 
     svgRenderer = new QSvgRenderer(fileName);
@@ -212,8 +216,9 @@ float viewer::ZoomFactor()
 
 void viewer::wheelEvent(QWheelEvent *event)
 {
-    ZoomBy(qPow(1.2, event->angleDelta().y() / 240.0));
-}
+    ZoomBy(qPow(1.2, event->angleDelta().y() / 240.0));      //Special for Arina and Yakov:
+}                                                            //If we don't need scale with mouse wheel, delete
+                                                             //functions wheelEvent, ZoomFactor, GetMapPicScale and ZoomBy.
 
 void viewer::ZoomBy(float factor)
 {
@@ -225,3 +230,40 @@ void viewer::ZoomBy(float factor)
     mapPic->setScale(factor);
     emit ZoomChanged();
 }
+
+
+bool viewer::viewportEvent(QEvent *event)
+{
+    switch (event->type())
+    {
+    case QEvent::TouchBegin:
+    case QEvent::TouchUpdate:
+    case QEvent::TouchEnd:
+    {
+        QTouchEvent *touchEvent = static_cast<QTouchEvent *>(event);
+        QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+
+        if (touchPoints.count() == 2)
+        {                                                       // determine scale factor
+            const QTouchEvent::TouchPoint &touchPoint0 = touchPoints.first();
+            const QTouchEvent::TouchPoint &touchPoint1 = touchPoints.last();
+            qreal currentScaleFactor =
+                    QLineF(touchPoint0.pos(), touchPoint1.pos()).length()
+                    / QLineF(touchPoint0.startPos(), touchPoint1.startPos()).length();
+
+            if (touchEvent->touchPointStates() & Qt::TouchPointReleased)    // if one of the fingers is released, remember the current scale
+            {                                                               // factor so that adding another finger later will continue zooming
+                totalScaleFactor *= currentScaleFactor;                     // by adding new scale factor to the existing remembered value.
+                currentScaleFactor = 1;
+            }
+            setTransform(QTransform::fromScale(totalScaleFactor * currentScaleFactor,
+                                               totalScaleFactor * currentScaleFactor));
+        }
+        return true;
+    }
+    default:
+        break;
+    }
+    return QGraphicsView::viewportEvent(event);
+}
+
