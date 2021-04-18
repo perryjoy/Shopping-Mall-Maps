@@ -111,11 +111,11 @@ bool viewer::InitMap(const QString &fileName)
     mapPic->setCacheMode(QGraphicsItem::NoCache);
     mapPic->setZValue(1);
 
-   /* backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
+    backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
     backgroundItem->setBrush(Qt::blue);
     backgroundItem->setPen(Qt::NoPen);
     backgroundItem->setVisible(backgroundItem ? backgroundItem->isVisible() : false);
-    backgroundItem->setZValue(-1);*/
+    backgroundItem->setZValue(-1);
 
     outlineItem = new QGraphicsRectItem(mapPic->boundingRect());
     QPen outline(Qt::black, 2, Qt::DashLine);
@@ -217,11 +217,11 @@ void viewer::wheelEvent(QWheelEvent *event)
 
 void viewer::ZoomBy(float factor)
 {
-    //const qreal currentZoom = zoomFactor();
+    //const qreal currentZoom = ZoomFactor();
     const float currentZoom = mapPic->scale();
     if ((factor < 1 && currentZoom < 0.1) || (factor > 1 && currentZoom > 10))
         return;
-    //scale(factor, factor);
+    scale(factor, factor);
     mapPic->setScale(factor);
     emit ZoomChanged();
 }
