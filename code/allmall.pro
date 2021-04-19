@@ -12,6 +12,7 @@ CONFIG += c++11
 
 SOURCES += \
     core/graph.cpp \
+    core/manager.cpp \
     core/viewer.cpp \
     core/main.cpp \
     device/graph_alternative.cpp \
@@ -26,15 +27,15 @@ HEADERS += \
     core/manager.h \
     device/Vector2.hpp \
     device/graph.h \
+    device/manager.h \
     device/graph_alternative.h \
     device/graph_parser.h \
     device/map.h \
     device/viewer.h \
-    device\mainwindow.h \
+    device/mainwindow.h \
     shops_data.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -44,5 +45,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     ../resources/map1(2).qrc \
     ../resources/map1.qrc \
-    ../resources/map1.qrc
-
+    ../resources/pics.qrc \
