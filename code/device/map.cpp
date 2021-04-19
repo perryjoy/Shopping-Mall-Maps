@@ -1,6 +1,8 @@
 #include <QSvgRenderer>
 #include "map.h"
-#include "graph.h"
+#include "svgview.h" // TODO exclude
+#include "graph_alternative1.h"
+#include "graph_parser.h"
 #include "shops_data.h"
 
 
@@ -27,15 +29,6 @@ shops_data* map::GetInfo (void)
     return info;
 }
 
-graph* CreateGraphFromSvg (QGraphicsSvgItem* v)
-{
-    if (v == nullptr)
-    {
-        return nullptr;
-    }
-    return nullptr; // TDOD: write an actual creation when Misha is done
-}
-
 
 map::map(QObject *parent) :
     QObject(parent), svgMapFileName(""), mapInfoFileName(""), object_indexes(), paths(nullptr)
@@ -53,7 +46,6 @@ quint32 map::GetIndex(QLatin1String name)
 {
     return object_indexes[name];
 }
-
 
 
 void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
@@ -79,7 +71,11 @@ void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
     if ((flags & __MAP_GRAPH_CHANGED) != 0)
     {
         ClearGraph();
-        paths = CreateGraphFromSvg(pic);
+        graph_parser gp(mapToSet);
+        if (gp.proceedFile())
+        {
+            paths = gp.produceOtherGraph();
+        }
     }
     if ((flags & __MAP_INFO_CHANGED) != 0)
     {
@@ -89,9 +85,6 @@ void map::SetAnotherMap(QString const & mapToSet, QString const & extrasToSet)
 
     OnChange(flags);
 }
-
-
-
 
 
 void map::ClearObjects() // doesnt inform anyone. emit signals yourself!

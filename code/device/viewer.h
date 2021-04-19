@@ -6,7 +6,7 @@
 #include "map.h"
 
 class coord; //Misha's
-class graph; //Misha's
+// class graph; //Misha's
 
 enum viewer_error_code
 {
@@ -72,7 +72,6 @@ private:
 
     bool isPathNeeded = true;
     qreal totalScaleFactor = 1;
-
 };
 
 #endif // VIEWER_H
