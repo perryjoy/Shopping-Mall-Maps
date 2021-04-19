@@ -3,8 +3,8 @@
 
 #include <QObject>
 #include <QMap>
+#include <QtSvg/qgraphicssvgitem.h>
 
-class svg_view;
 class shops_data;
 
 class graph_alternative;
@@ -45,7 +45,10 @@ private:
 
     void OnChange(quint8 flags);
 
+    bool OpenFile(const QString &fileName);//IDD
+
 public:
+    QGraphicsSvgItem* GetPic(); // I don't remember your idea of signals and slots system. Rewrite it please. IDD
     explicit map(QObject *parent = nullptr);
     ~map();
 
@@ -56,7 +59,7 @@ public:
 signals:
     // v = new svg pic ptr
     //NOTE: might be nullptr, check it!
-    void MapPictureChanged(svg_view * view);
+    void MapPictureChanged(QGraphicsSvgItem * view);
 
     // g = new graph ptr
     //NOTE: might be nullptr, check it!

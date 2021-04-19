@@ -29,7 +29,6 @@ HEADERS += \
     device/graph_alternative.h \
     device/graph_parser.h \
     device/map.h \
-    device/svgview.h \
     device/viewer.h \
     device\mainwindow.h \
     shops_data.h
@@ -41,3 +40,9 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    ../resources/map1(2).qrc \
+    ../resources/map1.qrc \
+    ../resources/map1.qrc
+
