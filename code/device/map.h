@@ -5,8 +5,11 @@
 #include <QMap>
 #include <QtSvg/qgraphicssvgitem.h>
 
-class graph;
 class shops_data;
+
+class graph_alternative;
+
+
 
 
 #define __LEAVE_MAP_AS_IT_IS (QString(""))
@@ -25,10 +28,8 @@ class map : public QObject // holds information about current map
 
 private:
     QLatin1String svgMapFileName; // *.svg file to be drawn as map
-
-    QGraphicsSvgItem* pic; //IDD map picture
-
-    graph* paths; // paths graph, based on svg pic
+    svg_view* pic; // svg picture loaded from file above
+    graph_alternative* paths; // paths graph, based on svg pic
 
     QLatin1String mapInfoFileName; // *xml file, containing extra information for map objects
     shops_data* info; // loaded and parsed extras data from file above
@@ -62,7 +63,7 @@ signals:
 
     // g = new graph ptr
     //NOTE: might be nullptr, check it!
-    void PathGraphChanged(graph * graph);
+    void PathGraphChanged(graph_alternative* graph);
 
     // i = new info
     // NOTE: might be empty

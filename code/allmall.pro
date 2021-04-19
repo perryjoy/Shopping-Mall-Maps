@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets svg
 qtHaveModule(opengl): QT += opengl
@@ -14,12 +14,20 @@ SOURCES += \
     core/graph.cpp \
     core/viewer.cpp \
     core/main.cpp \
+    device/graph_alternative.cpp \
+    device/graph_parser.cpp \
     device/map.cpp \
+    device/map2graph.cpp \
+    device/svgview.cpp \
     device/mainwindow.cpp \
     shops_data.cpp
 
 HEADERS += \
+    core/manager.h \
+    device/Vector2.hpp \
     device/graph.h \
+    device/graph_alternative.h \
+    device/graph_parser.h \
     device/map.h \
     device/viewer.h \
     device\mainwindow.h \

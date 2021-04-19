@@ -5,7 +5,7 @@
 #include "map.h"
 
 class coord; //Misha's
-class graph; //Misha's
+// class graph; //Misha's
 
 enum viewer_error_code
 {
@@ -68,7 +68,6 @@ private:
     QImage image;
 
     bool isPathNeeded = true;
-
 };
 
 #endif // VIEWER_H
