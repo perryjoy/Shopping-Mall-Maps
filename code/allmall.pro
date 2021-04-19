@@ -17,17 +17,20 @@ SOURCES += \
     core/main.cpp \
     device/map.cpp \
     device/mainwindow.cpp \
+    device/pathwidget.cpp \
     shops_data.cpp
 
 HEADERS += \
     device/graph.h \
     device/manager.h \
     device/map.h \
+    device/pathwidget.h \
     device/viewer.h \
     device\mainwindow.h \
     shops_data.h
 
-FORMS +=
+FORMS += \
+    ../resources/PathWidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
