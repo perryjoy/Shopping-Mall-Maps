@@ -23,7 +23,6 @@ SOURCES += \
     shops_data.cpp
 
 HEADERS += \
-    core/manager.h \
     device/Vector2.hpp \
     device/graph.h \
     device/manager.h \

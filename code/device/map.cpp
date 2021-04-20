@@ -115,3 +115,18 @@ void map::OnChange(quint8 singal_flags)
         emit MapInfoChanged(info, object_indexes);
     }
 }
+
+background_on_floor floor_layer::GetBckgrndLr() const
+{
+    return bckgrndLr;
+}
+
+shops_on_floor floor_layer::GetShopsLr() const
+{
+    return shopsLr;
+}
+
+paths_on_floor floor_layer::GetPathsLr() const
+{
+    return pathsLr;
+}

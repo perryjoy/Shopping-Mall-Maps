@@ -40,14 +40,14 @@ void viewer::paintEvent(QPaintEvent *event)
         }
 
         // My way
-        QPainter p(this);
+        QPainter p(viewport());
         QGraphicsView::render(&p);
         p.end();
         QGraphicsView::paintEvent(event);
 
         //QGraphicsSvgItem *black = new QGraphicsSvgItem();
         //black->setSharedRenderer(svgRenderer);
-        //black->setElementId(QLatin1String("layer2"));
+        //black->setElementId(QLatin1String("3_area"));
         //svgRenderer->render(&p, QLatin1String("layer2"));
 
         //QPainter imagePainter(&image);
@@ -68,6 +68,41 @@ void viewer::paintEvent(QPaintEvent *event)
     {
         QGraphicsView::paintEvent(event);
     }
+}
+
+void viewer::AddUnstableVisible(QString id)
+{
+ //   QString id = "3_lift_1";
+    QGraphicsSvgItem *newItem = new QGraphicsSvgItem();
+    newItem->setSharedRenderer(svgRenderer);
+    newItem->setElementId(id);
+    newItem->setOpacity(1);
+
+    newItem->setParentItem(a);
+    newItem->setVisible(true);
+    newItem->setZValue(1);
+    QRectF bound    =   svgRenderer->boundsOnElement(id);
+
+    newItem->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
+    unstableVisibleItems[id] = newItem;
+    mapScene->addItem(unstableVisibleItems[id]);
+//    mapScene->setSceneRect(mapScene->itemsBoundingRect());
+/*
+    QGraphicsSvgItem *newItem = new QGraphicsSvgItem();
+    newItem->setZValue(2);
+    newItem->setSharedRenderer(svgRenderer);
+    newItem->setVisible(true);
+    newItem->setElementId("path2504");
+    unstableVisibleItems[id] = newItem;
+    mapScene->addItem(unstableVisibleItems[id]);
+    mapScene->setSceneRect(mapScene->itemsBoundingRect());*/
+
+  //  emit mapScene->changed(&viewport()->rect());
+}
+
+void viewer::ChangeVisibility(QString id, bool isVisible)
+{
+    unstableVisibleItems[id]->setVisible(isVisible);
 }
 
 void viewer::drawBackground(QPainter *p, const QRectF &)
@@ -106,18 +141,31 @@ bool viewer::InitMap(const QString &fileName)
 
     svgRenderer = new QSvgRenderer(fileName);
     mapPic = new QGraphicsSvgItem();
+    mapPic->setElementId(QLatin1String("layer9"));
     mapPic->setSharedRenderer(svgRenderer);
+//mapPic->setVisible(false);
+    QRectF bound    =   svgRenderer->boundsOnElement("layer9");
 
+    mapPic->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
     mapScene->clear();
     resetTransform();
 
     mapPic->setFlags(QGraphicsItem::ItemClipsToShape);
     mapPic->setCacheMode(QGraphicsItem::NoCache);
-    mapPic->setZValue(1);
+    mapPic->setZValue(-0.5);
+
+    a = new QGraphicsSvgItem();
+   // a->setSharedRenderer(svgRenderer);
+    a->setElementId(QLatin1String("layer8"));
+    a->setVisible(true);
+   // a->setOpacity(0);
+   // a->setFlag(QGraphicsItem::ItemDoesntPropagateOpacityToChildren);
 
     backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
-    backgroundItem->setBrush(Qt::blue);
+    backgroundItem->setBrush(Qt::cyan);
     backgroundItem->setPen(Qt::NoPen);
+    backgroundItem->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
+
     backgroundItem->setVisible(backgroundItem ? backgroundItem->isVisible() : false);
     backgroundItem->setZValue(-1);
 
@@ -127,14 +175,19 @@ bool viewer::InitMap(const QString &fileName)
     outlineItem->setPen(outline);
     outlineItem->setBrush(Qt::NoBrush);
     outlineItem->setVisible(outlineItem ? outlineItem->isVisible() : true);
-    outlineItem->setZValue(1);
+    outlineItem->setZValue(0);
 
     mapScene->addItem(backgroundItem);
     mapScene->addItem(mapPic);
-    mapScene->addItem(outlineItem);
+    mapScene->addItem(a);
+//    mapScene->addItem(outlineItem);
 
-    mapScene->setSceneRect(outlineItem->boundingRect().adjusted(-10, -10, 10, 10));
+    mapScene->setSceneRect(mapScene->itemsBoundingRect());
 
+
+    setTransform(QTransform::fromScale(totalScaleFactor * 5,
+                                       totalScaleFactor * 5));
+   //fitInView(mapScene->sceneRect(), Qt::KeepAspectRatio);
     return true;
 }
 
@@ -227,7 +280,7 @@ void viewer::ZoomBy(float factor)
     if ((factor < 1 && currentZoom < 0.1) || (factor > 1 && currentZoom > 10))
         return;
     scale(factor, factor);
-    mapPic->setScale(factor);
+    //mapPic->setScale(factor);
     emit ZoomChanged();
 }
 

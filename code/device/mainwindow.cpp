@@ -9,7 +9,7 @@ MainWindow::MainWindow(class manager &mgr, bool customGraphicsView) : QMainWindo
     zoomLabel(new QLabel),
     manager(mgr)
 {
-    resize(800, 600);
+    resize(1800, 1000);
     SetupUi(customGraphicsView);
 }
 

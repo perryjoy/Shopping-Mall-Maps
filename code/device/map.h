@@ -67,9 +67,12 @@ class floor_layer : public layer
     friend class graph_parser;
     friend class map;
 public:
-    const background_on_floor& getBckgrndLr() const;
-    const shops_on_floor& getShopsLr() const;
-    const paths_on_floor& getPathsLr() const;
+//    const background_on_floor& getBckgrndLr() const;
+//    const shops_on_floor& getShopsLr() const;
+//    const paths_on_floor& getPathsLr() const;
+    background_on_floor GetBckgrndLr() const;
+    shops_on_floor GetShopsLr() const;
+    paths_on_floor GetPathsLr() const;
 };
 
 
@@ -113,7 +116,7 @@ public:
 signals:
     // v = new svg pic ptr
     //NOTE: might be nullptr, check it!
-    void MapPictureDataChanged(const std::vector<floor_layer>* const & svgIds);
+    void MapPictureDataChanged(std::vector<floor_layer>* svgIds);
 
     // g = new graph ptr
     //NOTE: might be nullptr, check it!
