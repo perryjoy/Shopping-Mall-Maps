@@ -2,8 +2,9 @@
 #include "device/viewer.h"
 #include "device/manager.h"
 #include "device/graph_alternative.h"
+#include "device/pathwidget.h"
 
-manager::manager() : window(*this, true), currentMap()
+manager::manager() : window(*this, true), currentMap(), currentFloor(0)
 {
     mapViewer = new viewer(window.GetCentralWidget());
     window.SetView(mapViewer);
@@ -13,20 +14,29 @@ manager::manager() : window(*this, true), currentMap()
 
 void manager::OnButton(int butttonPressed)
 {
+    std::vector<QString> ids;
+
     auto v= (*floorLayers)[2].GetPathsLr().GetObjects();
     switch (butttonPressed){
     case BUTTON_UP:
+        if (currentFloor < floorLayers->size() - 1)
+            currentFloor++;
         for (auto id : v)
         {
             mapViewer->AddUnstableVisible(id);
         }
         break;
     case BUTTON_DOWN:
+        if (currentFloor > 0)
+            currentFloor--;
         for (auto id : v)
         {
             if (rand() % 2)
                  mapViewer->ChangeVisibility(id, false);
         }
+        break;
+    case BUTTON_DRAW_PATH:
+        window.GetPathWidget()->GetData();
         break;
 
     }

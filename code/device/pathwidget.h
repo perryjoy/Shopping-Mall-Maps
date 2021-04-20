@@ -1,3 +1,5 @@
+#ifndef PATH_H
+#define PATH_H
 
 #include <QWidget>
 
@@ -5,11 +7,24 @@ namespace Ui {
     class PathWidget;
 }
 
+struct path_data
+{
+    int floor1, floor2;
+    float x1, x2, y1, y2;
+    path_data(QString Floor1, QString Floor2, QString X1, QString X2, QString Y1, QString Y2) :
+        floor1(Floor1.toInt()), floor2(Floor2.toInt()), x1(X1.toFloat()), x2(X2.toFloat()), y1(Y1.toFloat()), y2(Y2.toFloat())
+    {
+    }
+};
+
 class PathWidget : public QWidget
 {
     Q_OBJECT
 
+signals:
+    void ButtonPressed();
 public:
+    path_data GetData() { return path_data(Floor1, Floor2, X1, X2, Y1, Y2); }
     explicit PathWidget(QWidget *parent = 0);
     ~PathWidget();
 private slots:
@@ -31,3 +46,4 @@ private:
     Ui::PathWidget *ui;
     QString Floor1, Floor2, X1, X2, Y1, Y2;
 };
+#endif

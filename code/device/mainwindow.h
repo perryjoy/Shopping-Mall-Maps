@@ -15,6 +15,7 @@ class QGraphicsView;
 class QLabel;
 class QSignalMapper;
 class QHBoxLayout;
+class QVBoxLayout;
 QT_END_NAMESPACE
 
 enum ui_button{
@@ -35,6 +36,7 @@ public:
     MainWindow(manager &mgr, bool customGraphicsView = false);
     ~MainWindow();
 
+    PathWidget * GetPathWidget();
     QWidget * GetCentralWidget();
 
     void SetView(QGraphicsView * view);
@@ -59,6 +61,7 @@ private:
 
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
     QGraphicsView *graphicsView;
 
     manager &manager;

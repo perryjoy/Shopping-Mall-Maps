@@ -11,6 +11,8 @@ MainWindow::MainWindow(class manager &mgr, bool customGraphicsView) : QMainWindo
 {
     resize(1800, 1000);
     SetupUi(customGraphicsView);
+    auto qwe = pathWidget->geometry();
+    QRect r = this->contentsRect();
 }
 
 void MainWindow::SetupUi(bool customGraphicsView)
@@ -24,8 +26,8 @@ void MainWindow::SetupUi(bool customGraphicsView)
             image: url(:/based/UP.png);\
             background: transparent;\
             padding-top: 0px;\
-            height: 200px;\
-            width: 200px;\
+            height: 50px;\
+            width: 50px;\
         }\
     ");
     buttonDown->setStyleSheet("QPushButton\
@@ -33,28 +35,34 @@ void MainWindow::SetupUi(bool customGraphicsView)
             image: url(:/based/DOWN.png);\
             background: transparent;\
             padding-top: 0px;\
-            height: 200px;\
-            width: 200px;\
+            height: 50px;\
+            width: 50px;\
         }\
     ");
-    //pathWidget->setGeometry(QRect(QPoint(this->size().width(), 0),QSize(500, 500)));
-    buttonUp->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(200, 200)));
-    buttonDown->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(200, 200)));
+
+ //   pathWidget->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 400),QSize(300, 300)));
+    buttonUp->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(50, 50)));
+    buttonDown->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(50, 50)));
 
     buttonMapper->setMapping(buttonUp, BUTTON_UP);
     buttonMapper->setMapping(buttonDown, BUTTON_DOWN);
+    buttonMapper->setMapping(pathWidget, BUTTON_DRAW_PATH);
 
     connect(buttonUp, SIGNAL(released()), buttonMapper, SLOT(map()));
     connect(buttonDown, SIGNAL(released()), buttonMapper, SLOT(map()));
+    connect(pathWidget, SIGNAL(ButtonPressed()), buttonMapper, SLOT(map()));
 
     connect(buttonMapper, &QSignalMapper::mappedInt, &manager, &manager::OnButton);
 
     centralWidget = new QWidget(this);
     horizontalLayout = new QHBoxLayout(centralWidget);
 
-    horizontalLayout->addWidget(buttonDown);
-    horizontalLayout->addWidget(buttonUp);
-    horizontalLayout->addWidget(pathWidget);
+    verticalLayout = new QVBoxLayout(centralWidget);
+    horizontalLayout->addLayout(verticalLayout);
+
+    verticalLayout->addWidget(buttonDown);
+    verticalLayout->addWidget(buttonUp);
+    verticalLayout->addWidget(pathWidget);
 
     if (!customGraphicsView)
     {
@@ -94,6 +102,11 @@ bool MainWindow::event(QEvent *event)
 void MainWindow::Show()
 {
     show();
+}
+
+PathWidget * MainWindow::GetPathWidget()
+{
+    return pathWidget;
 }
 
 MainWindow::~MainWindow()

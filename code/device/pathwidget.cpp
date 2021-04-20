@@ -5,6 +5,7 @@ PathWidget::PathWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PathWidget)
 {
+    setMinimumWidth(250);
     ui->setupUi(this);
 }
 PathWidget::~PathWidget()
@@ -46,5 +47,5 @@ void PathWidget::on_pushButton_released()
 {
     int a;
     a++;
-    /// Call your function here ///
+    emit ButtonPressed();
 }
