@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include "map.h"
 #include "viewer.h"
+#include "pathwidget.h"
 
 class manager;
 
@@ -52,6 +53,7 @@ private:
     QPushButton *buttonUp;
     QPushButton *buttonDown;
     QSignalMapper *buttonMapper;
+    PathWidget *pathWidget;
 
     QLabel *zoomLabel;
 

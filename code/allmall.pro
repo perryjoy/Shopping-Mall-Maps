@@ -20,6 +20,7 @@ SOURCES += \
     device/map.cpp \
     device/map2graph.cpp \
     device/mainwindow.cpp \
+    device/pathwidget.cpp \
     shops_data.cpp
 
 HEADERS += \
@@ -29,11 +30,13 @@ HEADERS += \
     device/graph_alternative.h \
     device/graph_parser.h \
     device/map.h \
+    device/pathwidget.h \
     device/viewer.h \
     device/mainwindow.h \
     shops_data.h
 
-FORMS +=
+FORMS += \
+    ../resources/PathWidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

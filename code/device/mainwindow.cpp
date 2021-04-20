@@ -16,7 +16,7 @@ MainWindow::MainWindow(class manager &mgr, bool customGraphicsView) : QMainWindo
 void MainWindow::SetupUi(bool customGraphicsView)
 {
     buttonMapper = new QSignalMapper();
-
+    pathWidget = new PathWidget(this);
     buttonUp = new QPushButton("", this);
     buttonDown = new QPushButton("", this);
     buttonUp->setStyleSheet("QPushButton\
@@ -37,6 +37,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
             width: 200px;\
         }\
     ");
+    //pathWidget->setGeometry(QRect(QPoint(this->size().width(), 0),QSize(500, 500)));
     buttonUp->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(200, 200)));
     buttonDown->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(200, 200)));
 
@@ -53,6 +54,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
 
     horizontalLayout->addWidget(buttonDown);
     horizontalLayout->addWidget(buttonUp);
+    horizontalLayout->addWidget(pathWidget);
 
     if (!customGraphicsView)
     {
