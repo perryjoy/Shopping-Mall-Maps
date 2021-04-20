@@ -67,7 +67,7 @@ private:
     QGraphicsScene *mapScene;
 
     QGraphicsSvgItem* mapPic;
-    graph *path;
+    //graph *path;
     QImage image;
 
     bool isPathNeeded = true;

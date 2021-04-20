@@ -14,7 +14,7 @@ class manager : public QObject
     MainWindow window;
     map currentMap;
     viewer *mapViewer; //NOTE: ownership of viewer has window but manager can manage its creation and call its methods
-    vertex_graph start, end;
+    //vertex_graph start, end;
 public:
     manager();
 

@@ -19,7 +19,6 @@ SOURCES += \
     device/graph_parser.cpp \
     device/map.cpp \
     device/map2graph.cpp \
-    device/svgview.cpp \
     device/mainwindow.cpp \
     shops_data.cpp
 

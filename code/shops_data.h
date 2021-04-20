@@ -37,7 +37,7 @@ class shops_data
 
     shops_data();
     shops_data(quint32 sz);
-    friend shops_data* ReadInfo(QXmlStreamReader& reader, QMap<QLatin1String, quint32>& indexes);
+    friend shops_data* ReadInfo(QXmlStreamReader& reader, QMap<QString, quint32>& indexes);
     friend void DestroyInfo (shops_data *& i);
 public:
 
@@ -115,7 +115,7 @@ public:
 
 
 void DestroyInfo (shops_data *& i);
-shops_data* InitInfoFromFile(QString const & file, QMap<QLatin1String, quint32>& indexes);
+shops_data* InitInfoFromFile(QString const & file, QMap<QString, quint32>& indexes);
 
 
 
