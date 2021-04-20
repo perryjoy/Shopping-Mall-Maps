@@ -369,6 +369,7 @@ bool graph_parser::proceedFile()
                 currentNode = currentNode.nextSiblingElement();
             }
             signatures->push_back(currentFloor);
+            currentFloor = floor_layer();
         }
 
 
