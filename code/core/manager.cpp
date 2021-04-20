@@ -3,6 +3,12 @@
 #include "device/manager.h"
 #include "device/graph_alternative.h"
 #include "device/pathwidget.h"
+#include "device/graph_alternative.h"
+
+void manager::SetPath(path *p)
+{
+    activePath = p;
+}
 
 manager::manager() : window(*this, true), currentMap(), currentFloor(0)
 {
@@ -16,27 +22,29 @@ void manager::OnButton(int butttonPressed)
 {
     std::vector<QString> ids;
 
-    auto v= (*floorLayers)[2].GetPathsLr().GetObjects();
+    auto v = (*floorLayers)[2].GetPathsLr().GetObjects();
     switch (butttonPressed){
     case BUTTON_UP:
         if (currentFloor < floorLayers->size() - 1)
             currentFloor++;
-        for (auto id : v)
+        for (auto& id : v)
         {
             mapViewer->AddUnstableVisible(id);
         }
         break;
     case BUTTON_DOWN:
-        if (currentFloor > 0)
-            currentFloor--;
-        for (auto id : v)
+        for (auto& e : activePath->defaultEdges)
         {
-            if (rand() % 2)
-                 mapViewer->ChangeVisibility(id, false);
+            mapViewer->ChangeVisibility(e, true);
         }
         break;
     case BUTTON_DRAW_PATH:
-        window.GetPathWidget()->GetData();
+        path_data pd = window.GetPathWidget()->GetData();
+        vec start(pd.x1, pd.y1);
+        vec end(pd.x2, pd.y2);
+        graph->SetStart(start, quint32(pd.floor1)-1);
+        graph->SetEnd(end, quint32(pd.floor2)-1);
+        graph->FindPath();
         break;
 
     }
@@ -45,6 +53,7 @@ void manager::OnButton(int butttonPressed)
 void manager::OnNewGraph(graph_alternative *newGraph)
 {
     graph = newGraph;
+    connect(graph, &graph_alternative::PathFound, this, &manager::SetPath);
 }
 
 void manager::OnNewMap(std::vector<floor_layer>* svgIds)

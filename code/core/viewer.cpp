@@ -102,7 +102,10 @@ void viewer::AddUnstableVisible(QString id)
 
 void viewer::ChangeVisibility(QString id, bool isVisible)
 {
-    unstableVisibleItems[id]->setVisible(isVisible);
+    if (unstableVisibleItems.find(id)!=unstableVisibleItems.end())
+    {
+        unstableVisibleItems[id]->setVisible(isVisible);
+    }
 }
 
 void viewer::drawBackground(QPainter *p, const QRectF &)

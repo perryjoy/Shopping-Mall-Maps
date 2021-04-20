@@ -4,8 +4,10 @@
 #include "device/mainwindow.h"
 #include "device/map.h"
 
+
 class graph_alternative;
 class viewer;
+class path;
 
 class manager : public QObject
 {
@@ -16,14 +18,20 @@ class manager : public QObject
     viewer *mapViewer; //NOTE: ownership of viewer has window but manager can manage its creation and call its methods
     graph_alternative *graph; //NOTE: ownership of graph has map but manager can manage its creation and call its methods
     std::vector<floor_layer>* floorLayers; //NOTE: ownership of floorLayers has map but manager can manage its creation and call its methods
+    path* activePath;
     int currentFloor;
     //vertex_graph start, end;
+
 public:
     manager();
 
     void LoadData(const QString &svgFileName, const QString &xmlFileName);
 
     void Start() { window.Show(); }
+
+private slots:
+    void SetPath(path* p);
+
 public slots:
     void OnButton(int butttonPressed);
     void OnNewMap(std::vector<floor_layer>* svgIds);
