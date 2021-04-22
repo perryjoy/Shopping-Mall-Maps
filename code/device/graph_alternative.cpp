@@ -12,13 +12,13 @@ constexpr quint32 NO_PATH_INT = MAX_INT;
 //{
 //}
 
-graph_alternative::graph_alternative(QObject *parent) : QObject(parent)
+graph_alternative::graph_alternative(QObject *parent) : QObject(parent), startFloorIndex(0), endFloorIndex(0)
 {
 }
 
 void graph_alternative::SetStart(point p, quint32 floorIndex)
 {
-    if (startFloorIndex != floorIndex || start != p)
+    if ((startFloorIndex != floorIndex || start != p) && floorIndex < floors.size())
     {
         startFloorIndex = floorIndex;
         start = p;
@@ -28,7 +28,7 @@ void graph_alternative::SetStart(point p, quint32 floorIndex)
 
 void graph_alternative::SetEnd(point p, quint32 floorIndex)
 {
-    if (endFloorIndex != floorIndex || end != p)
+    if ((endFloorIndex != floorIndex || end != p) && floorIndex < floors.size())
     {
         endFloorIndex = floorIndex;
         end = p;

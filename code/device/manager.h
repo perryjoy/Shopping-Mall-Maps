@@ -7,7 +7,7 @@
 
 class graph_alternative;
 class viewer;
-class path;
+struct path;
 
 class manager : public QObject
 {
@@ -20,8 +20,6 @@ class manager : public QObject
     std::vector<floor_layer>* floorLayers; //NOTE: ownership of floorLayers has map but manager can manage its creation and call its methods
     path* activePath;
     int currentFloor;
-    //vertex_graph start, end;
-
 public:
     manager();
 
@@ -29,10 +27,8 @@ public:
 
     void Start() { window.Show(); }
 
-private slots:
-    void SetPath(path* p);
-
 public slots:
+    void SetPath(path* p);
     void OnButton(int butttonPressed);
     void OnNewMap(std::vector<floor_layer>* svgIds);
     void OnNewGraph(graph_alternative *graph);

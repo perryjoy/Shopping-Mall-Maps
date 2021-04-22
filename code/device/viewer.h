@@ -5,8 +5,8 @@
 
 #include "map.h"
 
-class coord; //Misha's
-// class graph; //Misha's
+class coord;
+// class graph;
 
 enum viewer_error_code
 {
@@ -39,6 +39,7 @@ class viewer: public QGraphicsView
     float GetMapPicScale();
     void AddUnstableVisible(QString id);
     void ChangeVisibility(QString id, bool isVisible);
+    void ChangeBgrLayer(QString id);
     void Clear();
     ~viewer();
 
@@ -66,10 +67,9 @@ private:
     QGraphicsRectItem *backgroundItem;
     QGraphicsRectItem *outlineItem;
     QSvgRenderer *svgRenderer;
-    QSvgRenderer *mapRenderer;
     QGraphicsScene *mapScene;
 
-    QGraphicsSvgItem* mapPic, *a;
+    QGraphicsSvgItem* mapPic;
     //graph *path;
     QImage image;
 

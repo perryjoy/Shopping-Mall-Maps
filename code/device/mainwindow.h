@@ -3,19 +3,20 @@
 
 #include <QMainWindow>
 #include <QString>
-#include <QPushButton>
 #include "map.h"
 #include "viewer.h"
 #include "pathwidget.h"
+
 
 class manager;
 
 QT_BEGIN_NAMESPACE
 class QGraphicsView;
-class QLabel;
 class QSignalMapper;
 class QHBoxLayout;
 class QVBoxLayout;
+class QPushButton;
+class QLabel;
 QT_END_NAMESPACE
 
 enum ui_button{
@@ -36,9 +37,12 @@ public:
     MainWindow(manager &mgr, bool customGraphicsView = false);
     ~MainWindow();
 
-    PathWidget * GetPathWidget();
+    path_widget * GetPathWidget();
     QWidget * GetCentralWidget();
 
+    void AddLabel(QString text, int x, int y);
+
+    void ClearLabels();
     void SetView(QGraphicsView * view);
 
     void Show();
@@ -55,9 +59,10 @@ private:
     QPushButton *buttonUp;
     QPushButton *buttonDown;
     QSignalMapper *buttonMapper;
-    PathWidget *pathWidget;
+    path_widget *pathWidget;
 
     QLabel *zoomLabel;
+    std::vector<QLabel*> itemsLabels;
 
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;

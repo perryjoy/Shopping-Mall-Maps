@@ -1,9 +1,10 @@
 #include <QFileInfo>
+#include <QLabel>
+#include <QPushButton>
 #include "device/viewer.h"
 #include "device/manager.h"
 #include "device/graph_alternative.h"
 #include "device/pathwidget.h"
-#include "device/graph_alternative.h"
 
 void manager::SetPath(path *p)
 {
@@ -21,22 +22,24 @@ manager::manager() : window(*this, true), currentMap(), currentFloor(0)
 void manager::OnButton(int butttonPressed)
 {
     std::vector<QString> ids;
+    QMap<QString, quint32> mapping;
+    QString bgr;
+    QString *text;
+    int i = 0;
 
     auto v = (*floorLayers)[2].GetPathsLr().GetObjects();
     switch (butttonPressed){
     case BUTTON_UP:
         if (currentFloor < floorLayers->size() - 1)
             currentFloor++;
-        for (auto& id : v)
-        {
-            mapViewer->AddUnstableVisible(id);
-        }
+        bgr = (*floorLayers)[currentFloor].GetBckgrndLr().GetName();
+        mapViewer->ChangeBgrLayer(bgr);
         break;
     case BUTTON_DOWN:
-        for (auto& e : activePath->defaultEdges)
-        {
-            mapViewer->ChangeVisibility(e, true);
-        }
+        if (currentFloor > 0)
+            currentFloor--;
+        bgr = (*floorLayers)[currentFloor].GetBckgrndLr().GetName();
+        mapViewer->ChangeBgrLayer(bgr);
         break;
     case BUTTON_DRAW_PATH:
         path_data pd = window.GetPathWidget()->GetData();
@@ -53,22 +56,26 @@ void manager::OnButton(int butttonPressed)
 void manager::OnNewGraph(graph_alternative *newGraph)
 {
     graph = newGraph;
-    connect(graph, &graph_alternative::PathFound, this, &manager::SetPath);
+    connect(graph, SIGNAL(PathFound(path *)), this, SLOT(SetPath(path *)));
 }
 
 void manager::OnNewMap(std::vector<floor_layer>* svgIds)
 {
-    floorLayers = svgIds;
+    if (svgIds)
+    {
+        floorLayers = svgIds;
+        mapViewer->ChangeBgrLayer((*floorLayers)[currentFloor].GetBckgrndLr().GetName());
+    }
 }
 
 void manager::LoadData(const QString &svgFileName, const QString &xmlFileName)
 {
-    if (QFileInfo::exists(svgFileName) && QFileInfo::exists(xmlFileName))
-    {
-        currentMap.SetAnotherMap(svgFileName, xmlFileName);
-    }
     if (QFileInfo::exists(svgFileName))
     {
         mapViewer->InitMap(svgFileName);
+    }
+    if (QFileInfo::exists(svgFileName) && QFileInfo::exists(xmlFileName))
+    {
+        currentMap.SetAnotherMap(svgFileName, xmlFileName);
     }
 }

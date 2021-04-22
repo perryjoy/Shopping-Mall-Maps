@@ -219,8 +219,8 @@ void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e)
     {
         for (auto& neigbour : floorsWithPoints.at(floor-1).at(toAdd.start))
         {
-            f.edges.at(neigbour).adjacentEdges.push_back(indexOfToAddEdge);
-            toAdd.adjacentEdges.push_back(neigbour);
+//            f.edges.at(neigbour).adjacentEdges.push_back(indexOfToAddEdge);
+//            toAdd.adjacentEdges.push_back(neigbour);
         }
     }
 //    else
@@ -235,8 +235,8 @@ void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e)
     {
         for (auto& neigbour : floorsWithPoints.at(floor-1).at(toAdd.end))
         {
-            f.edges.at(neigbour).adjacentEdges.push_back(indexOfToAddEdge);
-            toAdd.adjacentEdges.push_back(neigbour);
+//            f.edges.at(neigbour).adjacentEdges.push_back(indexOfToAddEdge);
+//            toAdd.adjacentEdges.push_back(neigbour);
         }
     }
 //    else
@@ -246,7 +246,7 @@ void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e)
     floorsWithPoints.at(floor-1)[toAdd.end].push_back(indexOfToAddEdge);
 
 
-    f.edges.push_back(toAdd);
+//    f.edges.push_back(toAdd);
 }
 
 void LoadGraphObjectsOfTheFloor (graph_alternative* res, QDomNode& pathGroupHolder)
@@ -280,7 +280,7 @@ void LoadGraphObjectsOfTheFloor (graph_alternative* res, QDomNode& pathGroupHold
         }
         if (graphElement.tagName() == __EDGE_TAG)
         {
-            LoadEdge(res, floorIndex, graphElement);
+            //LoadEdge(res, floorIndex, graphElement);
         }
     }
 }

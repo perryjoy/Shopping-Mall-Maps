@@ -39,30 +39,10 @@ void viewer::paintEvent(QPaintEvent *event)
             image = QImage(viewport()->size(), QImage::Format_ARGB32_Premultiplied);
         }
 
-        // My way
         QPainter p(viewport());
         QGraphicsView::render(&p);
         p.end();
         QGraphicsView::paintEvent(event);
-
-        //QGraphicsSvgItem *black = new QGraphicsSvgItem();
-        //black->setSharedRenderer(svgRenderer);
-        //black->setElementId(QLatin1String("3_area"));
-        //svgRenderer->render(&p, QLatin1String("layer2"));
-
-        //QPainter imagePainter(&image);
-        //QGraphicsView::render(&imagePainter);
-        //imagePainter.end();
-
-        //QPainter p(viewport());
-
-        // Other way
-        //QPainter p(viewport());
-        //p.drawImage(0, 0, image);
-        //if (isPathNeeded)
-        //{
-        //    ViewPath();
-        //}
     }
     else
     {
@@ -72,32 +52,17 @@ void viewer::paintEvent(QPaintEvent *event)
 
 void viewer::AddUnstableVisible(QString id)
 {
- //   QString id = "3_lift_1";
     QGraphicsSvgItem *newItem = new QGraphicsSvgItem();
     newItem->setSharedRenderer(svgRenderer);
     newItem->setElementId(id);
-    newItem->setOpacity(1);
 
-    newItem->setParentItem(a);
     newItem->setVisible(true);
     newItem->setZValue(1);
-    QRectF bound    =   svgRenderer->boundsOnElement(id);
-
+    QRectF bound = svgRenderer->boundsOnElement(id);
     newItem->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
-    unstableVisibleItems[id] = newItem;
-    mapScene->addItem(unstableVisibleItems[id]);
-//    mapScene->setSceneRect(mapScene->itemsBoundingRect());
-/*
-    QGraphicsSvgItem *newItem = new QGraphicsSvgItem();
-    newItem->setZValue(2);
-    newItem->setSharedRenderer(svgRenderer);
-    newItem->setVisible(true);
-    newItem->setElementId("path2504");
-    unstableVisibleItems[id] = newItem;
-    mapScene->addItem(unstableVisibleItems[id]);
-    mapScene->setSceneRect(mapScene->itemsBoundingRect());*/
 
-  //  emit mapScene->changed(&viewport()->rect());
+    unstableVisibleItems[id] = newItem;
+    mapScene->addItem(unstableVisibleItems[id]);
 }
 
 void viewer::ChangeVisibility(QString id, bool isVisible)
@@ -144,11 +109,8 @@ bool viewer::InitMap(const QString &fileName)
 
     svgRenderer = new QSvgRenderer(fileName);
     mapPic = new QGraphicsSvgItem();
-    mapPic->setElementId(QLatin1String("layer9"));
     mapPic->setSharedRenderer(svgRenderer);
-//mapPic->setVisible(false);
-    QRectF bound    =   svgRenderer->boundsOnElement("layer9");
-
+    QRectF bound = svgRenderer->boundsOnElement("layer9");
     mapPic->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
     mapScene->clear();
     resetTransform();
@@ -156,13 +118,6 @@ bool viewer::InitMap(const QString &fileName)
     mapPic->setFlags(QGraphicsItem::ItemClipsToShape);
     mapPic->setCacheMode(QGraphicsItem::NoCache);
     mapPic->setZValue(-0.5);
-
-    a = new QGraphicsSvgItem();
-   // a->setSharedRenderer(svgRenderer);
-    a->setElementId(QLatin1String("layer8"));
-    a->setVisible(true);
-   // a->setOpacity(0);
-   // a->setFlag(QGraphicsItem::ItemDoesntPropagateOpacityToChildren);
 
     backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
     backgroundItem->setBrush(Qt::cyan);
@@ -182,7 +137,6 @@ bool viewer::InitMap(const QString &fileName)
 
     mapScene->addItem(backgroundItem);
     mapScene->addItem(mapPic);
-    mapScene->addItem(a);
 //    mapScene->addItem(outlineItem);
 
     mapScene->setSceneRect(mapScene->itemsBoundingRect());
@@ -190,7 +144,6 @@ bool viewer::InitMap(const QString &fileName)
 
     setTransform(QTransform::fromScale(totalScaleFactor * 5,
                                        totalScaleFactor * 5));
-   //fitInView(mapScene->sceneRect(), Qt::KeepAspectRatio);
     return true;
 }
 
@@ -204,6 +157,8 @@ void viewer::Clear()
         delete outlineItem;
     if (mapPic)
         delete mapPic;
+    for (auto & item : unstableVisibleItems)
+        delete item.second;
 }
 
 viewer::~viewer()
@@ -321,5 +276,10 @@ bool viewer::viewportEvent(QEvent *event)
         break;
     }
     return QGraphicsView::viewportEvent(event);
+}
+
+void viewer::ChangeBgrLayer(QString id)
+{
+    mapPic->setElementId(id);
 }
 

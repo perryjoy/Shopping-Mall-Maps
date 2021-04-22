@@ -36,7 +36,7 @@ HEADERS += \
     shops_data.h
 
 FORMS += \
-    ../resources/PathWidget.ui
+    ../resources/path_widget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

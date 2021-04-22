@@ -11,14 +11,12 @@ MainWindow::MainWindow(class manager &mgr, bool customGraphicsView) : QMainWindo
 {
     resize(1800, 1000);
     SetupUi(customGraphicsView);
-    auto qwe = pathWidget->geometry();
-    QRect r = this->contentsRect();
 }
 
 void MainWindow::SetupUi(bool customGraphicsView)
 {
     buttonMapper = new QSignalMapper();
-    pathWidget = new PathWidget(this);
+    pathWidget = new path_widget(this);
     buttonUp = new QPushButton("", this);
     buttonDown = new QPushButton("", this);
     buttonUp->setStyleSheet("QPushButton\
@@ -40,7 +38,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
         }\
     ");
 
- //   pathWidget->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 400),QSize(300, 300)));
+    pathWidget->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 400),QSize(300, 300)));
     buttonUp->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(50, 50)));
     buttonDown->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(50, 50)));
 
@@ -60,8 +58,8 @@ void MainWindow::SetupUi(bool customGraphicsView)
     verticalLayout = new QVBoxLayout(centralWidget);
     horizontalLayout->addLayout(verticalLayout);
 
-    verticalLayout->addWidget(buttonDown);
     verticalLayout->addWidget(buttonUp);
+    verticalLayout->addWidget(buttonDown);
     verticalLayout->addWidget(pathWidget);
 
     if (!customGraphicsView)
@@ -76,6 +74,21 @@ void MainWindow::SetupUi(bool customGraphicsView)
     }
 
     setWindowTitle("MainWindow");
+}
+
+void MainWindow::AddLabel(QString text, int x, int y)
+{
+    QLabel * l = new QLabel(centralWidget);
+    l->setText(text);
+    l->setGeometry(x, y, 100, 30);
+    itemsLabels.push_back(l);
+}
+
+void MainWindow::ClearLabels()
+{
+    for (int i =  0; i < itemsLabels.size(); i++)
+        delete itemsLabels[i];
+    itemsLabels.clear();
 }
 
 void MainWindow::SetView(QGraphicsView *view)
@@ -104,20 +117,23 @@ void MainWindow::Show()
     show();
 }
 
-PathWidget * MainWindow::GetPathWidget()
+path_widget * MainWindow::GetPathWidget()
 {
     return pathWidget;
 }
 
 MainWindow::~MainWindow()
 {
+    ClearLabels();
     delete buttonMapper;
     delete buttonUp;
     delete buttonDown;
     delete zoomLabel;
-    delete centralWidget;
-    delete horizontalLayout;
     delete graphicsView;
+    delete pathWidget;
+    delete verticalLayout;
+    delete horizontalLayout;
+    delete centralWidget;
 }
 
 void MainWindow::updateZoomLabel()

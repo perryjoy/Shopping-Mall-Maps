@@ -4,7 +4,7 @@
 #include <QWidget>
 
 namespace Ui {
-    class PathWidget;
+    class path_widget;
 }
 
 struct path_data
@@ -17,7 +17,7 @@ struct path_data
     }
 };
 
-class PathWidget : public QWidget
+class path_widget : public QWidget
 {
     Q_OBJECT
 
@@ -25,8 +25,8 @@ signals:
     void ButtonPressed();
 public:
     path_data GetData() { return path_data(Floor1, Floor2, X1, X2, Y1, Y2); }
-    explicit PathWidget(QWidget *parent = 0);
-    ~PathWidget();
+    explicit path_widget(QWidget *parent = 0);
+    ~path_widget();
 private slots:
 void on_lineEdit_textEdited(const QString &arg1);
 
@@ -43,7 +43,7 @@ void on_lineEdit_6_textEdited(const QString &arg1);
 void on_pushButton_released();
 
 private:
-    Ui::PathWidget *ui;
+    Ui::path_widget *ui;
     QString Floor1, Floor2, X1, X2, Y1, Y2;
 };
 #endif

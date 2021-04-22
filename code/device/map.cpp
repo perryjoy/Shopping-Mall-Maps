@@ -1,6 +1,5 @@
 #include <QSvgRenderer>
 #include "map.h"
-//#include "svgview.h" // TODO exclude
 #include "graph_alternative.h"
 #include "graph_parser.h"
 #include "shops_data.h"
