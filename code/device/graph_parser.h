@@ -1,6 +1,7 @@
 #ifndef GRAPH_PARSER_H
 #define GRAPH_PARSER_H
 
+#include <vector>
 #include <QtXml/QDomDocument>
 #include <QRegExp>
 
@@ -10,12 +11,17 @@ class graph_alternative;
 
 const QString __XY_COORDS_SEPARATOR = QString(",");
 
+const QString __ELEMENT_NAME_ATTRIBUTE = QString("id");
+
 const QString __LAYER_TAG = QString("g");
 const QString __LAYER_ATTRIBUTE_NAME = QString("groupmode"); // inkscape:groupmode
 const QString __LAYER_ATTRIBUTE_VALUE = QString("layer");
 
 const QString __LAYER_LABEL_ATTRIBUTE = QString("label"); //inkscape:label
-const QRegExp __GRAPH_LAYER_LABEL_MASK = QRegExp("[0-9]+_paths");
+const QRegExp __LAYER_LABEL_MASK = QRegExp("[0-9]+");
+const QRegExp __AREA_SUBLAYER_LABEL_MASK = QRegExp("[0-9]+_area");
+const QRegExp __SHOPS_SUBLAYER_LABEL_MASK = QRegExp("[0-9]+_shops");
+const QRegExp __PATHS_SUBLAYER_LABEL_MASK = QRegExp("[0-9]+_paths");
 
 const QString __ELEVATOR_TAG = QString("circle");
 const QString __ELEVATOR_NAME_ATTRIBUTE = QString("id");
@@ -36,9 +42,10 @@ enum polyline_attr
 {
     PA_START = 0,
     PA_SHIFT_HORISONTAL,
-    PA_SHIFT_VERTICAL
+    PA_SHIFT_VERTICAL,
+    MYSTERIOUS_L_TO_REFACTOR
 };
-const QString __PATH_ATTRIBUTES[] = {"M", "H", "V"};
+const QString __PATH_ATTRIBUTES[] = {"M", "H", "V", "L"};
 
 
 class graph_parser
@@ -53,9 +60,10 @@ class graph_parser
     QDomDocument doc;
     QDomNodeList edges;
 
+
+
     bool errorFlag;
     QString lastError;
-
 
 
 public:
@@ -66,7 +74,7 @@ public:
     graph* produceGraph();
     graph_alternative* produceOtherGraph();
     QString getLastError();
-
+    void* getSignatures(); // use static_cast<vector<floor_layer>*>(...)
 
 
 };

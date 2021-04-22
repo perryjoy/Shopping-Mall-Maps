@@ -39,34 +39,37 @@ void viewer::paintEvent(QPaintEvent *event)
             image = QImage(viewport()->size(), QImage::Format_ARGB32_Premultiplied);
         }
 
-        // My way
-        QPainter p(this);
+        QPainter p(viewport());
         QGraphicsView::render(&p);
         p.end();
         QGraphicsView::paintEvent(event);
-
-        //QGraphicsSvgItem *black = new QGraphicsSvgItem();
-        //black->setSharedRenderer(svgRenderer);
-        //black->setElementId(QLatin1String("layer2"));
-        //svgRenderer->render(&p, QLatin1String("layer2"));
-
-        //QPainter imagePainter(&image);
-        //QGraphicsView::render(&imagePainter);
-        //imagePainter.end();
-
-        //QPainter p(viewport());
-
-        // Other way
-        //QPainter p(viewport());
-        //p.drawImage(0, 0, image);
-        //if (isPathNeeded)
-        //{
-        //    ViewPath();
-        //}
     }
     else
     {
         QGraphicsView::paintEvent(event);
+    }
+}
+
+void viewer::AddUnstableVisible(QString id)
+{
+    QGraphicsSvgItem *newItem = new QGraphicsSvgItem();
+    newItem->setSharedRenderer(svgRenderer);
+    newItem->setElementId(id);
+
+    newItem->setVisible(true);
+    newItem->setZValue(1);
+    QRectF bound = svgRenderer->boundsOnElement(id);
+    newItem->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
+
+    unstableVisibleItems[id] = newItem;
+    mapScene->addItem(unstableVisibleItems[id]);
+}
+
+void viewer::ChangeVisibility(QString id, bool isVisible)
+{
+    if (unstableVisibleItems.find(id)!=unstableVisibleItems.end())
+    {
+        unstableVisibleItems[id]->setVisible(isVisible);
     }
 }
 
@@ -107,17 +110,20 @@ bool viewer::InitMap(const QString &fileName)
     svgRenderer = new QSvgRenderer(fileName);
     mapPic = new QGraphicsSvgItem();
     mapPic->setSharedRenderer(svgRenderer);
-
+    QRectF bound = svgRenderer->boundsOnElement("layer9");
+    mapPic->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
     mapScene->clear();
     resetTransform();
 
     mapPic->setFlags(QGraphicsItem::ItemClipsToShape);
     mapPic->setCacheMode(QGraphicsItem::NoCache);
-    mapPic->setZValue(1);
+    mapPic->setZValue(-0.5);
 
     backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
-    backgroundItem->setBrush(Qt::blue);
+    backgroundItem->setBrush(Qt::cyan);
     backgroundItem->setPen(Qt::NoPen);
+    backgroundItem->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
+
     backgroundItem->setVisible(backgroundItem ? backgroundItem->isVisible() : false);
     backgroundItem->setZValue(-1);
 
@@ -127,14 +133,17 @@ bool viewer::InitMap(const QString &fileName)
     outlineItem->setPen(outline);
     outlineItem->setBrush(Qt::NoBrush);
     outlineItem->setVisible(outlineItem ? outlineItem->isVisible() : true);
-    outlineItem->setZValue(1);
+    outlineItem->setZValue(0);
 
     mapScene->addItem(backgroundItem);
     mapScene->addItem(mapPic);
-    mapScene->addItem(outlineItem);
+//    mapScene->addItem(outlineItem);
 
-    mapScene->setSceneRect(outlineItem->boundingRect().adjusted(-10, -10, 10, 10));
+    mapScene->setSceneRect(mapScene->itemsBoundingRect());
 
+
+    setTransform(QTransform::fromScale(totalScaleFactor * 5,
+                                       totalScaleFactor * 5));
     return true;
 }
 
@@ -148,6 +157,8 @@ void viewer::Clear()
         delete outlineItem;
     if (mapPic)
         delete mapPic;
+    for (auto & item : unstableVisibleItems)
+        delete item.second;
 }
 
 viewer::~viewer()
@@ -184,24 +195,24 @@ void viewer::ViewGraph()
 
 void viewer::ViewPath()
 {
-    graph w;
-    w.adjacencyList = {
-    {{555,555},0,{{1,5},{2,6},{3,4}}},
-    {{30,485},0,{{0,5},{2,6},{5,9}}},
-    {{60,100},0,{{0,6},{1,6},{5,7}}},
-    {{200,30},0,{{0,4},{4,14}}},
-    {{120,30},0,{{3,14},{6,5}}},
-    {{120,308},0,{{1,9},{2,7},{6,5}}},
-    {{160,0},0,{{5,5},{4,5}}}
-    };
-    std::vector<vertex_graph> path = w.SearchWay(0,6);
-    for (int i = 0; i < path.size() - 1; ++i)
-    {
-        QPainter painter(viewport());
-        painter.setPen(QPen(Qt::red, 3, Qt::DotLine, Qt::RoundCap));
-        painter.drawLine(path[i].vertexCoordinates.x, path[i].vertexCoordinates.y,
-                         path[i + 1].vertexCoordinates.x, path[i + 1].vertexCoordinates.y);
-    }
+//    graph w;
+//    w.adjacencyList = {
+//    {{555,555},0,{{1,5},{2,6},{3,4}}},
+//    {{30,485},0,{{0,5},{2,6},{5,9}}},
+//    {{60,100},0,{{0,6},{1,6},{5,7}}},
+//    {{200,30},0,{{0,4},{4,14}}},
+//    {{120,30},0,{{3,14},{6,5}}},
+//    {{120,308},0,{{1,9},{2,7},{6,5}}},
+//    {{160,0},0,{{5,5},{4,5}}}
+//    };
+//    std::vector<vertex_graph> path = w.SearchWay(0,6);
+//    for (int i = 0; i < path.size() - 1; ++i)
+//    {
+//        QPainter painter(viewport());
+//        painter.setPen(QPen(Qt::red, 3, Qt::DotLine, Qt::RoundCap));
+//        painter.drawLine(path[i].vertexCoordinates.x, path[i].vertexCoordinates.y,
+//                         path[i + 1].vertexCoordinates.x, path[i + 1].vertexCoordinates.y);
+//    }
 }
 
 float viewer::GetMapPicScale()
@@ -227,7 +238,7 @@ void viewer::ZoomBy(float factor)
     if ((factor < 1 && currentZoom < 0.1) || (factor > 1 && currentZoom > 10))
         return;
     scale(factor, factor);
-    mapPic->setScale(factor);
+    //mapPic->setScale(factor);
     emit ZoomChanged();
 }
 
@@ -265,5 +276,10 @@ bool viewer::viewportEvent(QEvent *event)
         break;
     }
     return QGraphicsView::viewportEvent(event);
+}
+
+void viewer::ChangeBgrLayer(QString id)
+{
+    mapPic->setElementId(id);
 }
 

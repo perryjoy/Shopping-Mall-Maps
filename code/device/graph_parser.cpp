@@ -1,5 +1,6 @@
 #include "graph_parser.h"
 #include "graph_alternative.h"
+#include "map.h"
 #include <QFile>
 
 #define FIRST_LADDER_INDEX 128 // costyl TM, look at LoadLadder fun
@@ -16,6 +17,7 @@ std::vector<std::pair<vec, quint32>>   // each value has the set of coordinates+
 
 
 graph_alternative *resulGraph = nullptr;
+std::vector<floor_layer>* floorSignatures = nullptr;
 
 graph_parser::graph_parser() :  docName(), doc(), edges(), errorFlag(false), lastError()
 {
@@ -168,6 +170,7 @@ void LoadElevator (graph_alternative* g, quint32 floor, QDomElement& e)
 
 void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e)
 {
+    QString asdasda = e.toElement().attribute("id");
     Q_ASSERT(g->floors.size() >= floor);
     edge toAdd;
     QStringList pathCoords = e.attribute(__EDGE_COORDINATES_ATTRIBUTE).split(" ");
@@ -190,9 +193,18 @@ void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e)
         }
         else
         {
-             QStringList endCoords = pathCoords.at(2).split(__XY_COORDS_SEPARATOR);
-             Q_ASSERT(endCoords.size() == 2);
-             toAdd.end = vec (endCoords.at(0).toDouble(), endCoords.at(1).toDouble());
+            if (pathCoords.at(2) == __PATH_ATTRIBUTES[MYSTERIOUS_L_TO_REFACTOR])
+            {
+                QStringList endCoords = pathCoords.at(3).split(__XY_COORDS_SEPARATOR);
+                Q_ASSERT(endCoords.size() == 2);
+                toAdd.end = vec (endCoords.at(0).toDouble(), endCoords.at(1).toDouble());
+            }
+            else
+            {
+                 QStringList endCoords = pathCoords.at(2).split(__XY_COORDS_SEPARATOR);
+                 Q_ASSERT(endCoords.size() == 2);
+                 toAdd.end = vec (endCoords.at(0).toDouble(), endCoords.at(1).toDouble());
+            }
         }
     }
     toAdd.len = toAdd.start.distance(toAdd.end);
@@ -207,8 +219,8 @@ void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e)
     {
         for (auto& neigbour : floorsWithPoints.at(floor-1).at(toAdd.start))
         {
-            f.edges.at(neigbour).adjacentEdges.push_back(indexOfToAddEdge);
-            toAdd.adjacentEdges.push_back(neigbour);
+//            f.edges.at(neigbour).adjacentEdges.push_back(indexOfToAddEdge);
+//            toAdd.adjacentEdges.push_back(neigbour);
         }
     }
 //    else
@@ -223,8 +235,8 @@ void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e)
     {
         for (auto& neigbour : floorsWithPoints.at(floor-1).at(toAdd.end))
         {
-            f.edges.at(neigbour).adjacentEdges.push_back(indexOfToAddEdge);
-            toAdd.adjacentEdges.push_back(neigbour);
+//            f.edges.at(neigbour).adjacentEdges.push_back(indexOfToAddEdge);
+//            toAdd.adjacentEdges.push_back(neigbour);
         }
     }
 //    else
@@ -234,7 +246,7 @@ void LoadEdge (graph_alternative* g, quint32 floor, QDomElement& e)
     floorsWithPoints.at(floor-1)[toAdd.end].push_back(indexOfToAddEdge);
 
 
-    f.edges.push_back(toAdd);
+//    f.edges.push_back(toAdd);
 }
 
 void LoadGraphObjectsOfTheFloor (graph_alternative* res, QDomNode& pathGroupHolder)
@@ -268,7 +280,7 @@ void LoadGraphObjectsOfTheFloor (graph_alternative* res, QDomNode& pathGroupHold
         }
         if (graphElement.tagName() == __EDGE_TAG)
         {
-            LoadEdge(res, floorIndex, graphElement);
+            //LoadEdge(res, floorIndex, graphElement);
         }
     }
 }
@@ -281,12 +293,19 @@ bool graph_parser::proceedFile()
     resulGraph = new graph_alternative();
     QDomNode floorNode;
 
+    std::vector<floor_layer>* signatures = new std::vector<floor_layer>();
+    floor_layer currentFloor;
+
+
     floorsWithPoints.clear();
     connections.clear();
 
     if (errorFlag == true || docName.length() == 0) //failed to open or didnt set the file
     {
         delete resulGraph;
+        delete signatures;
+        delete floorSignatures;
+        floorSignatures = nullptr;
         resulGraph = nullptr;
         return false;
     }
@@ -301,8 +320,62 @@ bool graph_parser::proceedFile()
             continue;
         }
 
+
+        if (HasAttributes (floorNode, __LAYER_ATTRIBUTE_NAME, __LAYER_ATTRIBUTE_VALUE,
+                           __LAYER_LABEL_ATTRIBUTE, __LAYER_LABEL_MASK))
+        {
+//            QString asdasd = floorNode.toElement().attribute(__LAYER_LABEL_ATTRIBUTE);
+//            int asd = floorNode.toElement().attribute(__LAYER_LABEL_ATTRIBUTE).toUInt();
+//            quint32 gsdf = signatures->size()+1;
+            Q_ASSERT(floorNode.toElement().attribute(__LAYER_LABEL_ATTRIBUTE).toUInt() == signatures->size()+1);
+            currentFloor.layerName = floorNode.toElement().attribute("id");
+
+            QDomElement currentNode = floorNode.firstChildElement();
+            while (!currentNode.isNull())
+            {
+                if (HasAttributes (currentNode, __LAYER_ATTRIBUTE_NAME, __LAYER_ATTRIBUTE_VALUE,
+                                   __LAYER_LABEL_ATTRIBUTE, __AREA_SUBLAYER_LABEL_MASK))
+                {
+                    Q_ASSERT(currentNode.attribute(__LAYER_LABEL_ATTRIBUTE).split("_").at(0).toUInt() == signatures->size()+1);
+                    currentFloor.bckgrndLr.layerName = currentNode.attribute(__ELEMENT_NAME_ATTRIBUTE);
+                }
+
+                if (HasAttributes (currentNode, __LAYER_ATTRIBUTE_NAME, __LAYER_ATTRIBUTE_VALUE,
+                                   __LAYER_LABEL_ATTRIBUTE, __SHOPS_SUBLAYER_LABEL_MASK))
+                {
+                    Q_ASSERT(currentNode.attribute(__LAYER_LABEL_ATTRIBUTE).split("_").at(0).toUInt() == signatures->size()+1);
+                    currentFloor.shopsLr.layerName = currentNode.attribute(__ELEMENT_NAME_ATTRIBUTE);
+                    QDomElement currentShop = currentNode.firstChildElement();
+                    while (!currentShop.isNull())
+                    {
+                        Q_ASSERT(currentShop.attribute(__ELEMENT_NAME_ATTRIBUTE).split("_").at(0).toUInt() == signatures->size()+1);
+                        currentFloor.shopsLr.namesAndIndexes.insert(currentShop.attribute(__ELEMENT_NAME_ATTRIBUTE), 0);
+                        currentShop = currentShop.nextSiblingElement();
+                    }
+                }
+
+                if (HasAttributes (currentNode, __LAYER_ATTRIBUTE_NAME, __LAYER_ATTRIBUTE_VALUE,
+                                   __LAYER_LABEL_ATTRIBUTE, __PATHS_SUBLAYER_LABEL_MASK))
+                {
+                    Q_ASSERT(currentNode.attribute(__LAYER_LABEL_ATTRIBUTE).split("_").at(0).toUInt() == signatures->size()+1);
+                    currentFloor.pathsLr.layerName = currentNode.attribute(__ELEMENT_NAME_ATTRIBUTE);
+                    QDomElement currentGraphElement = currentNode.firstChildElement();
+                    while (!currentGraphElement.isNull())
+                    {
+                        currentFloor.pathsLr.graphObjects.push_back(currentGraphElement.attribute(__ELEMENT_NAME_ATTRIBUTE));
+                        currentGraphElement = currentGraphElement.nextSiblingElement();
+                    }
+                }
+                currentNode = currentNode.nextSiblingElement();
+            }
+            signatures->push_back(currentFloor);
+            currentFloor = floor_layer();
+        }
+
+
+
         if(HasAttributes (floorNode,__LAYER_ATTRIBUTE_NAME, __LAYER_ATTRIBUTE_VALUE,
-                          __LAYER_LABEL_ATTRIBUTE, __GRAPH_LAYER_LABEL_MASK ))
+                          __LAYER_LABEL_ATTRIBUTE, __PATHS_SUBLAYER_LABEL_MASK ))
         {
             LoadGraphObjectsOfTheFloor(resulGraph, floorNode);
         }
@@ -327,9 +400,21 @@ bool graph_parser::proceedFile()
         }
     }
 
+    delete floorSignatures;
+    floorSignatures = signatures;
     return true;
 }
 
+void* graph_parser::getSignatures() // use static_cast<vector<floor_layer>*>(...)
+{
+    if (errorFlag == true)
+    {
+        return nullptr;
+    }
+    void* res = static_cast<void*>(floorSignatures);
+    floorSignatures = nullptr;
+    return res;
+}
 
 graph *graph_parser::produceGraph()
 {

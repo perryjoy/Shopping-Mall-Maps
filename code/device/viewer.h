@@ -5,8 +5,8 @@
 
 #include "map.h"
 
-class coord; //Misha's
-// class graph; //Misha's
+class coord;
+// class graph;
 
 enum viewer_error_code
 {
@@ -37,6 +37,9 @@ class viewer: public QGraphicsView
     void ViewPath();      // Shows path from firt point to second point (calls Graph)
     float ZoomFactor();
     float GetMapPicScale();
+    void AddUnstableVisible(QString id);
+    void ChangeVisibility(QString id, bool isVisible);
+    void ChangeBgrLayer(QString id);
     void Clear();
     ~viewer();
 
@@ -59,15 +62,15 @@ private:
 
     renderer_type rendererType;
 
+    std::map<QString, QGraphicsSvgItem*> unstableVisibleItems;
     QGraphicsSvgItem *svgItem;
     QGraphicsRectItem *backgroundItem;
     QGraphicsRectItem *outlineItem;
     QSvgRenderer *svgRenderer;
-    QSvgRenderer *mapRenderer;
     QGraphicsScene *mapScene;
 
     QGraphicsSvgItem* mapPic;
-    graph *path;
+    //graph *path;
     QImage image;
 
     bool isPathNeeded = true;
