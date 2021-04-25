@@ -76,21 +76,6 @@ void MainWindow::SetupUi(bool customGraphicsView)
     setWindowTitle("MainWindow");
 }
 
-void MainWindow::AddLabel(QString text, int x, int y)
-{
-    QLabel * l = new QLabel(centralWidget);
-    l->setText(text);
-    l->setGeometry(x, y, 100, 30);
-    itemsLabels.push_back(l);
-}
-
-void MainWindow::ClearLabels()
-{
-    for (int i =  0; i < itemsLabels.size(); i++)
-        delete itemsLabels[i];
-    itemsLabels.clear();
-}
-
 void MainWindow::SetView(QGraphicsView *view)
 {
     if (graphicsView)
@@ -124,7 +109,6 @@ path_widget * MainWindow::GetPathWidget()
 
 MainWindow::~MainWindow()
 {
-    ClearLabels();
     delete buttonMapper;
     delete buttonUp;
     delete buttonDown;

@@ -7,6 +7,7 @@
 
 class coord;
 // class graph;
+class QLabel;
 
 enum viewer_error_code
 {
@@ -38,9 +39,14 @@ class viewer: public QGraphicsView
     float ZoomFactor();
     float GetMapPicScale();
     void AddUnstableVisible(QString id);
+    void AddSelectable(QString id);
     void ChangeVisibility(QString id, bool isVisible);
     void ChangeBgrLayer(QString id);
     void Clear();
+    void AddLabel(QString text, int x, int y, QString idToLabeling = "", QWidget *parent = nullptr);
+    void ClearLabels();
+    void ClearSelectables();
+
     ~viewer();
 
 signals:
@@ -63,15 +69,16 @@ private:
     renderer_type rendererType;
 
     std::map<QString, QGraphicsSvgItem*> unstableVisibleItems;
+    std::map<QString, QGraphicsSvgItem*> selectableItems;
     QGraphicsSvgItem *svgItem;
-    QGraphicsRectItem *backgroundItem;
-    QGraphicsRectItem *outlineItem;
     QSvgRenderer *svgRenderer;
     QGraphicsScene *mapScene;
 
     QGraphicsSvgItem* mapPic;
     //graph *path;
     QImage image;
+
+    std::vector<QLabel*> itemsLabels;
 
     bool isPathNeeded = true;
     qreal totalScaleFactor = 1;
