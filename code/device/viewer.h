@@ -34,7 +34,8 @@ class viewer: public QGraphicsView
     void ViewMap();                             // Draws map
     void ViewObject();                          // Drows something (preparing for future) f.e. selected shop
     void ViewGraph();                           // Shows graph on map (for debug )
-    void ViewPath();      // Shows path from firt point to second point (calls Graph)
+    void ViewPathFirst(int start, int finish);      // Shows path from firt point to second point (calls Graph)
+    void ViewPathSecond(int finish);
     float ZoomFactor();
     float GetMapPicScale();
     void AddUnstableVisible(QString id);
