@@ -28,12 +28,16 @@ class graph
 public:
     void DeleteVertex(int index);
     void AddTemporaryVertex(vertex_graph vertex);
-    void WriteDataFromFile(const std::string &config);
+    void LoadDataFromFile(const std::string &config);
     void DeleteTemperaryVertex();
     std::vector<vertex_graph> SearchWay(int vertexStart, int vertexFinish);
     std::vector<vertex_graph> SearchWayAlternative(int vertexFinish);
     std::vector<vertex_graph> ReturnTemperaryVertexs();
 
+    graph()
+    {
+        LoadDataFromFile("allMall.txt");
+    }
     ~graph()
     {
         delete [] adjacencyList;
