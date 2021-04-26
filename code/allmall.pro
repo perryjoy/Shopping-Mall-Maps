@@ -47,3 +47,6 @@ RESOURCES += \
     ../resources/map1(2).qrc \
     ../resources/map1.qrc \
     ../resources/pics.qrc \
+
+DISTFILES += \
+    ../resources/MacOS.qss
