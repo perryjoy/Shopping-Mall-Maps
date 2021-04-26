@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iostream>
 
-void graph::WriteDataFromFile(const std::string &config)
+void graph::LoadDataFromFile(const std::string &config)
 {
     int index = 0;
     std::string line;

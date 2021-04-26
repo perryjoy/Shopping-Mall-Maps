@@ -228,8 +228,8 @@ void viewer::ViewPathSecond(int finish)
     temperaryVertex = w.ReturnTemperaryVertexs();
     for (int i = 0; i < temperaryVertex.size() - 1; ++i)
     {
-    mapScene->addLine(temperaryVertex[i].vertexCoordinates.x, temperaryVertex[i].vertexCoordinates.y,
-                      temperaryVertex[i + 1].vertexCoordinates.x, temperaryVertex[i + 1].vertexCoordinates.y, color);
+        mapScene->addLine(temperaryVertex[i].vertexCoordinates.x, temperaryVertex[i].vertexCoordinates.y,
+                          temperaryVertex[i + 1].vertexCoordinates.x, temperaryVertex[i + 1].vertexCoordinates.y, color);
     }
 
     for (int i = 0; i < path.size() - 1; ++i)
