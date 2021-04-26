@@ -20,8 +20,6 @@ class manager : public QObject
     std::vector<floor_layer>* floorLayers; //NOTE: ownership of floorLayers has map but manager can manage its creation and call its methods
     path* activePath;
     int currentFloor;
-
-    void DrawShopsWithLabels();
 public:
     manager();
 

@@ -20,6 +20,8 @@ class QLabel;
 QT_END_NAMESPACE
 
 enum ui_button{
+    BUTTON_SHOW,
+    BUTTON_HIDE,
     BUTTON_UP,
     BUTTON_DOWN,
     BUTTON_LOAD,
@@ -40,9 +42,14 @@ public:
     path_widget * GetPathWidget();
     QWidget * GetCentralWidget();
 
+    void AddLabel(QString text, int x, int y);
+
+    void ClearLabels();
     void SetView(QGraphicsView * view);
 
     void Show();
+    void ShowMenu();
+    void HideMenu();
 
 public slots:
     bool event(QEvent *event) override;
@@ -53,12 +60,15 @@ private slots:
 private:
     void SetupUi(bool customGraphicsView);
 
+    QPushButton *buttonShow;
+    QPushButton *buttonHide;
     QPushButton *buttonUp;
     QPushButton *buttonDown;
     QSignalMapper *buttonMapper;
     path_widget *pathWidget;
 
     QLabel *zoomLabel;
+    std::vector<QLabel*> itemsLabels;
 
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
