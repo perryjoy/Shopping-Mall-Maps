@@ -15,22 +15,28 @@ MainWindow::MainWindow(class manager &mgr, bool customGraphicsView) : QMainWindo
 
 void MainWindow::SetupUi(bool customGraphicsView)
 {
+    QFile file("MacOS.qss");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+
     buttonMapper = new QSignalMapper();
     pathWidget = new path_widget(this);
     buttonUp = new QPushButton("", this);
     buttonDown = new QPushButton("", this);
-    buttonUp->setStyleSheet("QPushButton\
+    buttonUp->setStyleSheet(styleSheet + "QPushButton\
         {\
             image: url(:/based/UP.png);\
+            border-style: outset;\
             background: transparent;\
             padding-top: 0px;\
             height: 50px;\
             width: 50px;\
         }\
     ");
-    buttonDown->setStyleSheet("QPushButton\
+    buttonDown->setStyleSheet(styleSheet + "QPushButton\
         {\
             image: url(:/based/DOWN.png);\
+            border-style: outset;\
             background: transparent;\
             padding-top: 0px;\
             height: 50px;\
