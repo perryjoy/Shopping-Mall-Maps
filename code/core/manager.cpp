@@ -5,6 +5,7 @@
 #include "device/manager.h"
 #include "device/graph_alternative.h"
 #include "device/pathwidget.h"
+#include "shops_data.h"
 
 void manager::SetPath(path *p)
 {
@@ -24,10 +25,8 @@ void manager::OnButton(int butttonPressed)
     std::vector<QString> ids;
     QMap<QString, quint32> mapping;
     QString bgr;
-    QString *text;
-    int i = 0;
+    QString text("fuck");
 
-    auto v = (*floorLayers)[2].GetPathsLr().GetObjects();
     switch (butttonPressed){
     case BUTTON_SHOW:
         window.ShowMenu();
@@ -40,12 +39,14 @@ void manager::OnButton(int butttonPressed)
             currentFloor++;
         bgr = (*floorLayers)[currentFloor].GetBckgrndLr().GetName();
         mapViewer->ChangeBgrLayer(bgr);
+        DrawShopsWithLabels();
         break;
     case BUTTON_DOWN:
         if (currentFloor > 0)
             currentFloor--;
         bgr = (*floorLayers)[currentFloor].GetBckgrndLr().GetName();
         mapViewer->ChangeBgrLayer(bgr);
+        DrawShopsWithLabels();
         break;
     case BUTTON_DRAW_PATH:
         path_data pd = window.GetPathWidget()->GetData();
@@ -55,6 +56,19 @@ void manager::OnButton(int butttonPressed)
         graph->SetEnd(end, quint32(pd.floor2)-1);
         graph->FindPath();
         break;
+    }
+}
+
+void manager::DrawShopsWithLabels()
+{
+    QMap<QString, quint32> mapping;
+    mapping = (*floorLayers)[currentFloor].GetShopsLr().GetShops();
+    mapViewer->ClearSelectables();
+    mapViewer->ClearLabels();
+    for (auto shop = mapping.begin(); shop != mapping.end(); shop++)
+    {
+        mapViewer->AddSelectable(shop.key());
+        mapViewer->AddLabel(shop.key(), 40, 100, shop.key());
     }
 }
 
@@ -82,5 +96,6 @@ void manager::LoadData(const QString &svgFileName, const QString &xmlFileName)
     if (QFileInfo::exists(svgFileName) && QFileInfo::exists(xmlFileName))
     {
         currentMap.SetAnotherMap(svgFileName, xmlFileName);
+        DrawShopsWithLabels();
     }
 }
