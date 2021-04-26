@@ -248,6 +248,19 @@ bool viewer::viewportEvent(QEvent *event)
     switch (event->type())
     {
     case QEvent::TouchBegin:
+    {
+        QTouchEvent *touchEvent = static_cast<QTouchEvent *>(event);
+        QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+
+
+        if (touchPoints.count() == 1)
+        {
+            //For Arina
+            //On single touch event.
+            //If it looks strange, you can move this block from "Touch Begin" to "TouchUpdate" or "TouchEnd"
+        }
+
+    }
     case QEvent::TouchUpdate:
     case QEvent::TouchEnd:
     {
@@ -262,14 +275,19 @@ bool viewer::viewportEvent(QEvent *event)
                     QLineF(touchPoint0.pos(), touchPoint1.pos()).length()
                     / QLineF(touchPoint0.startPos(), touchPoint1.startPos()).length();
 
-            if (touchEvent->touchPointStates() & Qt::TouchPointReleased)    // if one of the fingers is released, remember the current scale
-            {                                                               // factor so that adding another finger later will continue zooming
-                totalScaleFactor *= currentScaleFactor;                     // by adding new scale factor to the existing remembered value.
-                currentScaleFactor = 1;
+            if(totalScaleFactor * currentScaleFactor <= maxZoom && totalScaleFactor * currentScaleFactor >= 1 / maxZoom)
+            {
+                if (touchEvent->touchPointStates() & Qt::TouchPointReleased)    // if one of the fingers is released, remember the current scale
+                {                                                               // factor so that adding another finger later will continue zooming
+                    totalScaleFactor *= currentScaleFactor;                     // by adding new scale factor to the existing remembered value.
+                    currentScaleFactor = 1;
+                }
+                setTransform(QTransform::fromScale(totalScaleFactor * currentScaleFactor,
+                                                   totalScaleFactor * currentScaleFactor));
             }
-            setTransform(QTransform::fromScale(totalScaleFactor * currentScaleFactor,
-                                               totalScaleFactor * currentScaleFactor));
+
         }
+
         return true;
     }
     default:

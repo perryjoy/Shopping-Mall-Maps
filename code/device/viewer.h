@@ -75,6 +75,9 @@ private:
 
     bool isPathNeeded = true;
     qreal totalScaleFactor = 1;
+    qreal maxZoom = 3.0;  //Maybe later I will add "speed" of zoom.
+                          //When scale is high or low you will need make more gestures to zoom.
+                          //In the limitation gesture will not affect on scale.
 };
 
 #endif // VIEWER_H
