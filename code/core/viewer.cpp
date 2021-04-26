@@ -5,6 +5,8 @@
 #include <QWheelEvent>
 #include <QtMath>
 #include <QGestureEvent>
+#include <QLabel>
+#include <QFont>
 
 #include <QDebug>
 
@@ -17,8 +19,6 @@ viewer::viewer(QWidget *parent) :
     svgRenderer(nullptr),
     rendererType(RENDERER_IMAGE),
     svgItem(nullptr),
-    backgroundItem(nullptr),
-    outlineItem(nullptr),
     mapPic(nullptr)
 {
     mapScene = new QGraphicsScene();
@@ -64,6 +64,22 @@ void viewer::AddUnstableVisible(QString id)
     unstableVisibleItems[id] = newItem;
     mapScene->addItem(unstableVisibleItems[id]);
 }
+
+void viewer::AddSelectable(QString id)
+{
+    QGraphicsSvgItem *newItem = new QGraphicsSvgItem();
+    newItem->setSharedRenderer(svgRenderer);
+    newItem->setElementId(id);
+
+    newItem->setVisible(true);
+    newItem->setZValue(-0.5);
+    QRectF bound = svgRenderer->boundsOnElement(id);
+    newItem->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
+
+    selectableItems[id] = newItem;
+    mapScene->addItem(selectableItems[id]);
+}
+
 
 void viewer::ChangeVisibility(QString id, bool isVisible)
 {
@@ -117,48 +133,54 @@ bool viewer::InitMap(const QString &fileName)
 
     mapPic->setFlags(QGraphicsItem::ItemClipsToShape);
     mapPic->setCacheMode(QGraphicsItem::NoCache);
-    mapPic->setZValue(-0.5);
-
-    backgroundItem = new QGraphicsRectItem(mapPic->boundingRect());
-    backgroundItem->setBrush(Qt::cyan);
-    backgroundItem->setPen(Qt::NoPen);
-    backgroundItem->setPos(bound.x(), bound.y());  // this code is must to set correct posisiton
-
-    backgroundItem->setVisible(backgroundItem ? backgroundItem->isVisible() : false);
-    backgroundItem->setZValue(-1);
-
-    outlineItem = new QGraphicsRectItem(mapPic->boundingRect());
-    QPen outline(Qt::black, 2, Qt::DashLine);
-    outline.setCosmetic(true);
-    outlineItem->setPen(outline);
-    outlineItem->setBrush(Qt::NoBrush);
-    outlineItem->setVisible(outlineItem ? outlineItem->isVisible() : true);
-    outlineItem->setZValue(0);
-
-    mapScene->addItem(backgroundItem);
+    mapPic->setZValue(-1);
     mapScene->addItem(mapPic);
-//    mapScene->addItem(outlineItem);
 
-    mapScene->setSceneRect(mapScene->itemsBoundingRect());
+    mapScene->setSceneRect(bound);
 
-
-    setTransform(QTransform::fromScale(totalScaleFactor * 5,
-                                       totalScaleFactor * 5));
+    setTransform(QTransform::fromScale(totalScaleFactor * 8,
+                                       totalScaleFactor * 8));
     return true;
 }
 
 void viewer::Clear()
 {
+    ClearSelectables();
+    ClearLabels();
     if (svgRenderer)
         delete svgRenderer;
-    if (backgroundItem)
-        delete backgroundItem;
-    if (outlineItem)
-        delete outlineItem;
     if (mapPic)
         delete mapPic;
     for (auto & item : unstableVisibleItems)
         delete item.second;
+    for (auto & item : selectableItems)
+        delete item.second;
+}
+
+void viewer::AddLabel(QString text, int x, int y, QString idToLabeling, QWidget *parent)
+{
+    QLabel * l = new QLabel(parent);
+    l->setText(text);
+    l->setMargin(1);
+    l->setFont(QFont("Arial", 1));
+    QRectF bound = svgRenderer->boundsOnElement(idToLabeling);
+    l->move(bound.center().x(), bound.center().y());  // this code is must to set correct posisiton
+    itemsLabels.push_back(l);
+    mapScene->addWidget(l);
+}
+
+void viewer::ClearSelectables()
+{
+    for (auto & item : selectableItems)
+        delete item.second;
+    selectableItems.clear();
+}
+
+void viewer::ClearLabels()
+{
+    for (int i =  0; i < itemsLabels.size(); i++)
+        delete itemsLabels[i];
+    itemsLabels.clear();
 }
 
 viewer::~viewer()

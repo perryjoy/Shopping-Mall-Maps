@@ -40,9 +40,6 @@ public:
     path_widget * GetPathWidget();
     QWidget * GetCentralWidget();
 
-    void AddLabel(QString text, int x, int y);
-
-    void ClearLabels();
     void SetView(QGraphicsView * view);
 
     void Show();
@@ -62,7 +59,6 @@ private:
     path_widget *pathWidget;
 
     QLabel *zoomLabel;
-    std::vector<QLabel*> itemsLabels;
 
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
