@@ -23,10 +23,17 @@ manager::manager() : window(*this, true), currentMap(), currentFloor(0)
 void manager::OnButton(int butttonPressed)
 {
     std::vector<QString> ids;
+    QMap<QString, quint32> mapping;
     QString bgr;
     QString text("fuck");
 
     switch (butttonPressed){
+    case BUTTON_SHOW:
+        window.ShowMenu();
+        break;
+    case BUTTON_HIDE:
+        window.HideMenu();
+        break;
     case BUTTON_UP:
         if (currentFloor < floorLayers->size() - 1)
             currentFloor++;
@@ -91,5 +98,4 @@ void manager::LoadData(const QString &svgFileName, const QString &xmlFileName)
         currentMap.SetAnotherMap(svgFileName, xmlFileName);
         DrawShopsWithLabels();
     }
-
 }

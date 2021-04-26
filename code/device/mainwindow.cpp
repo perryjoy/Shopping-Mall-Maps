@@ -21,8 +21,34 @@ void MainWindow::SetupUi(bool customGraphicsView)
 
     buttonMapper = new QSignalMapper();
     pathWidget = new path_widget(this);
+
+    buttonShow = new QPushButton("", this);
+    buttonHide = new QPushButton("", this);
+
     buttonUp = new QPushButton("", this);
     buttonDown = new QPushButton("", this);
+
+    buttonShow->setStyleSheet(styleSheet + "QPushButton\
+        {\
+            image: url(:/based/RIGHT.png);\
+            border-style: outset;\
+            background: transparent;\
+            padding-top: 0px;\
+            height: 50px;\
+            width: 50px;\
+        }\
+    ");
+    buttonHide->setStyleSheet(styleSheet + "QPushButton\
+        {\
+            image: url(:/based/LEFT.png);\
+            border-style: outset;\
+            background: transparent;\
+            padding-top: 0px;\
+            height: 50px;\
+            width: 50px;\
+        }\
+    ");
+
     buttonUp->setStyleSheet(styleSheet + "QPushButton\
         {\
             image: url(:/based/UP.png);\
@@ -33,6 +59,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
             width: 50px;\
         }\
     ");
+
     buttonDown->setStyleSheet(styleSheet + "QPushButton\
         {\
             image: url(:/based/DOWN.png);\
@@ -45,13 +72,21 @@ void MainWindow::SetupUi(bool customGraphicsView)
     ");
 
     pathWidget->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 400),QSize(300, 300)));
+    int Size = this->size().height() < this->size().width() ? this->size().height() : this->size().width();
+    buttonShow->setGeometry(QRect(QPoint(Size / 20, Size / 20),QSize(Size / 5, Size / 5)));
+    buttonHide->setGeometry(QRect(QPoint(Size / 20, Size / 20),QSize(Size / 5, Size / 5)));
+
     buttonUp->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(50, 50)));
     buttonDown->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(50, 50)));
 
+    buttonMapper->setMapping(buttonShow, BUTTON_SHOW);
+    buttonMapper->setMapping(buttonHide, BUTTON_HIDE);
     buttonMapper->setMapping(buttonUp, BUTTON_UP);
     buttonMapper->setMapping(buttonDown, BUTTON_DOWN);
     buttonMapper->setMapping(pathWidget, BUTTON_DRAW_PATH);
 
+    connect(buttonShow, SIGNAL(released()), buttonMapper, SLOT(map()));
+    connect(buttonHide, SIGNAL(released()), buttonMapper, SLOT(map()));
     connect(buttonUp, SIGNAL(released()), buttonMapper, SLOT(map()));
     connect(buttonDown, SIGNAL(released()), buttonMapper, SLOT(map()));
     connect(pathWidget, SIGNAL(ButtonPressed()), buttonMapper, SLOT(map()));
@@ -63,11 +98,17 @@ void MainWindow::SetupUi(bool customGraphicsView)
 
     verticalLayout = new QVBoxLayout(centralWidget);
     horizontalLayout->addLayout(verticalLayout);
-
+    buttonShow->raise();
+    buttonHide->raise();
+    //verticalLayout->addWidget(buttonShow);
+    //verticalLayout->addWidget(buttonHide);
     verticalLayout->addWidget(buttonUp);
     verticalLayout->addWidget(buttonDown);
     verticalLayout->addWidget(pathWidget);
-
+    buttonUp->hide();
+    buttonDown->hide();
+    pathWidget->hide();
+    buttonHide->hide();
     if (!customGraphicsView)
     {
         graphicsView = new QGraphicsView(centralWidget);
@@ -80,6 +121,21 @@ void MainWindow::SetupUi(bool customGraphicsView)
     }
 
     setWindowTitle("MainWindow");
+}
+
+void MainWindow::AddLabel(QString text, int x, int y)
+{
+    QLabel * l = new QLabel(centralWidget);
+    l->setText(text);
+    l->setGeometry(x, y, 100, 30);
+    itemsLabels.push_back(l);
+}
+
+void MainWindow::ClearLabels()
+{
+    for (int i =  0; i < itemsLabels.size(); i++)
+        delete itemsLabels[i];
+    itemsLabels.clear();
 }
 
 void MainWindow::SetView(QGraphicsView *view)
@@ -107,7 +163,28 @@ void MainWindow::Show()
 {
     show();
 }
+void MainWindow::ShowMenu()
+{
+    int Size = this->size().height() < this->size().width() ? this->size().height() : this->size().width();
 
+    buttonHide->setGeometry(QRect(QPoint(pathWidget->width() + Size/ 20, this->size().height() / 2 - Size / 10),QSize(Size / 5, Size / 5)));
+
+    buttonShow->hide();
+    buttonHide->show();
+    buttonUp->show();
+    buttonDown->show();
+    pathWidget->show();
+}
+void MainWindow::HideMenu()
+{
+    int Size = this->size().height() < this->size().width() ? this->size().height() : this->size().width();
+    buttonShow->setGeometry(QRect(QPoint(Size / 20, Size / 20),QSize(Size / 5, Size / 5)));
+    buttonShow->show();
+    buttonHide->hide();
+    buttonUp->hide();
+    buttonDown->hide();
+    pathWidget->hide();
+}
 path_widget * MainWindow::GetPathWidget()
 {
     return pathWidget;
@@ -115,6 +192,7 @@ path_widget * MainWindow::GetPathWidget()
 
 MainWindow::~MainWindow()
 {
+    ClearLabels();
     delete buttonMapper;
     delete buttonUp;
     delete buttonDown;
