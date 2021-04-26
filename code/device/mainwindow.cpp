@@ -35,7 +35,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
     ");
     buttonDown->setStyleSheet(styleSheet + "QPushButton\
         {\
-            image: url(:/based/UP.png);\
+            image: url(:/based/DOWN.png);\
             border-style: outset;\
             background: transparent;\
             padding-top: 0px;\
