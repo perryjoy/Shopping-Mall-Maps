@@ -71,7 +71,6 @@ void MainWindow::SetupUi(bool customGraphicsView)
     if (!customGraphicsView)
     {
         graphicsView = new QGraphicsView(centralWidget);
-        graphicsView->setStyleSheet(styleSheet);
         horizontalLayout->addWidget(graphicsView);
         setCentralWidget(centralWidget);
     }
