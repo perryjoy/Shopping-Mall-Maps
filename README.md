@@ -41,9 +41,11 @@
 >  - provision of an up-to-date plan of the mall premises
 >  - maintaining up-to-date information about shopping center facilities
 _________________________________________________________________________________
- ### RU
 
-  #### Мобильное приложение AllMall
+ ### RU      
+ <details>     
+  
+ #### Мобильное приложение AllMall
 
 >  Приложение позволяет ориентироваться в торговых центрах, предоставляя пользователю интерактивную карту здания,
 >  возможность поиска объекта ТЦ по названию, возможность проложить маршрут между двумя выбранными точками.
@@ -80,7 +82,9 @@ ________________________________________________________________________________
 
   ##### Требования:
 >  - предоставление актуального плана помещений ТЦ
->  - поддержание актуальной информации об объектах ТЦ
+>  - поддержание актуальной информации об объектах ТЦ   
+
+  </details>    
   
 ## Compare with analogs:
 
@@ -122,12 +126,26 @@ ________________________________________________________________________________
 3. Shows stocks.
 4. Search for stores by requirements.
 
+### Current stage
+
+The current released version is **0.2.0**
+
+### [Launch instructions](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/launch_instructions.md)
+
+#### Target platform:    
+Android 5.0+   
+IOS 14.4 + (comming soon)   
+
+#### System Requirements and Limitations (for v0.2.0):    
+Android 5.0+ 
+200 MB free space on drive.    
+
 ## Links for collaborators:   
 
-[Code rules and style](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Code-Style-and-Rules.md)   
-[Git workflow](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Git-Workflow)   
-[Commit rules](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/Coomit-and-Dashboard-Rules.md)   
- 
+[Code rules and style](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Coomit-and-Dashboard-Rules.md)   
+[Git workflow](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Git-Workflow)   
+[Commit rules](https://github.com/HellInsider/Shopping-Mall-Maps/blob/main/docs/Coomit-and-Dashboard-Rules.md)   
+[Setup instructoin for collaborators](https://github.com/HellInsider/Shopping-Mall-Maps/blob/develop/docs/setup_guide.md) 
 
 
 ## Contributors:   
