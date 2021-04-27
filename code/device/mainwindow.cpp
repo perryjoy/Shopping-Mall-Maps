@@ -76,8 +76,10 @@ void MainWindow::SetupUi(bool customGraphicsView)
     buttonShow->setGeometry(QRect(QPoint(Size / 20, Size / 20),QSize(Size / 5, Size / 5)));
     buttonHide->setGeometry(QRect(QPoint(Size / 20, Size / 20),QSize(Size / 5, Size / 5)));
 
-    buttonUp->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(50, 50)));
-    buttonDown->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(50, 50)));
+    buttonUp->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 - 100),QSize(150, 150)));
+    buttonDown->setGeometry(QRect(QPoint(this->size().width(), this->size().height() / 2 + 100),QSize(150, 150)));
+    buttonUp->setMinimumHeight(150);
+    buttonDown->setMinimumHeight(150);
 
     buttonMapper->setMapping(buttonShow, BUTTON_SHOW);
     buttonMapper->setMapping(buttonHide, BUTTON_HIDE);
