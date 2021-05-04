@@ -43,6 +43,10 @@ void viewer::paintEvent(QPaintEvent *event)
         QGraphicsView::render(&p);
         p.end();
         QGraphicsView::paintEvent(event);
+        if (isPathNeeded)
+        {
+           //ViewPathFirst(0, 0);
+        }
     }
     else
     {
@@ -215,27 +219,48 @@ void viewer::ViewGraph()
 
 }
 
-void viewer::ViewPath()
+void viewer::ViewPathFirst(int start, int finish)
 {
-//    graph w;
-//    w.adjacencyList = {
-//    {{555,555},0,{{1,5},{2,6},{3,4}}},
-//    {{30,485},0,{{0,5},{2,6},{5,9}}},
-//    {{60,100},0,{{0,6},{1,6},{5,7}}},
-//    {{200,30},0,{{0,4},{4,14}}},
-//    {{120,30},0,{{3,14},{6,5}}},
-//    {{120,308},0,{{1,9},{2,7},{6,5}}},
-//    {{160,0},0,{{5,5},{4,5}}}
-//    };
-//    std::vector<vertex_graph> path = w.SearchWay(0,6);
-//    for (int i = 0; i < path.size() - 1; ++i)
-//    {
-//        QPainter painter(viewport());
-//        painter.setPen(QPen(Qt::red, 3, Qt::DotLine, Qt::RoundCap));
-//        painter.drawLine(path[i].vertexCoordinates.x, path[i].vertexCoordinates.y,
-//                         path[i + 1].vertexCoordinates.x, path[i + 1].vertexCoordinates.y);
-//    }
+    graph w;
+    QPen color(Qt::red);
+    color.setWidth(5);
+
+    std::vector<vertex_graph> path = w.SearchWay(start, finish);
+    mapPic->setZValue(0);
+    SetAntialiasing(1);
+
+    for (int i = 0; i < path.size() - 1; ++i)
+    {
+        mapScene->addLine(path[i].vertexCoordinates.x, path[i].vertexCoordinates.y,
+                          path[i + 1].vertexCoordinates.x, path[i + 1].vertexCoordinates.y, color);
+    }
 }
+
+void viewer::ViewPathSecond(int finish)
+{
+    graph w;
+    std::vector<vertex_graph> temperaryVertex;
+    QPen color(Qt::red);
+    color.setWidth(5);
+
+    std::vector<vertex_graph> path = w.SearchWayAlternative(finish);
+    mapPic->setZValue(0);
+    SetAntialiasing(1);
+
+    temperaryVertex = w.ReturnTemperaryVertexs();
+    for (int i = 0; i < temperaryVertex.size() - 1; ++i)
+    {
+        mapScene->addLine(temperaryVertex[i].vertexCoordinates.x, temperaryVertex[i].vertexCoordinates.y,
+                          temperaryVertex[i + 1].vertexCoordinates.x, temperaryVertex[i + 1].vertexCoordinates.y, color);
+    }
+
+    for (int i = 0; i < path.size() - 1; ++i)
+    {
+        mapScene->addLine(path[i].vertexCoordinates.x, path[i].vertexCoordinates.y,
+                          path[i + 1].vertexCoordinates.x, path[i + 1].vertexCoordinates.y, color);
+    }
+}
+
 
 float viewer::GetMapPicScale()
 {
