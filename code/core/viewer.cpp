@@ -83,7 +83,10 @@ void viewer::AddSelectable(QString id)
 
 void viewer::HighlightShop(QString id)
 {
-    qDebug() << selectableItems[id];
+    auto search = selectableItems.find(id);
+    if (search == selectableItems.end())
+       return;
+    
     recoloredItem = selectableItems[id];
 
     QGraphicsColorizeEffect* effect = new QGraphicsColorizeEffect;
