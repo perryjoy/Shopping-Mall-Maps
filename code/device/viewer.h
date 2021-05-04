@@ -8,6 +8,7 @@
 class coord;
 // class graph;
 class QLabel;
+class QGraphicsColorizeEffect;
 
 enum viewer_error_code
 {
@@ -41,12 +42,15 @@ class viewer: public QGraphicsView
     float GetMapPicScale();
     void AddUnstableVisible(QString id);
     void AddSelectable(QString id);
+    void HighlightShop(QString id); //to remove it call ClearHighlited(). IDD
     void ChangeVisibility(QString id, bool isVisible);
     void ChangeBgrLayer(QString id);
+
     void Clear();
     void AddLabel(QString text, int x, int y, QString idToLabeling = "", QWidget *parent = nullptr);
     void ClearLabels();
     void ClearSelectables();
+    void ClearHighlited();
 
     ~viewer();
 
@@ -71,6 +75,10 @@ private:
 
     std::map<QString, QGraphicsSvgItem*> unstableVisibleItems;
     std::map<QString, QGraphicsSvgItem*> selectableItems;
+
+    QGraphicsSvgItem* recoloredItem;    // Later I will make it to vector. IDD
+    QColor highlightColor = Qt::cyan;   // Color of highlighting. IDD
+
     QGraphicsSvgItem *svgItem;
     QSvgRenderer *svgRenderer;
     QGraphicsScene *mapScene;
@@ -85,7 +93,7 @@ private:
     qreal totalScaleFactor = 1;
     qreal maxZoom = 10.0;  //Maybe later I will add "speed" of zoom.
                           //When scale is high or low you will need make more gestures to zoom.
-                          //In the limitation gesture will not affect on scale.
+                          //In the limitation gesture will not affect on scale. IDD
 };
 
 #endif // VIEWER_H

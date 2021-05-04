@@ -2,6 +2,7 @@
 #include "device/graph.h"
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/qgraphicssvgitem.h>
+#include <QGraphicsColorizeEffect>
 #include <QWheelEvent>
 #include <QtMath>
 #include <QGestureEvent>
@@ -82,6 +83,30 @@ void viewer::AddSelectable(QString id)
 
     selectableItems[id] = newItem;
     mapScene->addItem(selectableItems[id]);
+}
+
+void viewer::HighlightShop(QString id)
+{
+    auto search = selectableItems.find(id);
+    if (search == selectableItems.end())
+       return;
+    
+    recoloredItem = selectableItems[id];
+
+    QGraphicsColorizeEffect* effect = new QGraphicsColorizeEffect;
+    effect->setColor(highlightColor);
+    effect->setStrength(1);
+    recoloredItem->setGraphicsEffect(effect);
+}
+
+void viewer::ClearHighlited()
+{
+    QGraphicsColorizeEffect* effect = new QGraphicsColorizeEffect;
+    effect->setColor(highlightColor);
+    effect->setStrength(0);
+
+    recoloredItem->setGraphicsEffect(effect);
+    recoloredItem = nullptr;
 }
 
 
@@ -305,11 +330,21 @@ bool viewer::viewportEvent(QEvent *event)
             //For Arina
             //On single touch event.
             //If it looks strange, you can move this block from "Touch Begin" to "TouchUpdate" or "TouchEnd"
-        }
 
+            //For example highlighting:
+            static bool a = true;
+            if(a)
+                HighlightShop("2_shop_4");
+            else
+                ClearHighlited();
+            a = !a;
+
+
+        }
+    break;
     }
-    case QEvent::TouchUpdate:
-    case QEvent::TouchEnd:
+    case QEvent::TouchUpdate: {break;}
+    case QEvent::TouchEnd: {break;}
     {
         QTouchEvent *touchEvent = static_cast<QTouchEvent *>(event);
         QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
