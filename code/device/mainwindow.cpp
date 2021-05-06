@@ -71,7 +71,6 @@ void MainWindow::SetupUi(bool customGraphicsView)
         }\
     ");
 
-    pathWidget->setGeometry(QRect(QPoint(0, this->size().height() / 2 - 400),QSize(300, 300)));
     int Size = this->size().height() < this->size().width() ? this->size().height() : this->size().width();
     buttonShow->setGeometry(QRect(QPoint(Size / 20, Size / 20),QSize(Size / 5, Size / 5)));
     buttonHide->setGeometry(QRect(QPoint(Size / 20, Size / 20),QSize(Size / 5, Size / 5)));
@@ -120,7 +119,6 @@ void MainWindow::SetupUi(bool customGraphicsView)
     buttonDown->raise();
     pathWidget->raise();
     buttonHide->hide();
-
 
     if (!customGraphicsView)
     {
@@ -175,7 +173,6 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 {
     int Size = this->size().height() < this->size().width() ? this->size().height() : this->size().width();
 
-    pathWidget->setGeometry(QRect(QPoint(0, Size / 20),QSize(Size / 5, Size - 10)));
     buttonUp->setGeometry(QRect(QPoint(10, 10),QSize(pathWidget->width() / 2, pathWidget->width() / 2)));
     buttonDown->setGeometry(QRect(QPoint(pathWidget->width() / 2 + 10, 10),QSize(pathWidget->width() / 2, pathWidget->width() / 2)));
     // Move down to real height
