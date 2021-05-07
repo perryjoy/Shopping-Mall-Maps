@@ -22,6 +22,9 @@
   <property name="toolTipDuration">
    <number>-5</number>
   </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
   <property name="styleSheet">
    <string notr="true">/*
  * MacOS Style Sheet for QT Applications
