@@ -23,6 +23,7 @@ enum data_accessable
 
 struct one_shop_data
 {
+    QString svgId;
     QString shortName;
     bool isUnique;
     QString shortInfo;
@@ -35,7 +36,7 @@ class QXmlStreamReader;
 
 class shops_data
 {
-
+    QStringList svgIds;
     QStringList shortNames;
     bool* isUnique;
     QStringList shortInfo;
@@ -49,13 +50,13 @@ class shops_data
     friend void DestroyInfo (shops_data *& i);
 public:
 
-
+    const QStringList& getSvgIds() const;
     const QStringList& getShortNames() const;
     bool *getUniqueness() const;
     QStringList getShortInfos() const;
     QTime *getOpeningTimes() const;
     QTime *getClosingTimes() const;
-    QStringList getFullInfos() const;
+    const QStringList& getFullInfos() const;
     one_shop_data getOneShopParams(quint32 index);
 };
 

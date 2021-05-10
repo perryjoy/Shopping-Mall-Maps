@@ -30,6 +30,11 @@ shops_data::shops_data(quint32 size): shortNames(), shortInfo(), fullInfo()
 
 }
 
+const QStringList &shops_data::getSvgIds() const
+{
+    return svgIds;
+}
+
 const QStringList& shops_data::getShortNames() const
 {
     return shortNames;
@@ -55,7 +60,7 @@ QTime *shops_data::getClosingTimes() const
     return closesAt;
 }
 
-QStringList shops_data::getFullInfos() const
+const QStringList &shops_data::getFullInfos() const
 {
     return fullInfo;
 }
@@ -63,6 +68,7 @@ QStringList shops_data::getFullInfos() const
 one_shop_data shops_data::getOneShopParams(quint32 index)
 {
     one_shop_data res;
+    res.svgId = svgIds[index];
     res.shortName = shortNames[index];
     res.isUnique = isUnique[index];
     res.shortInfo = shortInfo[index];
@@ -111,8 +117,12 @@ shops_data* ReadInfo(QXmlStreamReader& reader, QMap<QString, quint32>& indexes)
                        switch (i)
                        {
                        case DA_SVG_ID:
-                           indexes.insert(QLatin1String(reader.readElementText().toLatin1()), curr_index);
+                       {
+                           QString svgId = reader.readElementText();
+                           indexes.insert(svgId, curr_index);
+                           res->svgIds.append(svgId);
                            goto for_break;
+                       }
                            break;
                        case DA_SHORT_NAME:
                            res->shortNames.append(reader.readElementText());
@@ -145,6 +155,18 @@ shops_data* ReadInfo(QXmlStreamReader& reader, QMap<QString, quint32>& indexes)
                ;
            }
            Q_ASSERT(reader.isEndElement());
+           if (res->fullInfo.size() == curr_index)
+           {
+               res->fullInfo.append("");
+           }
+           if (res->shortInfo.size() == curr_index)
+           {
+               res->shortInfo.append("");
+           }
+           if (res->shortNames.size() == curr_index)
+           {
+               res->shortNames.append("");
+           }
            //reader.skipCurrentElement();
 //           while (reader.isEndElement())
 //           {
