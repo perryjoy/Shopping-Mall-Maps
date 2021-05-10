@@ -119,6 +119,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
     buttonDown->raise();
     pathWidget->raise();
     buttonHide->hide();
+    isInterfaceHide = true;
 
     if (!customGraphicsView)
     {
@@ -172,9 +173,18 @@ bool MainWindow::event(QEvent *event)
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
     int Size = this->size().height() < this->size().width() ? this->size().height() : this->size().width();
+    if(isInterfaceHide)
+    {
+        buttonUp->setGeometry(QRect(QPoint(this->size().width() - Size / 5, this->size().height() / 2 - Size / 5),QSize(Size / 5, Size / 5)));
+        buttonDown->setGeometry(QRect(QPoint(this->size().width() - Size / 5, this->size().height() / 2),QSize(Size / 5, Size / 5)));
+    }
+    else
+    {
+        Size = (this->size().height() - pathWidget->height()) < this->size().width() ? (this->size().height() - pathWidget->height()) : this->size().width();
 
-    buttonUp->setGeometry(QRect(QPoint(this->size().width() - Size / 5, this->size().height() / 2 - Size / 5),QSize(Size / 5, Size / 5)));
-    buttonDown->setGeometry(QRect(QPoint(this->size().width() - Size / 5, this->size().height() / 2),QSize(Size / 5, Size / 5)));
+        buttonUp->setGeometry(QRect(QPoint(this->size().width() - Size / 5, (this->size().height() - pathWidget->height()) / 2 - Size / 5),QSize(Size / 5, Size / 5)));
+        buttonDown->setGeometry(QRect(QPoint(this->size().width() - Size / 5, (this->size().height() - pathWidget->height()) / 2),QSize(Size / 5, Size / 5)));
+    }
     // Move down to real height
     pathWidget->setGeometry(QRect(QPoint(10, this->size().height() - 200),QSize(this->size().width() - 20, 190)));
 
@@ -189,7 +199,8 @@ void MainWindow::Show()
 }
 void MainWindow::ShowMenu()
 {
-    int Size = this->size().height() < this->size().width() ? this->size().height() : this->size().width();
+    isInterfaceHide = false;
+    int Size = (this->size().height() - pathWidget->height()) < this->size().width() ? (this->size().height() - pathWidget->height()) : this->size().width();
 
     //pathWidget->setGeometry(QRect(QPoint(0, Size / 20),QSize(Size / 5, Size - 10)));
     //buttonUp->setGeometry(QRect(QPoint(10, 10),QSize(pathWidget->width() / 2, pathWidget->width() / 2)));
@@ -197,7 +208,11 @@ void MainWindow::ShowMenu()
     // Move down to real height
     pathWidget->setGeometry(QRect(QPoint(10, this->size().height() - 200),QSize(this->size().width() - 20, 190)));
 
-    buttonHide->setGeometry(QRect(QPoint(pathWidget->width() / 2 - Size / 10, this->size().height() - pathWidget->height() - Size / 5),QSize(Size / 5, Size / 5)));
+    buttonHide->setGeometry(QRect(QPoint(pathWidget->width() / 2 - Size / 10, (this->size().height() - pathWidget->height()) - Size / 5),QSize(Size / 5, Size / 5)));
+
+    buttonUp->setGeometry(QRect(QPoint(this->size().width() - Size / 5, (this->size().height() - pathWidget->height()) / 2 - Size / 5),QSize(Size / 5, Size / 5)));
+    buttonDown->setGeometry(QRect(QPoint(this->size().width() - Size / 5, (this->size().height() - pathWidget->height()) / 2),QSize(Size / 5, Size / 5)));
+
     buttonShow->hide();
     buttonHide->show();
     //buttonUp->show();
@@ -206,8 +221,12 @@ void MainWindow::ShowMenu()
 }
 void MainWindow::HideMenu()
 {
+    isInterfaceHide = true;
     int Size = this->size().height() < this->size().width() ? this->size().height() : this->size().width();
     buttonShow->setGeometry(QRect(QPoint(pathWidget->width() / 2 - Size / 10, this->size().height() - Size / 5),QSize(Size / 5, Size / 5)));
+
+    buttonUp->setGeometry(QRect(QPoint(this->size().width() - Size / 5, this->size().height() / 2 - Size / 5),QSize(Size / 5, Size / 5)));
+    buttonDown->setGeometry(QRect(QPoint(this->size().width() - Size / 5, this->size().height() / 2),QSize(Size / 5, Size / 5)));
 
     buttonShow->show();
     buttonHide->hide();
