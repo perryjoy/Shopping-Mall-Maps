@@ -133,7 +133,7 @@ void LoadLadder (fine_graph* g, quint32 floor, QDomElement& l)
     quint32 floorIndex =  ladderParams.at(0).toULong() - 1;
     Q_ASSERT(floorIndex == floor-1);
 
-    QString nameWithoutFloorPrefix = ladderParams[1]+ladderParams[2];
+    QString nameWithoutFloorPrefix = ladderParams[1]+"_"+ladderParams[2];
     if (laddersAndElevators.find(nameWithoutFloorPrefix) == laddersAndElevators.end())
     {
         laddersAndElevators[nameWithoutFloorPrefix] = floor_pos_pair_array();
@@ -161,7 +161,7 @@ void LoadElevator (fine_graph* g, quint32 floor, QDomElement& e)
     quint32 floorIndex =  elevatorParams.at(0).toULong() - 1;
     Q_ASSERT(floorIndex == floor-1);
 
-    QString nameWithoutFloorPrefix = elevatorParams[1]+elevatorParams[2];
+    QString nameWithoutFloorPrefix = elevatorParams[1]+"_"+elevatorParams[2];
     if (laddersAndElevators.find(nameWithoutFloorPrefix) == laddersAndElevators.end())
     {
         laddersAndElevators[nameWithoutFloorPrefix] = floor_pos_pair_array();
@@ -362,7 +362,7 @@ bool graph_parser::proceedFile()
                resulGraph->floors[f.first].vertexes[f.second].pos = f.second;
             }
             resulGraph->floors[f.first].vertexes[f.second].isShowable = true;
-            resulGraph->floors[f.first].vertexes[f.second].svgId = QString::number(f.first+1)+"_"+le.first;
+            resulGraph->floors[f.first].vertexes[f.second].svgId = QString::number(f.first+1)+QString("_")+le.first;
             for (auto &fc : le.second)
             {
                 if (fc.first == f.first)

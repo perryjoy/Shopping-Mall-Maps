@@ -132,7 +132,7 @@ The best shop ever!</full_info>
 	</InfoLine>
 	<InfoLine>
 		<SVG_ID>2_shop_5</SVG_ID>
-		<short_name>bizarre filled shop</short_name>
+                <short_name>another shop</short_name>
 		<is_a_shop>true</is_a_shop>
 		<short_info> Excepteur sint occaecat cupidatat non proident,</short_info>
 		<opens>09:00:00.000</opens>

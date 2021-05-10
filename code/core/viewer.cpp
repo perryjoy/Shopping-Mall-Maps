@@ -182,7 +182,7 @@ void viewer::AddPolyline(path* currentPath, quint32 currentFloorIndex)
     color.setWidthF(0.2);
     color.setColor(QColor(0x66,0x80, 0x00, 0xff));
     color.setStyle(Qt::DashLine);
-    mapPic->setZValue(-0.1);
+    //mapPic->setZValue(-0.1);
     SetAntialiasing(1);
 
     if (currentFloorIndex == currentPath->startFloorIndex)

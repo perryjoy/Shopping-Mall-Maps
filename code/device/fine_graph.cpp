@@ -236,20 +236,24 @@ fine_graph::fine_graph(QObject *parent): QObject(parent)
 void fine_graph::SetStart(point p, quint32 floorIndex)
 {
         RoundCoord(p);
-        if (startFloorIndex != floorIndex || start != p)
+
+        if (floorIndex >= 0 && floorIndex < floors.size())
         {
-            startFloorIndex = 0;// floorIndex;
-            start = point(80,80);//p;
+            startFloorIndex = floorIndex ;
+            start = /*point(80,80);//*/p;
         }
+
+
 }
 
 void fine_graph::SetEnd(point p, quint32 floorIndex)
 {
         RoundCoord(p);
-        if (endFloorIndex != floorIndex || end != p)
+
+        if (floorIndex >= 0 && floorIndex < floors.size())
         {
-            endFloorIndex = 2;// floorIndex;
-            end = point(45,67);// p;
+            endFloorIndex = /* 2;//*/ floorIndex;
+            end = /*point(45,67);//*/ p;
         }
 }
 

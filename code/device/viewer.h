@@ -77,7 +77,7 @@ private:
     QGraphicsSvgItem *svgItem;
     QSvgRenderer *svgRenderer;
     QGraphicsScene *mapScene;
-    std::vector<QGraphicsItem *>pathLines;
+    std::vector<QGraphicsItem *> pathLines;
 
     QGraphicsSvgItem* mapPic;
     //graph *path;

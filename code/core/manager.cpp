@@ -60,6 +60,8 @@ void manager::SetFloor(quint32 index)
 {
     if (index < floorLayers->size() && index >= 0 && index != quint32(currentFloor))
     {
+        currentFloor = index;
+
         mapViewer->ClearUnstableVisible();
         mapViewer->ClearPolyline();
 
@@ -73,6 +75,7 @@ void manager::SetFloor(quint32 index)
             mapViewer->ChangeVisibility(s, false);
         }
 
+        DrawShopsWithLabels();
 
         mapViewer->AddPolyline(activePath, index);
         if (activePath != nullptr)
@@ -82,12 +85,7 @@ void manager::SetFloor(quint32 index)
                 mapViewer->ChangeVisibility(e, true);
             }
         }
-
-        currentFloor = index;
-        DrawShopsWithLabels();
-
     }
-
 }
 
 
