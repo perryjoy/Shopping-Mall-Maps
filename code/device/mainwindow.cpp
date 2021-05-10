@@ -30,7 +30,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
 
     buttonShow->setStyleSheet(styleSheet + "QPushButton\
         {\
-            image: url(:/based/RIGHT.png);\
+            image: url(:/based/UP.png);\
             border-style: outset;\
             background: transparent;\
             padding-top: 0px;\
@@ -40,7 +40,7 @@ void MainWindow::SetupUi(bool customGraphicsView)
     ");
     buttonHide->setStyleSheet(styleSheet + "QPushButton\
         {\
-            image: url(:/based/LEFT.png);\
+            image: url(:/based/DOWN.png);\
             border-style: outset;\
             background: transparent;\
             padding-top: 0px;\
