@@ -6,9 +6,9 @@
 #include "map.h"
 
 class coord;
+class path;
 // class graph;
 class QLabel;
-class QGraphicsColorizeEffect;
 
 enum viewer_error_code
 {
@@ -36,21 +36,20 @@ class viewer: public QGraphicsView
     void ViewMap();                             // Draws map
     void ViewObject();                          // Drows something (preparing for future) f.e. selected shop
     void ViewGraph();                           // Shows graph on map (for debug )
-    void ViewPathFirst(int start, int finish);      // Shows path from firt point to second point (calls Graph)
-    void ViewPathSecond(int finish);
+    void ViewPath();      // Shows path from firt point to second point (calls Graph)
     float ZoomFactor();
     float GetMapPicScale();
     void AddUnstableVisible(QString id);
     void AddSelectable(QString id);
-    void HighlightShop(QString id); //to remove it call ClearHighlited(). IDD
     void ChangeVisibility(QString id, bool isVisible);
     void ChangeBgrLayer(QString id);
-
     void Clear();
     void AddLabel(QString text, int x, int y, QString idToLabeling = "", QWidget *parent = nullptr);
+    void AddPolyline(path* currentPath, quint32 currentFloorIndex);
+    void ClearPolyline();
     void ClearLabels();
+    void ClearUnstableVisible();
     void ClearSelectables();
-    void ClearHighlited();
 
     ~viewer();
 
@@ -75,13 +74,10 @@ private:
 
     std::map<QString, QGraphicsSvgItem*> unstableVisibleItems;
     std::map<QString, QGraphicsSvgItem*> selectableItems;
-
-    QGraphicsSvgItem* recoloredItem;    // Later I will make it to vector. IDD
-    QColor highlightColor = Qt::cyan;   // Color of highlighting. IDD
-
     QGraphicsSvgItem *svgItem;
     QSvgRenderer *svgRenderer;
     QGraphicsScene *mapScene;
+    std::vector<QGraphicsItem *>pathLines;
 
     QGraphicsSvgItem* mapPic;
     //graph *path;
@@ -93,7 +89,7 @@ private:
     qreal totalScaleFactor = 1;
     qreal maxZoom = 10.0;  //Maybe later I will add "speed" of zoom.
                           //When scale is high or low you will need make more gestures to zoom.
-                          //In the limitation gesture will not affect on scale. IDD
+                          //In the limitation gesture will not affect on scale.
 };
 
 #endif // VIEWER_H

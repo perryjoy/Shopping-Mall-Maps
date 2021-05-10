@@ -80,4 +80,5 @@ private:
     manager &manager;
 };
 
+
 #endif
