@@ -1,8 +1,10 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+
 #include <vector>
-#include <string>
+
+
 
 struct vec2
 {
@@ -27,34 +29,16 @@ class graph
 {
 public:
     void DeleteVertex(int index);
-    void AddTemporaryVertex(vertex_graph vertex);
-    void LoadDataFromFile(const std::string &config);
-    void DeleteTemperaryVertex();
+    void AddTemporaryVertex(vec2 coordinates);
     std::vector<vertex_graph> SearchWay(int vertexStart, int vertexFinish);
-    std::vector<vertex_graph> SearchWayAlternative(int vertexFinish);
-    std::vector<vertex_graph> ReturnTemperaryVertexs();
-
-    graph()
-    {
-        LoadDataFromFile("allMall.txt");
-    }
-    ~graph()
-    {
-        delete [] adjacencyList;
-    }
+    std::vector<vertex_graph> adjacencyList;
 private:
-    void AddVertex(vertex_graph vertex);
-    float CalculateWeight(vec2 firstVertex, vec2 secondVertex);
-    vec2 MethodKramer(const std::vector<float> & firstEquation, const std::vector<float> & secondEquation);
     std::vector<edge> CopyDataweightedEdges(vec2 newVertex, edge adjVert, int h);
+    void AddVertex(vertex_graph vertex);
     std::vector<float> CreateLineEquation(vertex_graph vert, int index);
     std::vector<float> CreateNormalEquation(vertex_graph vert, int index, vec2 coordinates);
-
-    std::vector<vertex_graph> temperaryVertexs;
-    vertex_graph *adjacencyList;
-    int graphSize;
-    int vertexOne;
-    int vertexTwo;
+    vec2 MethodKramer(const std::vector<float> & firstEquation, const std::vector<float> & secondEquation);
+    float CalculateWeight(vec2 firstVertex, vec2 secondVertex); // calculates the weight of the edge
 };
 
 #endif // GRAPH_H
