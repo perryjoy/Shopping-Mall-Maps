@@ -25,7 +25,7 @@ class manager : public QObject
     void SetFloor(quint32 index);
 public:
     manager();
-
+    int SearchShop(const QString nameShop);
     void LoadData(const QString &svgFileName, const QString &xmlFileName);
 
     void Start() { window.Show(); }

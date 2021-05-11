@@ -136,3 +136,21 @@ void manager::LoadData(const QString &svgFileName, const QString &xmlFileName)
         DrawShopsWithLabels();
     }
 }
+
+int manager::SearchShop(const QString nameShop)
+{
+    QStringList namesShops = currentMap.GetInfo()->getShortNames();
+    for(int i = 0; i < namesShops.size(); ++i)
+    {
+        if(namesShops.at(i) == nameShop)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
+
+
