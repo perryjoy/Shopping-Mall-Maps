@@ -77,6 +77,8 @@ private:
     QVBoxLayout *verticalLayout;
     QGraphicsView *graphicsView;
 
+    bool isInterfaceHide;
+
     manager &manager;
 };
 
