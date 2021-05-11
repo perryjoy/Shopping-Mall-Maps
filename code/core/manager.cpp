@@ -58,7 +58,7 @@ void manager::OnButton(int butttonPressed)
 
 void manager::SetFloor(quint32 index)
 {
-    if (index < floorLayers->size() && index >= 0 && index != quint32(currentFloor))
+    if (index < floorLayers->size() && index >= 0 /*&& index != quint32(currentFloor)*/)
     {
         currentFloor = index;
 
@@ -120,14 +120,7 @@ void manager::OnNewMap(std::vector<floor_layer>* svgIds)
     if (svgIds)
     {
         floorLayers = svgIds;
-        mapViewer->ChangeBgrLayer((*floorLayers)[currentFloor].GetBckgrndLr().GetName());
-        auto floors = (*floorLayers)[currentFloor].GetShopsLr();
-        auto edges = floors.GetShops();
-        for (auto& e : edges.keys())
-        {
-            mapViewer->AddUnstableVisible(e);
-            mapViewer->ChangeVisibility(e, false);
-        }
+        SetFloor(0);
     }
 }
 

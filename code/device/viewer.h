@@ -6,7 +6,7 @@
 #include "map.h"
 
 class coord;
-class path;
+struct path;
 // class graph;
 class QLabel;
 
@@ -41,6 +41,7 @@ class viewer: public QGraphicsView
     float GetMapPicScale();
     void AddUnstableVisible(QString id);
     void AddSelectable(QString id);
+    void HighlightShop(QString id); //to remove it call ClearHighlited(). IDD
     void ChangeVisibility(QString id, bool isVisible);
     void ChangeBgrLayer(QString id);
     void Clear();
@@ -50,6 +51,7 @@ class viewer: public QGraphicsView
     void ClearLabels();
     void ClearUnstableVisible();
     void ClearSelectables();
+    void ClearHighlited();
 
     ~viewer();
 
@@ -74,6 +76,8 @@ private:
 
     std::map<QString, QGraphicsSvgItem*> unstableVisibleItems;
     std::map<QString, QGraphicsSvgItem*> selectableItems;
+    QGraphicsSvgItem* recoloredItem = nullptr;    // Later I will make it to vector. IDD
+    QColor highlightColor = Qt::cyan;   // Color of highlighting. IDD
     QGraphicsSvgItem *svgItem;
     QSvgRenderer *svgRenderer;
     QGraphicsScene *mapScene;

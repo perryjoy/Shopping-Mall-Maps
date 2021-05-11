@@ -242,6 +242,11 @@ void fine_graph::SetStart(point p, quint32 floorIndex)
             startFloorIndex = floorIndex ;
             start = /*point(80,80);//*/p;
         }
+        else
+        {
+            startFloorIndex = 0; //floorIndex ;
+            start = point(80,80);//p;
+        }
 
 
 }
@@ -254,6 +259,11 @@ void fine_graph::SetEnd(point p, quint32 floorIndex)
         {
             endFloorIndex = /* 2;//*/ floorIndex;
             end = /*point(45,67);//*/ p;
+        }
+        else
+        {
+            endFloorIndex =  2;// floorIndex;
+            end = point(45,67);// p;
         }
 }
 

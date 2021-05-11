@@ -11,7 +11,8 @@ const QString XML_DOC_NAMES[] = {"SVG_ID",
                                  "short_info",
                                  "opens",
                                  "closes",
-                                 "full_info"};
+                                 "full_info",
+                                 "coord"};
 
 
 
@@ -27,6 +28,7 @@ shops_data::shops_data(quint32 size): shortNames(), shortInfo(), fullInfo()
     isUnique =  new bool[size];
     opensAt = new QTime[size];
     closesAt =  new QTime[size];
+    exits = new point[size];
 
 }
 
@@ -60,6 +62,11 @@ QTime *shops_data::getClosingTimes() const
     return closesAt;
 }
 
+point *shops_data::getExits() const
+{
+    return exits;
+}
+
 const QStringList &shops_data::getFullInfos() const
 {
     return fullInfo;
@@ -75,6 +82,7 @@ one_shop_data shops_data::getOneShopParams(quint32 index)
     res.opensAt = opensAt[index];
     res.closesAt = closesAt[index];
     res.fullInfo = fullInfo[index];
+    res.exit = exits[index];
 
     return res;
 }
@@ -88,6 +96,7 @@ void DestroyInfo (shops_data *& i)
     delete[] i->opensAt;
     delete[] i->closesAt;
     i->fullInfo.clear();
+    delete[] i->exits;
     delete i;
     i = nullptr;
 }
@@ -104,8 +113,9 @@ shops_data* ReadInfo(QXmlStreamReader& reader, QMap<QString, quint32>& indexes)
     quint32 curr_index = 0;
 
 
-    while(reader.readNextStartElement() && curr_index < size)
+    while(curr_index < size)
     {
+        reader.readNextStartElement();
         if(reader.name() == "InfoLine")
         {
            while(reader.readNextStartElement())
@@ -146,6 +156,13 @@ shops_data* ReadInfo(QXmlStreamReader& reader, QMap<QString, quint32>& indexes)
                            break;
                        case DA_FULL_INFO:
                            res->fullInfo.append(reader.readElementText());
+                           goto for_break;
+                           break;
+                       case DA_EXIT_POSITION:
+                           reader.readNextStartElement();
+                           res->exits[curr_index].x = reader.readElementText().toDouble();
+                           reader.readNextStartElement();
+                           res->exits[curr_index].y = reader.readElementText().toDouble();
                            goto for_break;
                            break;
                        }

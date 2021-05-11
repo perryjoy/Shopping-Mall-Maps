@@ -2,10 +2,13 @@
 #define SHOP_DATA_H
 #include <QtGlobal>
 #include <QTime>
+#include "device/Vector2.hpp"
 
 
 
 #define QUINT_MAX 4294967295
+
+using point = Vector2<double>;
 
 enum data_accessable
 {
@@ -15,11 +18,12 @@ enum data_accessable
     DA_SHORT_INFO,
     DA_OPENS_AT,
     DA_CLOSES_AT,
-    DA_FULL_INFO
+    DA_FULL_INFO,
+    DA_EXIT_POSITION
 };
 
 #define DA_FIRST_CODE DA_SVG_ID
-#define DA_LAST_CODE DA_FULL_INFO
+#define DA_LAST_CODE DA_EXIT_POSITION
 
 struct one_shop_data
 {
@@ -30,6 +34,7 @@ struct one_shop_data
     QTime opensAt;
     QTime closesAt;
     QString fullInfo;
+    point exit;
 };
 
 class QXmlStreamReader;
@@ -43,6 +48,8 @@ class shops_data
     QTime* opensAt;
     QTime* closesAt;
     QStringList fullInfo;
+    point* exits;
+
 
     shops_data();
     shops_data(quint32 sz);
@@ -56,6 +63,7 @@ public:
     QStringList getShortInfos() const;
     QTime *getOpeningTimes() const;
     QTime *getClosingTimes() const;
+    point *getExits() const;
     const QStringList& getFullInfos() const;
     one_shop_data getOneShopParams(quint32 index);
 };
