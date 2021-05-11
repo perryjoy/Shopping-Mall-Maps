@@ -206,6 +206,7 @@ void viewer::AddPolyline(path* currentPath, quint32 currentFloorIndex)
     {
         return;
     }
+    ClearPolyline();
     QPen color;
     color.setWidthF(0.2);
     color.setColor(QColor(0x66,0x80, 0x00, 0xff));
